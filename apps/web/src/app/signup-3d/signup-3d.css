@@ -1,0 +1,154 @@
+.signup-3d .three-office-canvas {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  width: 1200px;
+  height: 800px;
+  z-index: -1;
+  pointer-events: none;
+}
+.signup-3d .world-heading h1 {
+  text-shadow: 0 3px 0 #075aac55;
+}
+.signup-3d .pip-dialogue {
+  border: 1px solid #d2edeb;
+  border-radius: 15px;
+  box-shadow:
+    0 5px 0 #153c7020,
+    0 12px 25px #071a3810;
+}
+.signup-3d .pip-dialogue::before {
+  border-top-color: #d2edeb;
+}
+.signup-3d .computer-casing {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  border-radius: 19px;
+}
+.signup-3d .computer-screen {
+  border-radius: 7px;
+  border-color: #153c70;
+  box-shadow:
+    inset 0 2px 7px #0008,
+    0 1px 0 #fff8;
+}
+.signup-3d .computer-neck,
+.signup-3d .computer-foot,
+.signup-3d .pixel-keyboard {
+  visibility: hidden;
+}
+.signup-3d .computer-brand {
+  color: #466a73;
+}
+.signup-3d .computer-led {
+  border-radius: 50%;
+  box-shadow: 0 0 5px #00a86b;
+}
+.signup-3d .computer-slots {
+  opacity: 0.7;
+}
+.signup-3d .bell-art {
+  opacity: 0;
+}
+.signup-3d .bell-plaque {
+  border: 1px solid #c18a2d;
+  border-radius: 8px;
+  box-shadow:
+    0 4px 0 #ad782c,
+    0 8px 15px #071a3825;
+  background: linear-gradient(#ffda82, #ffc857);
+}
+.signup-3d .bell-plaque:hover {
+  box-shadow:
+    0 6px 0 #ad782c,
+    0 12px 20px #071a3820;
+}
+.signup-3d .pixel-clipboard {
+  border-radius: 10px;
+  border-color: #be995c;
+  box-shadow:
+    0 5px 0 #8e693e,
+    0 12px 24px #071a3833,
+    inset 0 0 0 1px #dae7d8;
+}
+.signup-3d .clipboard-clip {
+  border: 1px solid #527484;
+  border-radius: 6px;
+  background: linear-gradient(#e2ecee, #92acba);
+  box-shadow: 0 2px 3px #071a3833;
+}
+.signup-3d .clipboard-clip::after {
+  border-radius: 4px;
+}
+.signup-3d .paper-stamp {
+  border-radius: 5px;
+}
+.signup-3d .clipboard-back {
+  border-radius: 4px;
+}
+.signup-3d .delivery-slip {
+  border-radius: 4px;
+  box-shadow: 0 5px 12px #071a3825;
+}
+.signup-3d .delivery-slip p > button,
+.signup-3d .verify-key {
+  border-radius: 4px;
+}
+.signup-3d .code-digits > span {
+  border-radius: 3px;
+}
+.signup-3d .employee-badge {
+  border: 1px solid #d3e3dd;
+  border-radius: 13px;
+  box-shadow:
+    0 4px 0 #bddad1,
+    0 12px 20px #071a3833;
+}
+.signup-3d .badge-main > svg {
+  border: 0;
+  border-radius: 10px;
+}
+.signup-3d .badge-bottom > button {
+  border: 1px solid #0766bf;
+  border-radius: 5px;
+  box-shadow: 0 3px 0 #07559b;
+}
+.signup-3d .badge-slot {
+  border-radius: 6px;
+  box-shadow: inset 0 1px 2px #153c7050;
+}
+.signup-3d .promotion-banner {
+  border: 1px solid #e1ab3f;
+  border-radius: 10px;
+  box-shadow:
+    0 5px 0 #b28735,
+    0 12px 20px #071a3825;
+}
+.signup-3d .pixel-error {
+  border: 1px solid #cf9a30;
+  border-radius: 8px;
+  box-shadow: 0 4px 0 #ad782c;
+}
+.signup-3d .pixel-confetti i {
+  border-radius: 2px;
+}
+.signup-3d .office-status i,
+.signup-3d .scene-caption i {
+  border-radius: 50%;
+}
+.signup-3d .office-sign {
+  text-shadow: 0 1px 2px #071a3870;
+}
+.signup-3d .scene-loading {
+  position: absolute;
+  inset: 360px 0 auto;
+  text-align: center;
+  font-size: 10px;
+}
+@media (max-width: 640px) {
+  .signup-3d .three-office-canvas {
+    top: 26px;
+  }
+}

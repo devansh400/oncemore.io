@@ -168,7 +168,7 @@ export function KatanaStory({
                   intensity={0.1}
                   travel={10}
                   fit="contain"
-                  image={asset + "poster01 clean.webp"}
+                  image={asset + "poster01.jpg"}
                   width="100%"
                   height="100%"
                 />
