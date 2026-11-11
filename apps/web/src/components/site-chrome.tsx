@@ -7,7 +7,17 @@ import { Grain } from "./grain";
 import { SiteFooter } from "./site-footer";
 import { SiteHeader } from "./site-header";
 
-const bare = new Set(["/squish", "/squish2", "/oncemore2", "/transition", "/katana", "/signup", "/signup-3d"]);
+const bare = new Set([
+  "/squish",
+  "/squish2",
+  "/oncemore2",
+  "/transition",
+  "/katana",
+  "/signup",
+  "/signup-3d",
+  "/profile",
+  "/profile2",
+]);
 
 export function SiteChrome({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
