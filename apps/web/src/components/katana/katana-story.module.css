@@ -1,0 +1,280 @@
+.story {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  color: #e5e4df;
+  font-family: "Barlow Condensed", sans-serif;
+  pointer-events: none;
+}
+.panel {
+  position: absolute;
+  inset: 0;
+  visibility: hidden;
+}
+.panel:first-child {
+  visibility: visible;
+}
+.label {
+  position: absolute;
+  top: 7%;
+  left: 5.5%;
+  font:
+    400 12px "Barlow Condensed",
+    sans-serif;
+  letter-spacing: 0.24em;
+  color: #de3436;
+}
+.reverse .label {
+  left: 56%;
+}
+.copy {
+  position: absolute;
+  top: 23%;
+  left: 5.5%;
+  width: 38%;
+}
+.reverse .copy {
+  left: 56%;
+}
+.copy .title {
+  margin: 0;
+}
+.copy .titleText {
+  font:
+    400 clamp(46px, 5.2vw, 82px)/1.1 Anton,
+    sans-serif;
+  letter-spacing: 0;
+}
+.copy .body {
+  margin: 32px 0 0;
+}
+.copy .bodyText {
+  font:
+    400 clamp(19px, 1.6vw, 24px)/1.4 "Barlow Condensed",
+    sans-serif;
+}
+.title {
+  font:
+    400 var(--title-size, 72px) Anton,
+    sans-serif;
+  text-transform: uppercase;
+  color: #e4e3dc;
+  letter-spacing: 0;
+  margin: 0;
+}
+.title > span {
+  filter: drop-shadow(0 2px 6px #000);
+}
+.body {
+  font:
+    400 var(--body-size, 23px) "Barlow Condensed",
+    sans-serif;
+  color: #bcbfbd;
+  margin: 0;
+}
+.media {
+  position: absolute;
+  right: 5.5%;
+  top: 19%;
+  width: 27%;
+  height: 61%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+}
+.reverse .media {
+  right: auto;
+  left: 5.5%;
+}
+.poster {
+  width: 100%;
+  height: 100%;
+}
+.games {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.comic a:focus-visible {
+  outline: 2px solid #c8272e;
+  outline-offset: 5px;
+}
+.cards {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.fanCard {
+  position: absolute;
+  width: 72%;
+  aspect-ratio: 339 / 589;
+}
+.fanCard:nth-child(1) {
+  transform: translate(-22%, 15px) rotate(-10deg);
+}
+.fanCard:nth-child(2) {
+  transform: translate(22%, 15px) rotate(10deg);
+}
+.fanCard:nth-child(3) {
+  transform: translateY(-10px);
+}
+.metric {
+  display: flex;
+  flex-direction: column;
+  font-family: Anton, sans-serif;
+  line-height: 1;
+  text-align: center;
+}
+.metric strong {
+  color: #ce252b;
+  font-size: clamp(65px, 10vw, 170px);
+  font-weight: 400;
+}
+.metric span {
+  font:
+    14px "Barlow Condensed",
+    sans-serif;
+  letter-spacing: 0.3em;
+  margin: 20px 0 45px;
+}
+.metric b {
+  font-weight: 400;
+  font-size: clamp(60px, 7vw, 120px);
+  color: #b6bec0;
+}
+.comic {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.comicArtwork {
+  position: relative;
+  display: block;
+  transform: scale(var(--comic-scale, 1));
+  transform-origin: center;
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+}
+.comicLink {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: max-content;
+  max-width: 90%;
+  padding: 12px 16px;
+  background: #080a0be6;
+  border: 1px solid #a22c3170;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  color: #d9d9d1;
+  opacity: 0;
+  transform: translate(-50%, calc(-50% + 6px));
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease;
+  pointer-events: none;
+}
+.comicArtwork:hover .comicLink,
+.comicArtwork:focus-visible .comicLink {
+  opacity: 1;
+  transform: translate(-50%, -50%);
+}
+@media (prefers-reduced-motion: reduce) {
+  .comicLink {
+    transition: none;
+  }
+}
+@media (max-width: 699px) {
+  .panel[data-chapter] {
+    --copy-left: 6.5%;
+  }
+  .copy,
+  .reverse .copy {
+    left: 6.5%;
+    top: 12%;
+    width: 87%;
+  }
+  .copy .titleText {
+    font-size: clamp(32px, 10.5vw, 46px);
+  }
+  .copy .body {
+    margin-top: 24px;
+  }
+  .copy .bodyText {
+    font-size: 19px;
+  }
+  .label,
+  .reverse .label {
+    top: 5%;
+    left: 6.5%;
+    font-size: 10px;
+  }
+  .media,
+  .reverse .media {
+    top: auto;
+    bottom: 8%;
+    right: 6.5%;
+    left: auto;
+    width: 47%;
+    height: 31%;
+  }
+  .poster {
+    width: 100%;
+    height: 100%;
+  }
+  .fanCard {
+    width: 68%;
+  }
+  .metric strong {
+    font-size: 70px;
+  }
+  .metric b {
+    font-size: 50px;
+  }
+  .metric span {
+    font-size: 9px;
+    margin: 12px 0 15px;
+  }
+  .comicLink {
+    font-size: 10px;
+  }
+}
+
+.gameDeck {
+  position: relative;
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+}
+.gameCard {
+  position: absolute;
+  inset: 0;
+  transform-origin: center;
+  will-change: transform, opacity;
+}
+.gameLabel {
+  margin: 24px 0 0;
+  color: #bfc2be;
+  font:
+    400 11px "Barlow Condensed",
+    sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  text-align: center;
+}
+@media (max-width: 699px) {
+  .gameLabel {
+    margin-top: 16px;
+    font-size: 10px;
+  }
+}

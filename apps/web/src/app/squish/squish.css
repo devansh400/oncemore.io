@@ -1,0 +1,160 @@
+.squish-stage {
+  --squish-violet: #7c5cff;
+  --squish-lime: #c6ff4a;
+  --squish-cyan: #46e0ff;
+  background: #04030a;
+  isolation: isolate;
+}
+
+/* ---------- Aurora ---------- */
+.squish-aurora {
+  background:
+    radial-gradient(46% 58% at 22% 26%, rgb(124 92 255 / 42%), transparent 68%),
+    radial-gradient(38% 46% at 78% 18%, rgb(70 224 255 / 26%), transparent 70%),
+    radial-gradient(52% 60% at 62% 92%, rgb(198 255 74 / 16%), transparent 70%),
+    radial-gradient(80% 80% at 50% 50%, rgb(8 6 20 / 0%), #04030a 82%);
+  filter: blur(6px) saturate(120%);
+  animation: squish-drift 22s ease-in-out infinite alternate;
+}
+
+.squish-aurora::after {
+  content: "";
+  position: absolute;
+  inset: -30%;
+  background: conic-gradient(
+    from 0deg,
+    rgb(124 92 255 / 0%) 0deg,
+    rgb(124 92 255 / 30%) 70deg,
+    rgb(70 224 255 / 0%) 140deg,
+    rgb(198 255 74 / 18%) 220deg,
+    rgb(124 92 255 / 0%) 300deg
+  );
+  mix-blend-mode: screen;
+  filter: blur(70px);
+  animation: squish-spin 34s linear infinite;
+  opacity: 0.5;
+}
+
+@keyframes squish-spin {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+@keyframes squish-drift {
+  from {
+    transform: translate3d(-2%, -1%, 0) scale(1.04);
+  }
+  to {
+    transform: translate3d(2%, 2%, 0) scale(1.12);
+  }
+}
+
+/* ---------- Floor grid ---------- */
+.squish-grid {
+  background-image:
+    linear-gradient(to right, rgb(236 233 255 / 12%) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(236 233 255 / 12%) 1px, transparent 1px);
+  background-size: 72px 72px;
+  transform: perspective(620px) rotateX(64deg) scale(2.4);
+  transform-origin: 50% 116%;
+  mask-image: linear-gradient(to bottom, transparent 6%, black 58%, transparent 96%);
+  opacity: 0.35;
+  animation: squish-grid-run 9s linear infinite;
+}
+
+@keyframes squish-grid-run {
+  to {
+    background-position:
+      0 72px,
+      0 72px;
+  }
+}
+
+/* ---------- Scanlines ---------- */
+.squish-scan {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgb(255 255 255 / 4%) 0px,
+    rgb(255 255 255 / 4%) 1px,
+    transparent 1px,
+    transparent 4px
+  );
+  mask-image: radial-gradient(70% 70% at 50% 50%, black, transparent 100%);
+  opacity: 0.5;
+  mix-blend-mode: overlay;
+}
+
+/* ---------- Halo behind the wordmark ---------- */
+.squish-halo {
+  background: radial-gradient(
+    50% 46% at 50% 52%,
+    rgb(124 92 255 / 34%),
+    rgb(70 224 255 / 10%) 52%,
+    transparent 74%
+  );
+  filter: blur(22px);
+  animation: squish-breathe 7.5s ease-in-out infinite;
+}
+
+@keyframes squish-breathe {
+  0%,
+  100% {
+    transform: scale(0.94);
+    opacity: 0.55;
+  }
+  50% {
+    transform: scale(1.06);
+    opacity: 0.9;
+  }
+}
+
+/* ---------- Wordmark shell ---------- */
+.squish-shell {
+  will-change: transform, filter;
+}
+
+.squish-word {
+  cursor: grab;
+}
+
+.squish-word:active {
+  cursor: grabbing;
+}
+
+.squish-flash {
+  background: radial-gradient(
+    52% 48% at 50% 50%,
+    rgb(236 233 255 / 75%),
+    rgb(124 92 255 / 22%) 46%,
+    transparent 72%
+  );
+  mix-blend-mode: screen;
+}
+
+.squish-streak {
+  background: linear-gradient(90deg, transparent, #ece9ff 46%, #c6ff4a 52%, transparent);
+  mix-blend-mode: screen;
+}
+
+/* ---------- Vertical ticker ---------- */
+.squish-rail {
+  writing-mode: vertical-rl;
+  animation: squish-rail 26s linear infinite;
+}
+
+@keyframes squish-rail {
+  to {
+    transform: translateY(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .squish-aurora,
+  .squish-aurora::after,
+  .squish-grid,
+  .squish-halo,
+  .squish-rail {
+    animation: none;
+  }
+}

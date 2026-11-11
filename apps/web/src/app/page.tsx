@@ -1,30 +1,34 @@
-"use client";
+import { Capabilities } from "@/components/sections/capabilities";
+import { Contact } from "@/components/sections/contact";
+import { Hero } from "@/components/sections/hero";
+import { Manifesto } from "@/components/sections/manifesto";
+import { Process } from "@/components/sections/process";
+import { Proof } from "@/components/sections/proof";
+import { Work } from "@/components/sections/work";
+import { Marquee } from "@/components/ui/marquee";
 
-const TITLE_TEXT = `
- ██████╗ ███████╗████████╗████████╗███████╗██████╗
- ██╔══██╗██╔════╝╚══██╔══╝╚══██╔══╝██╔════╝██╔══██╗
- ██████╔╝█████╗     ██║      ██║   █████╗  ██████╔╝
- ██╔══██╗██╔══╝     ██║      ██║   ██╔══╝  ██╔══██╗
- ██████╔╝███████╗   ██║      ██║   ███████╗██║  ██║
- ╚═════╝ ╚══════╝   ╚═╝      ╚═╝   ╚══════╝╚═╝  ╚═╝
-
- ████████╗    ███████╗████████╗ █████╗  ██████╗██╗  ██╗
- ╚══██╔══╝    ██╔════╝╚══██╔══╝██╔══██╗██╔════╝██║ ██╔╝
-    ██║       ███████╗   ██║   ███████║██║     █████╔╝
-    ██║       ╚════██║   ██║   ██╔══██║██║     ██╔═██╗
-    ██║       ███████║   ██║   ██║  ██║╚██████╗██║  ██╗
-    ╚═╝       ╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝
- `;
+const ticker = [
+  "They Call Him OG",
+  "Maa Inti Bangaaram",
+  "1M fans in 48 hours",
+  "Interactive worlds",
+  "AI-powered moments",
+  "Exclusive content",
+];
 
 export default function Home() {
   return (
-    <div className="container mx-auto max-w-3xl px-4 py-2">
-      <pre className="overflow-x-auto font-mono text-sm">{TITLE_TEXT}</pre>
-      <div className="grid gap-6">
-        <section className="rounded-lg border p-4">
-          <h2 className="mb-2 font-medium">API Status</h2>
-        </section>
+    <>
+      <Hero />
+      <div className="border-y border-bone/10 py-4">
+        <Marquee items={ticker} />
       </div>
-    </div>
+      <Manifesto />
+      <Proof />
+      <Work />
+      <Capabilities />
+      <Process />
+      <Contact />
+    </>
   );
 }

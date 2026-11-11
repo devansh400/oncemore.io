@@ -1,0 +1,5 @@
+Generated with the built-in image_gen tool. Converted to WebP at quality 86 for the website.
+Final asset: katana-moon.webp
+
+Generation prompt:
+Use case: photorealistic-natural. Asset type: website background surface texture, square image. Create a realistic high resolution close telescopic photograph of the FULL MOON, entire circular lunar disc precisely centered filling 94 percent of square image, isolated against pure black. Extremely rich photographic lunar geology, dark basalt maria, bright highland ridges, thousands of fine impact craters and ejecta rays, irregular dust and subtle relief, crisp fine detail with softly shaded sphere curvature at limb. Neutral silver grey, restrained contrast, illuminated from upper left but nearly full moon, subtle darkening at lower right rim. No blue coloration, no glow, no stars, no clouds, no text, no sword, no graphics. This will be used as a photographic surface texture on a large moon behind a 3D katana in a cinematic website. Save the generated asset locally and report its path.

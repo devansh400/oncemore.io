@@ -1,0 +1,247 @@
+/* /oncemore — crystallized wordmark motion study */
+
+body.om-immersive > header,
+body.om-immersive > footer {
+  display: none !important;
+}
+
+body.om-immersive {
+  overflow: hidden;
+}
+
+.oncemore-root {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  min-height: 100svh;
+  flex-direction: column;
+  overflow: hidden;
+  background: #000;
+  color: #ece9ff;
+  font-family: var(--font-inter-tight), system-ui, sans-serif;
+  opacity: 0;
+}
+
+/* ---------- HUD ---------- */
+.om-hud {
+  position: absolute;
+  inset-inline: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: clamp(16px, 3vw, 34px) clamp(20px, 3.4vw, 52px);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: clamp(9px, 0.72vw, 11px);
+  font-weight: 500;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: rgb(236 233 255 / 78%);
+}
+
+.om-hud--top {
+  top: 0;
+}
+
+.om-hud--bottom {
+  bottom: 0;
+}
+
+.om-hud__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8em;
+  white-space: nowrap;
+}
+
+.om-hud__item sup {
+  margin-left: 0.15em;
+  font-size: 0.7em;
+  color: rgb(124 200 255 / 85%);
+}
+
+.om-hud__item--muted {
+  color: rgb(236 233 255 / 42%);
+}
+
+.om-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #7cc8ff;
+  box-shadow: 0 0 12px rgb(124 200 255 / 90%);
+  animation: om-blink 2.8s ease-in-out infinite;
+}
+
+@keyframes om-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.28;
+  }
+}
+
+/* ---------- Stage ---------- */
+.om-stage {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  flex: 1;
+  place-items: center;
+  padding: clamp(72px, 12vh, 160px) clamp(18px, 5vw, 80px);
+  perspective: 1600px;
+}
+
+.om-wordmark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-inter-tight), system-ui, sans-serif;
+  font-size: clamp(3.4rem, 13.4vw, 12.5rem);
+  font-weight: 800;
+  font-variation-settings: "wght" 800;
+  line-height: 1;
+  letter-spacing: -0.012em;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* ---------- Crystal O ---------- */
+.om-ball-slot {
+  position: relative;
+  display: block;
+  flex: none;
+  width: 1.5em;
+  height: 1.5em;
+  margin-right: 0.02em;
+  transform-origin: center;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.om-ball-float {
+  position: absolute;
+  inset: 0;
+  display: block;
+  will-change: transform;
+}
+
+.om-ball-stage {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 1.5em;
+  height: 1.5em;
+  margin-left: -0.75em;
+  margin-top: -0.75em;
+  transform-origin: center;
+  will-change: transform;
+}
+
+.om-crystal {
+  position: absolute;
+  inset: 0;
+}
+
+.om-ball-halo {
+  position: absolute;
+  inset: -34%;
+  z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgb(108 198 255 / 42%) 0%,
+    rgb(64 132 255 / 26%) 40%,
+    transparent 70%
+  );
+  filter: blur(20px);
+  animation: om-halo 4.2s ease-in-out infinite;
+}
+
+@keyframes om-halo {
+  0%,
+  100% {
+    opacity: 0.72;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.12);
+  }
+}
+
+.om-ball-orbit {
+  position: absolute;
+  inset: -9%;
+  z-index: 2;
+  border-radius: 50%;
+  border: 1.5px solid rgb(160 210 255 / 22%);
+  box-shadow:
+    inset 0 0 30px rgb(100 175 255 / 10%),
+    0 0 24px rgb(100 175 255 / 8%);
+  pointer-events: none;
+  transform: rotateX(74deg) rotateZ(18deg);
+  animation: om-orbit 16s linear infinite;
+}
+
+@keyframes om-orbit {
+  from {
+    transform: rotateX(74deg) rotateZ(0deg);
+  }
+  to {
+    transform: rotateX(74deg) rotateZ(360deg);
+  }
+}
+
+/* ---------- Letters ---------- */
+.om-letters {
+  display: flex;
+  align-items: center;
+  line-height: 1;
+  transform-style: preserve-3d;
+  filter: drop-shadow(0 0 0.14em rgb(110 190 255 / 30%));
+}
+
+.om-letter {
+  display: inline-block;
+  padding-top: 0.012em;
+  padding-bottom: 0.06em;
+  margin-bottom: -0.06em;
+  color: #f2f7ff;
+  -webkit-text-fill-color: #f2f7ff;
+  transform-origin: center bottom;
+  will-change: transform;
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .om-dot,
+  .om-ball-halo,
+  .om-ball-orbit {
+    animation: none !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .om-wordmark {
+    font-size: clamp(2.9rem, 15.5vw, 5rem);
+    letter-spacing: -0.008em;
+  }
+
+  .om-hud__item--muted {
+    display: none;
+  }
+
+  .om-hud {
+    justify-content: center;
+    letter-spacing: 0.26em;
+  }
+
+  .om-ball-orbit {
+    display: none;
+  }
+}

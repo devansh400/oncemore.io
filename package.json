@@ -33,6 +33,7 @@
     "check": "oxlint && oxfmt --write"
   },
   "dependencies": {
+    "ogl": "^1.0.11",
     "zod": "catalog:"
   },
   "devDependencies": {
