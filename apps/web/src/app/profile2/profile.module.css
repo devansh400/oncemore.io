@@ -658,6 +658,194 @@
   font-weight: 600;
 }
 
+.showcase {
+  display: grid;
+  flex: 1;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: minmax(0, 1fr);
+  gap: 20px;
+  min-height: 0;
+  margin-top: 28px;
+}
+
+.souvenirPanel,
+.experiencePanel {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  padding: 18px;
+  border-radius: 24px;
+}
+
+.souvenirPanel {
+  background:
+    radial-gradient(circle at 18% 0%, rgba(255, 255, 255, 0.85), transparent 52%),
+    var(--surface-lavender);
+}
+
+.experiencePanel {
+  background: var(--surface-cream);
+}
+
+.panelHeadRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.panelHint {
+  margin-top: 3px;
+  font-size: 11.5px;
+  color: var(--text-secondary);
+}
+
+.lanyardStage {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at 50% 8%, #ffffff 0%, transparent 55%),
+    radial-gradient(circle at 86% 88%, rgba(251, 208, 180, 0.4), transparent 55%),
+    var(--surface-cream);
+}
+
+.lanyardStage .lanyardFill,
+.souvenirStageLarge .lanyardFill {
+  position: absolute;
+  inset: 0;
+}
+
+.stagePin {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  z-index: 2;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #e4b965, #b98b3c);
+  box-shadow: 0 4px 10px rgba(120, 90, 35, 0.35);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.stageLabel {
+  position: absolute;
+  bottom: 13px;
+  left: 16px;
+  z-index: 2;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  pointer-events: none;
+}
+
+.stageHint {
+  position: absolute;
+  right: 16px;
+  bottom: 13px;
+  z-index: 2;
+  font-size: 10px;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.emptyInner {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 0;
+  padding: 10px;
+  text-align: center;
+}
+
+.emptyInner .emptyText {
+  max-width: 32ch;
+}
+
+.souvenirTab {
+  display: grid;
+  flex: 1;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  grid-template-rows: minmax(0, 1fr);
+  gap: 24px;
+  min-height: 0;
+  margin-top: 18px;
+}
+
+.souvenirStageLarge {
+  position: relative;
+  min-height: 420px;
+  overflow: hidden;
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 50% 8%, #ffffff 0%, transparent 55%),
+    radial-gradient(circle at 86% 88%, rgba(251, 208, 180, 0.4), transparent 55%),
+    var(--surface-lavender);
+}
+
+.souvenirInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 28px;
+  border-radius: 24px;
+  background: var(--surface-cream);
+}
+
+.souvenirHeading {
+  margin-top: 6px;
+  font-family: var(--font-horizon-display), "Nunito", sans-serif;
+  font-size: clamp(26px, 2.2vw, 34px);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.souvenirSub {
+  max-width: 42ch;
+  margin-top: 8px;
+  font-size: 12.5px;
+  color: var(--text-secondary);
+}
+
+.detailRows {
+  display: flex;
+  flex-direction: column;
+  margin-top: 18px;
+}
+
+.detailRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--border-soft);
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.detailRow strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.souvenirHint {
+  margin-top: 16px;
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+
 @media (max-width: 1000px) {
   .frame {
     grid-template-columns: 1fr;
@@ -706,6 +894,22 @@
   .promo {
     margin-top: 0;
   }
+
+  .showcase {
+    grid-template-columns: 1fr;
+  }
+
+  .lanyardStage {
+    min-height: 320px;
+  }
+
+  .souvenirTab {
+    grid-template-columns: 1fr;
+  }
+
+  .souvenirStageLarge {
+    min-height: 380px;
+  }
 }
 
 @media (max-width: 640px) {
@@ -729,5 +933,17 @@
 
   .rail {
     grid-template-columns: 1fr;
+  }
+
+  .showcase {
+    margin-top: 20px;
+  }
+
+  .lanyardStage {
+    min-height: 300px;
+  }
+
+  .souvenirInfo {
+    padding: 20px;
   }
 }

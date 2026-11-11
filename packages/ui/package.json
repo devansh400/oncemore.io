@@ -10,6 +10,7 @@
     "./components/ElasticMesh": "./src/components/ElasticMesh.jsx",
     "./components/ScrollReveal": "./src/components/ScrollReveal.jsx",
     "./components/DecayCard": "./src/components/DecayCard.jsx",
+    "./components/Lanyard": "./src/components/Lanyard.jsx",
     "./hooks/*": "./src/hooks/*.ts",
     "./postcss.config": "./postcss.config.mjs"
   },

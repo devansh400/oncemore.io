@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1125" viewBox="0 0 800 1125">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F4ECFB"/>
+      <stop offset="0.52" stop-color="#EBE1F8"/>
+      <stop offset="1" stop-color="#E1D3F4"/>
+    </linearGradient>
+    <linearGradient id="blob" x1="0.15" y1="0" x2="0.85" y2="1">
+      <stop offset="0" stop-color="#F7F2FD"/>
+      <stop offset="0.5" stop-color="#DCCFF0"/>
+      <stop offset="1" stop-color="#BFA8E4"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="soften" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+  </defs>
+
+  <rect width="800" height="1125" fill="url(#bg)"/>
+  <circle cx="700" cy="205" r="185" fill="#F8B98F" opacity="0.55"/>
+  <circle cx="85" cy="900" r="220" fill="#C6B2E6" opacity="0.4"/>
+  <circle cx="400" cy="520" r="260" fill="url(#glow)" opacity="0.45"/>
+
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="400" y="132" text-anchor="middle" fill="#3F3249" font-size="17" font-weight="700" letter-spacing="7">ONCEMORE</text>
+    <text x="400" y="166" text-anchor="middle" fill="#6B5A75" font-size="10.5" font-weight="600" letter-spacing="4.5">SOUVENIR PASS</text>
+  </g>
+
+  <rect x="78" y="226" width="644" height="652" rx="58" fill="#FFF9F3"/>
+  <rect x="78.75" y="226.75" width="642.5" height="650.5" rx="57.25" fill="none" stroke="#C6B2E6" stroke-width="1.5"/>
+
+  <rect x="318" y="258" width="164" height="38" rx="19" fill="#FFF4EC"/>
+  <text x="400" y="283" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" fill="#E37B45" font-size="11.5" font-weight="700" letter-spacing="3">NO. 001</text>
+
+  <path d="M262 672V566C262 474 322 414 400 414C478 414 538 474 538 566V672Z" fill="#FBD0B4" opacity="0.32"/>
+  <ellipse cx="400" cy="680" rx="152" ry="20" fill="#C6B2E6" opacity="0.3" filter="url(#soften)"/>
+
+  <path d="M400 350C505 345 570 418 565 512C560 606 498 664 400 664C302 664 240 606 235 512C230 418 295 345 400 350Z" fill="url(#blob)"/>
+  <ellipse cx="344" cy="438" rx="44" ry="64" transform="rotate(-24 344 438)" fill="#FFFFFF" opacity="0.45"/>
+
+  <circle cx="365" cy="508" r="8.5" fill="#4A3B58"/>
+  <circle cx="435" cy="508" r="8.5" fill="#4A3B58"/>
+  <circle cx="368" cy="505" r="2.4" fill="#FFFFFF" opacity="0.85"/>
+  <circle cx="438" cy="505" r="2.4" fill="#FFFFFF" opacity="0.85"/>
+  <path d="M384 540Q400 554 416 540" fill="none" stroke="#4A3B58" stroke-width="5.5" stroke-linecap="round"/>
+  <circle cx="318" cy="548" r="17" fill="#F39D6A" opacity="0.45"/>
+  <circle cx="482" cy="548" r="17" fill="#F39D6A" opacity="0.45"/>
+
+  <line x1="140" y1="726" x2="660" y2="726" stroke="#E9E1F7"/>
+  <text x="400" y="792" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" fill="#3F3249" font-size="52" font-weight="700" letter-spacing="-1">Alex Rivera</text>
+  <text x="400" y="828" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" fill="#6B5A75" font-size="11.5" font-weight="600" letter-spacing="5">FOUNDING MEMBER</text>
+
+  <text x="400" y="956" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="27" font-style="italic" fill="#3F3249">A little piece of every world.</text>
+  <text x="400" y="1000" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" fill="#6B5A75" font-size="10" font-weight="600" letter-spacing="4">KEEP THIS CLOSE</text>
+  <line x1="320" y1="1034" x2="480" y2="1034" stroke="#C6B2E6"/>
+  <text x="400" y="1066" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" fill="#6B5A75" font-size="10.5" font-weight="600" letter-spacing="3.5">ONCEMORE.IO</text>
+
+  <path d="M0 -13C1.8 -3.5 3.5 -1.8 13 0C3.5 1.8 1.8 3.5 0 13C-1.8 3.5 -3.5 1.8 -13 0C-3.5 -1.8 -1.8 -3.5 0 -13Z" fill="#F6A96B" opacity="0.8" transform="translate(128 330) scale(0.8)"/>
+  <path d="M0 -13C1.8 -3.5 3.5 -1.8 13 0C3.5 1.8 1.8 3.5 0 13C-1.8 3.5 -3.5 1.8 -13 0C-3.5 -1.8 -1.8 -3.5 0 -13Z" fill="#C6B2E6" opacity="0.9" transform="translate(674 352) scale(0.6)"/>
+  <path d="M0 -13C1.8 -3.5 3.5 -1.8 13 0C3.5 1.8 1.8 3.5 0 13C-1.8 3.5 -3.5 1.8 -13 0C-3.5 -1.8 -1.8 -3.5 0 -13Z" fill="#F6A96B" opacity="0.7" transform="translate(676 764) scale(0.5)"/>
+  <circle cx="126" cy="744" r="5" fill="#C6B2E6" opacity="0.8"/>
+</svg>

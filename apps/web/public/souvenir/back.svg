@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1125" viewBox="0 0 800 1125">
+  <defs>
+    <linearGradient id="bgBack" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFFDF9"/>
+      <stop offset="0.55" stop-color="#FFF4EC"/>
+      <stop offset="1" stop-color="#F2EAF9"/>
+    </linearGradient>
+    <linearGradient id="stamp" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F7F2FD"/>
+      <stop offset="1" stop-color="#C6B2E6"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="1125" fill="url(#bgBack)"/>
+  <circle cx="110" cy="160" r="180" fill="#DCCFF0" opacity="0.35"/>
+  <circle cx="710" cy="1010" r="210" fill="#FBD0B4" opacity="0.45"/>
+
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="400" y="132" text-anchor="middle" fill="#4A3B58" font-size="17" font-weight="700" letter-spacing="7">ONCEMORE</text>
+    <text x="400" y="166" text-anchor="middle" fill="#8F7F8C" font-size="10.5" font-weight="600" letter-spacing="4.5">SOUVENIR PASS</text>
+  </g>
+
+  <rect x="78" y="226" width="644" height="614" rx="58" fill="#3F3249"/>
+
+  <path d="M400 274l5.4 16.6L422 296l-16.6 5.4L400 318l-5.4-16.6L378 296l16.6-5.4Z" fill="#F6A96B"/>
+  <text x="400" y="392" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="40" font-style="italic" fill="#FFF8F2">Every world</text>
+  <text x="400" y="446" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="40" font-style="italic" fill="#FFF8F2">leaves a little</text>
+  <text x="400" y="500" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="40" font-style="italic" fill="#FBD0B4">something.</text>
+  <line x1="330" y1="552" x2="470" y2="552" stroke="#7F68B0"/>
+  <text x="400" y="592" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" fill="#B9A8C9" font-size="10" font-weight="600" letter-spacing="4.5">MEMBER KEEPSAKE</text>
+
+  <circle cx="400" cy="696" r="70" fill="none" stroke="#7F68B0" stroke-dasharray="2 7"/>
+  <path d="M400 648C446 646 476 676 474 716C472 754 444 780 400 780C356 780 328 754 326 716C324 676 354 646 400 648Z" fill="url(#stamp)"/>
+  <circle cx="382" cy="710" r="4.5" fill="#4A3B58"/>
+  <circle cx="418" cy="710" r="4.5" fill="#4A3B58"/>
+  <path d="M391 728Q400 736 409 728" fill="none" stroke="#4A3B58" stroke-width="3.2" stroke-linecap="round"/>
+  <circle cx="360" cy="734" r="8" fill="#F39D6A" opacity="0.5"/>
+  <circle cx="440" cy="734" r="8" fill="#F39D6A" opacity="0.5"/>
+
+  <text x="400" y="812" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" fill="#B9A8C9" font-size="10.5" font-weight="600" letter-spacing="4">NO. 001  ·  2026</text>
+
+  <text x="400" y="900" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" fill="#8F7F8C" font-size="9.5" font-weight="600" letter-spacing="4">THIS PASS BELONGS TO</text>
+  <text x="400" y="941" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" fill="#3F3249" font-size="26" font-weight="700" letter-spacing="2">ALEX RIVERA</text>
+
+  <g fill="#3F3249">
+    <rect x="260" y="980" width="4" height="44"/>
+    <rect x="268" y="980" width="2" height="44"/>
+    <rect x="274" y="980" width="6" height="44"/>
+    <rect x="284" y="980" width="3" height="44"/>
+    <rect x="291" y="980" width="2" height="44"/>
+    <rect x="297" y="980" width="7" height="44"/>
+    <rect x="308" y="980" width="2" height="44"/>
+    <rect x="314" y="980" width="4" height="44"/>
+    <rect x="322" y="980" width="3" height="44"/>
+    <rect x="329" y="980" width="6" height="44"/>
+    <rect x="339" y="980" width="2" height="44"/>
+    <rect x="345" y="980" width="4" height="44"/>
+    <rect x="353" y="980" width="7" height="44"/>
+    <rect x="364" y="980" width="2" height="44"/>
+    <rect x="370" y="980" width="4" height="44"/>
+    <rect x="378" y="980" width="3" height="44"/>
+    <rect x="385" y="980" width="6" height="44"/>
+    <rect x="395" y="980" width="2" height="44"/>
+    <rect x="401" y="980" width="4" height="44"/>
+    <rect x="409" y="980" width="7" height="44"/>
+    <rect x="420" y="980" width="2" height="44"/>
+    <rect x="426" y="980" width="3" height="44"/>
+    <rect x="433" y="980" width="6" height="44"/>
+    <rect x="443" y="980" width="2" height="44"/>
+    <rect x="449" y="980" width="4" height="44"/>
+    <rect x="457" y="980" width="3" height="44"/>
+    <rect x="464" y="980" width="7" height="44"/>
+    <rect x="475" y="980" width="2" height="44"/>
+    <rect x="481" y="980" width="4" height="44"/>
+    <rect x="489" y="980" width="6" height="44"/>
+    <rect x="499" y="980" width="2" height="44"/>
+    <rect x="505" y="980" width="3" height="44"/>
+    <rect x="512" y="980" width="6" height="44"/>
+    <rect x="522" y="980" width="2" height="44"/>
+    <rect x="528" y="980" width="5" height="44"/>
+  </g>
+  <text x="400" y="1048" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" fill="#8F7F8C" font-size="9.5" letter-spacing="6">001  2026  1107</text>
+  <text x="400" y="1082" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" fill="#8F7F8C" font-size="10.5" font-weight="600" letter-spacing="3.5">ONCEMORE.IO</text>
+  <text x="400" y="1106" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" fill="#B4A6AE" font-size="8.5" letter-spacing="2">NO CASH VALUE  ·  KEEP FOREVER</text>
+</svg>

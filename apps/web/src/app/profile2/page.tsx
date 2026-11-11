@@ -3,13 +3,16 @@
 import { ArrowRight } from "lucide-react";
 import { useState } from "react";
 
+import { SouvenirLanyard } from "@/components/souvenir-lanyard";
+
 import styles from "./profile.module.css";
 
-type Section = "overview" | "experiences" | "settings";
+type Section = "overview" | "experiences" | "souvenir" | "settings";
 
 const SECTIONS = [
   { id: "overview", label: "Overview" },
   { id: "experiences", label: "Experiences" },
+  { id: "souvenir", label: "Souvenir" },
   { id: "settings", label: "Settings" },
 ] as const;
 
@@ -23,6 +26,11 @@ const HEADINGS: Record<Section, { kicker: string; title: string; subtitle: strin
     kicker: "Your library",
     title: "Experiences",
     subtitle: "Worlds you have joined, saved, or created.",
+  },
+  souvenir: {
+    kicker: "Keepsake",
+    title: "Souvenir",
+    subtitle: "A little piece of OnceMore, made to keep.",
   },
   settings: {
     kicker: "Preferences",
@@ -146,18 +154,41 @@ export default function ProfileTwoPage() {
                   </div>
                 </div>
 
-                <div className={styles.sectionHead}>
-                  <h2 className={styles.sectionTitle}>Experiences</h2>
-                  <span className={styles.countChip}>0 total</span>
-                </div>
-                <div className={styles.empty}>
-                  <Buddy />
-                  <div className={styles.emptyBody}>
-                    <h2 className={styles.emptyTitle}>No experiences yet</h2>
-                    <p className={styles.emptyText}>
-                      Once you join a world, it will settle in here — ready whenever you are.
-                    </p>
-                  </div>
+                <div className={styles.showcase}>
+                  <section className={styles.souvenirPanel}>
+                    <div className={styles.panelHeadRow}>
+                      <div>
+                        <h2 className={styles.sectionTitle}>Souvenir</h2>
+                        <p className={styles.panelHint}>A keepsake from your first chapter.</p>
+                      </div>
+                      <span className={styles.countChip}>No. 001</span>
+                    </div>
+                    <div className={styles.lanyardStage}>
+                      <SouvenirLanyard size={0.66} className={styles.lanyardFill} />
+                      <span className={styles.stagePin} aria-hidden />
+                      <span className={styles.stageLabel}>Souvenir No. 001</span>
+                      <span className={styles.stageHint}>Drag · flip</span>
+                    </div>
+                  </section>
+
+                  <section className={styles.experiencePanel}>
+                    <div className={styles.panelHeadRow}>
+                      <div>
+                        <h2 className={styles.sectionTitle}>Experiences</h2>
+                        <p className={styles.panelHint}>Worlds you join will appear here.</p>
+                      </div>
+                      <span className={styles.countChip}>0 total</span>
+                    </div>
+                    <div className={styles.emptyInner}>
+                      <Buddy />
+                      <div className={styles.emptyBody}>
+                        <h2 className={styles.emptyTitle}>No experiences yet</h2>
+                        <p className={styles.emptyText}>
+                          Once you join a world, it will settle in here — ready whenever you are.
+                        </p>
+                      </div>
+                    </div>
+                  </section>
                 </div>
               </>
             ) : null}
@@ -178,6 +209,42 @@ export default function ProfileTwoPage() {
                   </div>
                 </div>
               </>
+            ) : null}
+
+            {section === "souvenir" ? (
+              <div className={styles.souvenirTab}>
+                <div className={styles.souvenirStageLarge}>
+                  <SouvenirLanyard size={0.64} className={styles.lanyardFill} />
+                  <span className={styles.stagePin} aria-hidden />
+                  <span className={styles.stageLabel}>Souvenir No. 001</span>
+                  <span className={styles.stageHint}>Drag to swing · click to flip</span>
+                </div>
+                <div className={styles.souvenirInfo}>
+                  <p className={styles.kicker}>Member keepsake</p>
+                  <h2 className={styles.souvenirHeading}>A pass for your first chapter.</h2>
+                  <p className={styles.souvenirSub}>
+                    A soft-touch member pass, made to swing, flip, and stay with you. Every world
+                    leaves a little something.
+                  </p>
+                  <div className={styles.detailRows}>
+                    <div className={styles.detailRow}>
+                      <span>Owner</span>
+                      <strong>Alex Rivera</strong>
+                    </div>
+                    <div className={styles.detailRow}>
+                      <span>Issued</span>
+                      <strong>2026</strong>
+                    </div>
+                    <div className={styles.detailRow}>
+                      <span>Finish</span>
+                      <strong>Soft-touch</strong>
+                    </div>
+                  </div>
+                  <p className={styles.souvenirHint}>
+                    Drag the pass to swing it. Click the card to flip it over.
+                  </p>
+                </div>
+              </div>
             ) : null}
 
             {section === "settings" ? (

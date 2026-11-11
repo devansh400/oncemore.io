@@ -7,17 +7,21 @@ import {
   Settings,
   SlidersHorizontal,
   Sparkles,
+  Ticket,
   UserRound,
 } from "lucide-react";
 import { useState } from "react";
 
+import { SouvenirLanyard } from "@/components/souvenir-lanyard";
+
 import styles from "./profile.module.css";
 
-type Section = "overview" | "experiences" | "settings";
+type Section = "overview" | "experiences" | "souvenir" | "settings";
 
 const SECTIONS = [
   { id: "overview", label: "Overview", icon: UserRound },
   { id: "experiences", label: "Experiences", icon: Sparkles },
+  { id: "souvenir", label: "Souvenir", icon: Ticket },
   { id: "settings", label: "Settings", icon: Settings },
 ] as const;
 
@@ -31,6 +35,11 @@ const HEADINGS: Record<Section, { kicker: string; title: string; subtitle: strin
     kicker: "Your library",
     title: "Experiences",
     subtitle: "Worlds you have joined, saved, or created.",
+  },
+  souvenir: {
+    kicker: "Keepsake",
+    title: "Souvenir",
+    subtitle: "A little piece of OnceMore, made to keep.",
   },
   settings: {
     kicker: "Preferences",
@@ -201,6 +210,31 @@ export default function ProfilePage() {
                 </div>
               </div>
 
+              <section className={styles.souvenirCard}>
+                <div className={styles.souvenirStage}>
+                  <SouvenirLanyard size={0.7} className={styles.lanyardFill} />
+                  <span className={styles.stagePin} aria-hidden />
+                  <span className={styles.stageLabel}>Souvenir No. 001</span>
+                  <span className={styles.stageHint}>Drag · flip</span>
+                </div>
+                <div className={styles.souvenirCopy}>
+                  <p className={styles.souvenirKicker}>Your souvenir</p>
+                  <h2 className={styles.souvenirTitle}>A little piece of OnceMore.</h2>
+                  <p className={styles.souvenirText}>
+                    A soft-touch member pass for your first chapter. Drag it, flip it, keep it
+                    close.
+                  </p>
+                  <button
+                    type="button"
+                    className={styles.buttonPrimary}
+                    onClick={() => setSection("souvenir")}
+                  >
+                    Visit souvenir
+                    <ArrowRight size={15} strokeWidth={2.2} />
+                  </button>
+                </div>
+              </section>
+
               <section className={styles.card}>
                 <div className={styles.cardHead}>
                   <div>
@@ -224,6 +258,42 @@ export default function ProfilePage() {
                 <span className={styles.countChip}>0 total</span>
               </div>
               <EmptyExperiences centered />
+            </section>
+          ) : null}
+
+          {section === "souvenir" ? (
+            <section className={styles.souvenirShowcase}>
+              <div className={styles.souvenirShowcaseStage}>
+                <SouvenirLanyard size={0.64} className={styles.lanyardFill} />
+                <span className={styles.stagePin} aria-hidden />
+                <span className={styles.stageLabel}>Souvenir No. 001</span>
+                <span className={styles.stageHint}>Drag to swing · click to flip</span>
+              </div>
+              <div className={styles.souvenirShowcaseCopy}>
+                <p className={styles.souvenirKicker}>Member keepsake</p>
+                <h2 className={styles.souvenirHeading}>A pass for your first chapter.</h2>
+                <p className={styles.souvenirText}>
+                  A soft-touch member pass, made to swing, flip, and stay with you. Every world
+                  leaves a little something.
+                </p>
+                <div className={styles.souvenirDetails}>
+                  <div className={styles.souvenirDetail}>
+                    <span>Owner</span>
+                    <strong>Alex Rivera</strong>
+                  </div>
+                  <div className={styles.souvenirDetail}>
+                    <span>Issued</span>
+                    <strong>2026</strong>
+                  </div>
+                  <div className={styles.souvenirDetail}>
+                    <span>Finish</span>
+                    <strong>Soft-touch</strong>
+                  </div>
+                </div>
+                <p className={styles.souvenirHint}>
+                  Drag the pass to swing it. Click the card to flip it over.
+                </p>
+              </div>
             </section>
           ) : null}
 
