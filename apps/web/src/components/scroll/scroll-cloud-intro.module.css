@@ -1,0 +1,72 @@
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  overflow: hidden;
+  pointer-events: none;
+  /* A hydration failure must never leave a decorative curtain over the page. */
+  animation: release 0.01s 5s forwards;
+}
+.veil {
+  position: absolute;
+  inset: 0;
+  background: #eee5cc;
+}
+.clouds {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  inset: 0;
+  overflow: visible;
+}
+.cloudZoom {
+  position: absolute;
+  inset: -2%;
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+.intro::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.075;
+  mix-blend-mode: multiply;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%2385795b' filter='url(%23n)' d='M0 0h180v180H0z'/%3E%3C/svg%3E");
+}
+.mark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #8d4937;
+}
+.mark > span {
+  display: block;
+  font:
+    25px Georgia,
+    serif;
+  letter-spacing: 0.28em;
+  padding-left: 0.28em;
+}
+.mark > small {
+  display: block;
+  margin-top: 21px;
+  font:
+    7px var(--font-geist-mono),
+    monospace;
+  letter-spacing: 0.4em;
+  padding-left: 0.4em;
+  color: #857d65;
+}
+@keyframes release {
+  to {
+    visibility: hidden;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .intro {
+    display: none;
+    animation: none;
+  }
+}

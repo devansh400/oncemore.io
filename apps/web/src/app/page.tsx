@@ -10,7 +10,7 @@ import { Marquee } from "@/components/ui/marquee";
 const ticker = [
   "They Call Him OG",
   "Maa Inti Bangaaram",
-  "1M fans in 48 hours",
+  "1M fans in under 42 hours",
   "Interactive worlds",
   "AI-powered moments",
   "Exclusive content",

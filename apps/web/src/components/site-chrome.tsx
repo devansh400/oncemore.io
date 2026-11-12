@@ -13,6 +13,7 @@ const bare = new Set([
   "/oncemore2",
   "/transition",
   "/katana",
+  "/scroll",
   "/signup",
   "/signup-3d",
   "/profile",

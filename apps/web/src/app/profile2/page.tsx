@@ -6,6 +6,7 @@ import { useState } from "react";
 import { SouvenirLanyard } from "@/components/souvenir-lanyard";
 
 import styles from "./profile.module.css";
+import { ThemeFrame } from "./theme-frame";
 
 type Section = "overview" | "experiences" | "souvenir" | "settings";
 
@@ -72,7 +73,7 @@ export default function ProfileTwoPage() {
   const heading = HEADINGS[section];
 
   return (
-    <div className={styles.frame}>
+    <ThemeFrame>
       <aside className={styles.sidebar}>
         <div className={styles.brand}>
           <span className={styles.brandMark} aria-hidden />
@@ -307,6 +308,6 @@ export default function ProfileTwoPage() {
           </aside>
         </div>
       </div>
-    </div>
+    </ThemeFrame>
   );
 }

@@ -99,7 +99,7 @@ export const processSteps = [
 ];
 
 export const stats = [
-  { value: "1M+", label: "fans in 48 hours" },
+  { value: "1M+", label: "fans in under 42 hours" },
   { value: "02", label: "flagship IP launches" },
   { value: "01", label: "platform for living fan worlds" },
 ];

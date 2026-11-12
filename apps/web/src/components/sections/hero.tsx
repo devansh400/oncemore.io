@@ -131,7 +131,7 @@ export function Hero() {
           className="mt-12 flex items-center justify-between border-t border-bone/10 pt-5 md:mt-16"
         >
           <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-bone/60">
-            1M fans in 48 hours
+            1M fans in under 42 hours
           </span>
           <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-bone/60">
             Scroll to enter ↓

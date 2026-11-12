@@ -28,14 +28,16 @@ export const metadata: Metadata = {
     "OnceMore builds AI-powered interactive worlds for films, shows, and IP — launched at the exact moment fans are ready to live inside them.",
   openGraph: {
     title: "OnceMore — Interactive fan experiences",
-    description: "AI-powered interactive worlds for films, shows, and IP. 1M fans in 48 hours.",
+    description:
+      "AI-powered interactive worlds for films, shows, and IP. 1M fans in under 42 hours.",
     type: "website",
     siteName: "OnceMore",
   },
   twitter: {
     card: "summary_large_image",
     title: "OnceMore — Interactive fan experiences",
-    description: "AI-powered interactive worlds for films, shows, and IP. 1M fans in 48 hours.",
+    description:
+      "AI-powered interactive worlds for films, shows, and IP. 1M fans in under 42 hours.",
   },
 };
 
