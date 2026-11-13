@@ -1,0 +1,287 @@
+.scope {
+  --dock-paper: #f5efe3;
+  --dock-ink: #343c33;
+  --dock-muted: #686b5f;
+  --dock-line: #7c78623d;
+  background: var(--og-backdrop, #d5c9af);
+}
+
+.scope[data-og-theme="katana"] {
+  --og-metric-tracking: 0.015em;
+  --og-ink: #e5e4df;
+  --og-muted: #bcbfbd;
+  --og-accent: #de3436;
+  --og-paper: #0d1213;
+  --og-backdrop: #050707;
+  --og-glow: #291619;
+  --og-mount: #182426;
+  --og-line: #de34364d;
+  --og-heading: "Anton";
+  --og-body: "Barlow Condensed";
+  --og-heading-case: uppercase;
+  --og-heading-tracking: 0em;
+  --og-blend: normal;
+  --dock-paper: #101617;
+  --dock-ink: #e5e4df;
+  --dock-muted: #a8afad;
+  --dock-line: #de34364d;
+}
+
+.scope[data-og-theme="jade"] {
+  --og-ink: #f1e9d4;
+  --og-muted: #b5c8b7;
+  --og-accent: #d8c18c;
+  --og-paper: #153b33;
+  --og-backdrop: #08251f;
+  --og-glow: #315b49;
+  --og-mount: #254c40;
+  --og-line: #d8c18c55;
+  --og-heading: "Palatino Linotype", "Book Antiqua", Palatino;
+  --og-body: "Palatino Linotype", "Book Antiqua", Palatino;
+  --og-heading-tracking: -0.035em;
+  --og-blend: normal;
+  --og-mount-mask: none;
+  --og-radius: 12px;
+  --dock-paper: #16382f;
+  --dock-ink: #efe8d6;
+  --dock-muted: #b5c8b7;
+  --dock-line: #d8c18c55;
+}
+
+.scope[data-og-theme="noir"] {
+  --og-ink: #202321;
+  --og-muted: #5a605c;
+  --og-accent: #202321;
+  --og-paper: #edede8;
+  --og-backdrop: #bfc2bd;
+  --og-glow: #f6f6f0;
+  --og-mount: #d7dad3;
+  --og-line: #20232155;
+  --og-heading: var(--font-inter-tight), Arial;
+  --og-body: var(--font-inter-tight), Arial;
+  --og-heading-tracking: -0.065em;
+  --og-mount-mask: none;
+  --dock-paper: #f0f0ea;
+  --dock-ink: #202321;
+  --dock-muted: #5a605c;
+  --dock-line: #20232144;
+}
+
+.scope[data-og-theme="vermilion"] {
+  --og-ink: #fff0cf;
+  --og-muted: #f0c4a0;
+  --og-accent: #ffe8a9;
+  --og-paper: #a22f24;
+  --og-backdrop: #6e201c;
+  --og-glow: #c74b30;
+  --og-mount: #b5432c;
+  --og-line: #ffe8a966;
+  --og-heading: "Barlow Condensed";
+  --og-body: "Barlow Condensed";
+  --og-heading-case: uppercase;
+  --og-heading-tracking: 0.01em;
+  --og-blend: normal;
+  --og-mount-mask: none;
+  --og-radius: 3px;
+  --dock-paper: #8b2a22;
+  --dock-ink: #fff0cf;
+  --dock-muted: #f0c4a0;
+  --dock-line: #ffe8a966;
+}
+
+/* Palettes and atmospheric artwork drawn from OG's rain and flame posters. */
+.scope[data-og-theme="black-rain"] {
+  --og-metric-tracking: 0.015em;
+  --og-ink: #e4eeeb;
+  --og-muted: #a2bcc1;
+  --og-accent: #ff5149;
+  --og-paper: #07171e;
+  --og-backdrop: #02090d;
+  --og-glow: #103844;
+  --og-mount: #10272c;
+  --og-line: #70989d66;
+  --og-heading: "Anton";
+  --og-body: "Barlow Condensed";
+  --og-heading-case: uppercase;
+  --og-heading-tracking: 0.015em;
+  --og-blend: normal;
+  --og-landscape: url("/media/og/poster-rain.jpg");
+  --og-landscape-position: center 35%;
+  --og-landscape-opacity: 0.18;
+  --og-grime: url("/scroll/og-grime.svg");
+  --og-grime-blend: screen;
+  --og-grime-opacity: 0.13;
+  --og-title-shadow: 1px 2px 0 #03090d, -1px 0 0 #42616a;
+  --dock-paper: #09171d;
+  --dock-ink: #e4eeeb;
+  --dock-muted: #a2bcc1;
+  --dock-line: #70989d66;
+}
+
+.scope[data-og-theme="scorched"] {
+  --og-ink: #e9deca;
+  --og-muted: #c4ac91;
+  --og-accent: #eea463;
+  --og-paper: #17110c;
+  --og-backdrop: #080704;
+  --og-glow: #382014;
+  --og-mount: #261c13;
+  --og-line: #b16d3e66;
+  --og-heading: "Barlow Condensed";
+  --og-body: Georgia;
+  --og-heading-case: uppercase;
+  --og-heading-tracking: 0.025em;
+  --og-blend: normal;
+  --og-landscape: url("/media/og/poster-flame.webp");
+  --og-landscape-position: 35% center;
+  --og-landscape-opacity: 0.17;
+  --og-grime: url("/scroll/og-grime.svg");
+  --og-grime-blend: screen;
+  --og-grime-opacity: 0.18;
+  --og-title-shadow: 2px 2px 0 #080704, -1px 0 0 #785638;
+  --dock-paper: #17120c;
+  --dock-ink: #e9deca;
+  --dock-muted: #c4ac91;
+  --dock-line: #b16d3e66;
+}
+
+.dock {
+  position: fixed;
+  z-index: 45;
+  bottom: calc(68px + env(safe-area-inset-bottom, 0px));
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: calc(100vw - 24px);
+  padding: 9px 13px 7px;
+  border: 1px solid var(--dock-line);
+  border-radius: 18px;
+  background: var(--dock-paper);
+  color: var(--dock-ink);
+  box-shadow:
+    0 8px 32px #0002,
+    inset 0 1px 0 #ffffff12;
+  text-align: center;
+  font-family: var(--font-inter-tight), Arial, sans-serif;
+}
+.label {
+  display: block;
+  margin-bottom: 5px;
+  font:
+    8px/1.3 var(--font-geist-mono),
+    monospace;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--dock-muted);
+}
+.options {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--dock-line) transparent;
+}
+.option {
+  flex: 0 0 auto;
+  width: 62px;
+  min-height: 54px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 4px 2px;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  background: transparent;
+  color: var(--dock-muted);
+  cursor: pointer;
+  transition:
+    background-color 180ms,
+    border-color 180ms;
+}
+.option:hover {
+  background: color-mix(in srgb, var(--dock-ink) 7%, transparent);
+}
+.option[aria-pressed="true"] {
+  border-color: var(--dock-line);
+  background: color-mix(in srgb, var(--dock-ink) 8%, transparent);
+  color: var(--dock-ink);
+}
+.option:focus-visible {
+  outline: 2px solid var(--dock-ink);
+  outline-offset: 3px;
+}
+.swatch {
+  width: 30px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--swatch-ink) 35%, transparent);
+  border-radius: 5px;
+  background: var(--swatch-paper);
+  color: var(--swatch-ink);
+  font:
+    17px/1 Georgia,
+    serif;
+}
+.option:nth-child(2) .swatch {
+  font-family: "Anton", sans-serif;
+}
+.option:nth-child(3) .swatch {
+  font-family: "Palatino Linotype", Palatino, serif;
+}
+.option:nth-child(4) .swatch {
+  font-family: Arial, sans-serif;
+  font-weight: 700;
+  border-radius: 0;
+}
+.option:nth-child(5) .swatch {
+  font-family: "Barlow Condensed", sans-serif;
+}
+.option:nth-child(6) .swatch,
+.option:nth-child(7) .swatch {
+  font-family: "Anton", sans-serif;
+  background-image: url("/scroll/og-grime.svg");
+  background-blend-mode: soft-light;
+  border-radius: 0;
+}
+.option:nth-child(7) .swatch {
+  font-family: "Barlow Condensed", sans-serif;
+}
+.name {
+  font-size: 9px;
+  line-height: 1.2;
+}
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+@media (max-width: 700px) {
+  .dock {
+    bottom: calc(48px + env(safe-area-inset-bottom, 0px));
+    padding: 3px 7px;
+    border-radius: 14px;
+    width: min(398px, calc(100vw - 24px));
+  }
+  .option {
+    width: clamp(36px, calc((100vw - 64px) / 7), 50px);
+    min-height: 44px;
+  }
+  .label {
+    display: none;
+  }
+  .name {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .option {
+    transition: none;
+  }
+}

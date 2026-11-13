@@ -4,7 +4,6 @@ import "@fontsource/barlow-condensed/latin-400.css";
 import "@fontsource/barlow-condensed/latin-500.css";
 
 import { CinematicExperience } from "./cinematic-experience";
-import { PageComparison } from "@/components/page-comparison";
 
 export const metadata: Metadata = {
   title: "Maa Inti Bangaaram — You had to be there | OnceMore",
@@ -26,10 +25,5 @@ export const metadata: Metadata = {
 };
 
 export default function MaaIntiBangaaramPage() {
-  return (
-    <>
-      <CinematicExperience />
-      <PageComparison beforeUrl="/maa-inti-bangaaram" />
-    </>
-  );
+  return <CinematicExperience />;
 }

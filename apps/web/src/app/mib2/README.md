@@ -4,26 +4,8 @@ Route: `/mib2`. A shorter-copy fork of `/maa-inti-bangaaram`; original page
 files are unchanged. Styles, animation, media and layout match the source page.
 Redundant paragraphs and captions have been trimmed for more visual space.
 
-## Full-page before/after
-
-The floating top-right **Before / After** toggle mounts the original
-`/maa-inti-bangaaram` in a clipped, full-viewport same-origin iframe. Drag the
-divider to reveal either live page. Matching chapter boundaries synchronize
-scrolling across the two versions' different copy lengths; pages without
-matching chapter structures fall back to proportional document scrolling.
-The original view is visual-only and its videos stay muted.
-
-`PageComparison` lives in `components/page-comparison.tsx` and accepts a
-same-origin `beforeUrl`. It loads only while enabled and tears down its frame,
-observers and listeners when closed. The current page keeps its scroll position
-and interactions on the After side. Arrow keys adjust the split (Shift for
-larger steps); Home/End reveal one version completely; Escape closes the view.
-Pointer capture supports mouse and touch dragging.
-
-Verified: pointer drag, keyboard endpoints, scrolling over the Before side,
-mid-page opening, section alignment on desktop/phone, muted original videos,
-off-state cleanup, and no horizontal overflow. TypeScript passes; automated
-accessibility checks report no violations for the comparison controls.
+The page displays only this updated version. The before/after toggle and
+original-page iframe are no longer mounted.
 
 The `/mib2` media treatment additionally feathers card/reel edges, removes hard
 frames and heavy shadows, and uses a restrained warm grade. A lightweight SVG

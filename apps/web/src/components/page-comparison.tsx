@@ -15,6 +15,10 @@ import styles from "./page-comparison.module.css";
 type Anchor = { current: number; original: number };
 
 function chapters(document: Document) {
+  const mobileChapters = Array.from(
+    document.querySelectorAll<HTMLElement>("[data-mobile-chapter]"),
+  );
+  if (mobileChapters.length) return mobileChapters;
   return Array.from(document.querySelectorAll<HTMLElement>("main > section > div > section"));
 }
 
@@ -156,7 +160,12 @@ export function PageComparison({ beforeUrl }: { beforeUrl: string }) {
       const matched =
         original?.dataset.ready === "true" &&
         Math.abs(Number(original.dataset.frame) - Number(current?.dataset.frame)) <= 8;
-      if (still || matched || performance.now() - started > 5000) setReady(true);
+      const intro = originalDocument.querySelector<HTMLElement>("[data-cloud-intro]");
+      const pageReady =
+        !current?.querySelector("[data-title]") &&
+        originalDocument.readyState === "complete" &&
+        (!intro || originalWindow.getComputedStyle(intro).visibility === "hidden");
+      if (still || matched || pageReady || performance.now() - started > 5000) setReady(true);
       else readyRaf = requestAnimationFrame(reveal);
     };
     reveal();

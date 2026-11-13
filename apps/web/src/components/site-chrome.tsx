@@ -17,6 +17,9 @@ const bare = new Set([
   "/transition",
   "/katana",
   "/scroll",
+  "/scroll2", // Short-copy OG scroll with its own page chrome.
+  "/og-compare",
+  "/mib-compare",
   "/signup",
   "/signup-3d",
   "/profile",
