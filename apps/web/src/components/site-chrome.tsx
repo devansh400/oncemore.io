@@ -9,6 +9,7 @@ import { SiteHeader } from "./site-header";
 
 const bare = new Set([
   "/maa-inti-bangaaram",
+  "/mib2", // Short-copy variant with its own page chrome.
   "/mib",
   "/squish",
   "/squish2",

@@ -1,0 +1,172 @@
+.dock {
+  position: fixed;
+  z-index: 251;
+  top: max(88px, calc(env(safe-area-inset-top) + 72px));
+  right: 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 9px;
+  font-family: "Barlow Condensed", Arial, sans-serif;
+}
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  min-height: 44px;
+  padding: 11px 15px;
+  border: 1px solid #e7ba6870;
+  border-radius: 999px;
+  background: #260b16ed;
+  box-shadow: 0 4px 24px #14040c35;
+  color: #f8ead1;
+  font:
+    500 12px "Barlow Condensed",
+    Arial,
+    sans-serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.toggle svg {
+  width: 19px;
+  height: 19px;
+  color: #f1bd58;
+}
+.toggle:hover,
+.toggle[aria-pressed="true"] {
+  border-color: #f1bd58;
+  background: #3c1421f2;
+}
+.state {
+  color: #f1bd58;
+  border-left: 1px solid #e7ba6840;
+  padding-left: 10px;
+  font-size: 10px;
+}
+.status {
+  margin: 0;
+  padding: 6px 10px;
+  border-radius: 6px;
+  color: #f8ead1;
+  background: #260b16ed;
+  font-size: 12px;
+}
+.overlay {
+  position: fixed;
+  z-index: 250;
+  inset: 0;
+  pointer-events: none;
+}
+.before {
+  position: absolute;
+  inset: 0;
+  clip-path: inset(0 calc(100% - var(--comparison-split)) 0 0);
+  pointer-events: auto;
+  touch-action: pan-y;
+}
+.before iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  pointer-events: none;
+}
+.divider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--comparison-split);
+  width: 1px;
+  background: #f1d99ae6;
+  box-shadow: 0 0 10px #1f071755;
+}
+.handle {
+  position: absolute;
+  left: clamp(25px, var(--comparison-split), calc(100% - 25px));
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid #f1bd58;
+  border-radius: 50%;
+  background: #32101ff2;
+  box-shadow: 0 4px 25px #14040c60;
+  color: #f8ead1;
+  cursor: ew-resize;
+  touch-action: none;
+  pointer-events: auto;
+}
+.handle svg {
+  width: 24px;
+  height: 24px;
+}
+.toggle:focus-visible,
+.handle:focus-visible {
+  outline: 2px solid #f8ead1;
+  outline-offset: 5px;
+}
+.label {
+  position: absolute;
+  bottom: max(20px, env(safe-area-inset-bottom));
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 13px;
+  border: 1px solid #e7ba683d;
+  border-radius: 999px;
+  background: #260b16e6;
+  color: #f8ead1;
+  font:
+    500 11px "Barlow Condensed",
+    Arial,
+    sans-serif;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.label span {
+  color: #f1bd58;
+  font-size: 10px;
+}
+.beforeLabel {
+  left: 20px;
+}
+.afterLabel {
+  right: 20px;
+}
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+@media (max-width: 600px) {
+  .dock {
+    top: max(80px, calc(env(safe-area-inset-top) + 64px));
+    right: 12px;
+  }
+  .toggle {
+    padding: 10px 12px;
+    font-size: 11px;
+    gap: 8px;
+  }
+  .label {
+    padding: 8px 10px;
+    gap: 8px;
+    font-size: 10px;
+  }
+  .beforeLabel {
+    left: 12px;
+  }
+  .afterLabel {
+    right: 12px;
+  }
+}
