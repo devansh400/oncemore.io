@@ -8,6 +8,8 @@ import { SiteFooter } from "./site-footer";
 import { SiteHeader } from "./site-header";
 
 const bare = new Set([
+  "/maa-inti-bangaaram",
+  "/mib",
   "/squish",
   "/squish2",
   "/oncemore2",

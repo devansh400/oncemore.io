@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ScrollExperience } from "@/components/scroll/scroll-experience";
+import { ResponsiveScrollExperience } from "@/components/scroll/scroll-responsive";
 
 export const metadata: Metadata = {
   title: "The OG Fan Event — See What You Missed | OnceMore",
@@ -8,5 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function ScrollPage() {
-  return <ScrollExperience />;
+  return <ResponsiveScrollExperience />;
 }

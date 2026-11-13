@@ -1,0 +1,747 @@
+.scene {
+  --gold: #f1bd58;
+  --ivory: #f8ead1;
+  position: relative;
+  isolation: isolate;
+  background: #18070b;
+  color: var(--ivory);
+  font-family: "Barlow Condensed", Arial, sans-serif;
+}
+.viewport {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  background: #18070b;
+}
+.media,
+.canvas,
+.still,
+.veil {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.canvas {
+  opacity: 0;
+}
+.still {
+  background: url("/maa-inti-bangaaram/v2/opening.webp") var(--poster-x, 36.1%) top / cover
+    no-repeat;
+}
+.scene[data-ready="true"] .canvas {
+  opacity: 1;
+}
+.veil {
+  background:
+    linear-gradient(180deg, #12040865, transparent 22%, transparent 65%, #12040865),
+    linear-gradient(90deg, #12040835, transparent 45%, #12040855);
+}
+.header {
+  position: fixed;
+  z-index: 20;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: max(26px, env(safe-area-inset-top)) clamp(24px, 4.5vw, 90px) 24px;
+  background: linear-gradient(#17030788, transparent);
+}
+.brandLink {
+  display: block;
+  width: 112px;
+  color: inherit;
+}
+.brandMark,
+.footerMark {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.headerLabel,
+.skip {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.headerLabel {
+  margin-left: auto;
+  opacity: 0.75;
+}
+.skip {
+  color: inherit;
+  text-decoration: none;
+  padding: 10px 0 10px 20px;
+}
+.skip span {
+  margin-left: 14px;
+  font-size: 18px;
+}
+.scene a:focus-visible,
+.reel video:focus-visible,
+.reels:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 8px;
+}
+.scene a:hover {
+  color: #fff5e2;
+}
+.title {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  mix-blend-mode: lighten;
+}
+.titleArtwork {
+  width: min(76vw, 1050px);
+  height: auto;
+  overflow: hidden;
+}
+.titleByline {
+  margin-top: 34px;
+  font-size: 13px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+}
+.story {
+  position: relative;
+  z-index: 3;
+  margin-top: -100vh;
+  margin-top: -100dvh;
+}
+.chapter {
+  position: relative;
+  min-height: 100svh;
+  padding: clamp(110px, 15svh, 190px) clamp(24px, 7vw, 140px);
+  display: flex;
+  align-items: center;
+  gap: clamp(50px, 8vw, 150px);
+  scroll-margin-top: 80px;
+}
+.eyebrow {
+  margin: 0 0 25px;
+  color: var(--gold);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+.reveal {
+  margin: 0 !important;
+}
+.heroHeading,
+.heading {
+  font-family: "Anton", Impact, sans-serif;
+  font-size: clamp(50px, 6.2vw, 104px);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  white-space: pre-line;
+  text-wrap: balance;
+  text-shadow: 0 3px 28px #19020555;
+}
+.heroHeading {
+  color: var(--gold);
+  font-size: clamp(68px, 7.5vw, 128px);
+  line-height: 1.02;
+}
+.copyReveal {
+  margin: 26px 0 0 !important;
+  max-width: 430px;
+}
+.bodyCopy {
+  font-family: "Barlow Condensed", Arial, sans-serif;
+  font-size: clamp(20px, 1.8vw, 26px);
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+  color: var(--ivory);
+  text-wrap: pretty;
+}
+.hero {
+  min-height: 100svh;
+  justify-content: flex-end;
+  padding-top: 140px;
+  padding-bottom: 110px;
+}
+.heroCopy {
+  width: 47%;
+  max-width: 650px;
+}
+.heroCopy .eyebrow {
+  font-size: 12px;
+  letter-spacing: 0.17em;
+}
+.heroCopy .copyReveal {
+  max-width: 440px;
+}
+.heroFootnote {
+  position: absolute;
+  bottom: 32px;
+  left: clamp(24px, 4.5vw, 90px);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  opacity: 0.7;
+}
+.textLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 32px;
+  color: var(--gold);
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  padding: 16px 0;
+}
+.heroCopy .textLink {
+  margin-top: 20px;
+}
+.textLink span {
+  font-size: 22px;
+}
+.chapterCopy {
+  flex: 1;
+  min-width: 0;
+  max-width: 650px;
+}
+.quizChapter {
+  min-height: 125svh;
+  justify-content: space-between;
+}
+.quizChapter .heading {
+  font-size: clamp(48px, 5.9vw, 94px);
+}
+.cardGallery figcaption {
+  margin-top: 18px;
+  font-size: 11px;
+  line-height: 1.4;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #e9d1aa;
+}
+.artifactNote {
+  margin-top: 32px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+}
+.rewardsChapter {
+  min-height: 95svh;
+  justify-content: flex-end;
+}
+.rewardsChapter .chapterCopy {
+  flex: 0 1 590px;
+}
+.smallPrint {
+  display: block;
+  margin-top: 34px;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  color: #ebce9c;
+}
+.reachChapter {
+  min-height: 100svh;
+  display: block;
+  padding-top: 18svh;
+}
+.metric .heading {
+  font-size: clamp(100px, 15vw, 250px);
+  color: var(--gold);
+  line-height: 1;
+  letter-spacing: -0.035em;
+}
+.metricCaption {
+  margin-top: 22px !important;
+}
+.metricCaption .heading {
+  font-size: clamp(32px, 4.3vw, 68px);
+  line-height: 1.1;
+}
+.reachChapter .copyReveal {
+  max-width: 430px;
+}
+.titlePause {
+  min-height: 120svh;
+  position: relative;
+}
+.staticTitle {
+  display: none;
+  width: min(80vw, 1000px);
+  margin: auto;
+  text-align: center;
+  mix-blend-mode: lighten;
+}
+.staticTitle svg {
+  width: 100%;
+}
+.staticTitle .eyebrow {
+  margin-top: 25px;
+  color: var(--ivory);
+}
+.personalChapter {
+  min-height: 130svh;
+  gap: 6vw;
+}
+.personalChapter .chapterCopy {
+  max-width: 480px;
+  flex-basis: 38%;
+}
+.personalChapter .heading {
+  font-size: clamp(55px, 6vw, 96px);
+}
+.cardGallery {
+  flex: 1;
+  display: flex;
+  gap: clamp(25px, 3vw, 55px);
+  align-items: center;
+  min-width: 0;
+}
+.matchCards {
+  position: relative;
+  flex: 1.15;
+  margin: 0;
+  padding-top: 15px;
+}
+.matchCards img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 12px 35px #13010488;
+}
+.cardBack {
+  position: absolute;
+  inset: 15px 0 auto;
+  transform: rotate(-12deg) translate(-15px, -12px);
+}
+.cardFront {
+  position: relative;
+  transform: rotate(4deg);
+}
+.matchCards figcaption {
+  margin-top: 35px;
+}
+.personalityCard {
+  margin: 0;
+  flex: 0.85;
+}
+.personalityCard img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  box-shadow: 0 18px 50px #13010480;
+}
+.editsChapter {
+  min-height: 100svh;
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.8fr);
+  align-items: center;
+  gap: clamp(45px, 7vw, 110px);
+}
+.editIntro {
+  min-width: 0;
+}
+.editIntro .heading {
+  font-size: clamp(50px, 6vw, 96px);
+}
+.editIntro .copyReveal {
+  margin-bottom: 4px !important;
+}
+.reels {
+  width: min(100%, 340px);
+  align-self: center;
+  justify-self: center;
+}
+.reel {
+  margin: 0;
+  min-width: 0;
+}
+.reel video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 320 / 568;
+  background: #09090d;
+  border: 1px solid #d3ad663f;
+  border-radius: 8px;
+  box-shadow: 0 15px 55px #13010866;
+}
+.reel figcaption {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 17px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.reel figcaption span:last-child {
+  opacity: 0.6;
+  font-size: 9px;
+}
+.closing {
+  min-height: 100svh;
+  padding-bottom: 160px;
+}
+.closingCopy {
+  max-width: 1000px;
+}
+.closing .heading {
+  font-size: clamp(58px, 8vw, 130px);
+}
+.closing .copyReveal {
+  max-width: 540px;
+}
+.primaryLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 65px;
+  margin-top: 35px;
+  padding: 20px 27px;
+  background: var(--gold);
+  color: #38111b;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 500;
+  font-size: 14px;
+  border: 1px solid var(--gold);
+}
+.scene .primaryLink:hover {
+  background: #f8d98e;
+  color: #38111b;
+}
+.caseFooter {
+  position: absolute;
+  bottom: 26px;
+  left: clamp(24px, 4.5vw, 90px);
+  right: clamp(24px, 4.5vw, 90px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+  border-top: 1px solid #e0b56f40;
+  padding-top: 25px;
+}
+.footerMark {
+  width: 90px;
+}
+.caseFooter > span {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.65;
+}
+.caseFooter .textLink {
+  font-size: 10px;
+}
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.scene[data-fallback="true"] .canvas,
+.scene[data-reduced="true"] .canvas {
+  visibility: hidden;
+}
+.scene[data-fallback="true"] .still,
+.scene[data-reduced="true"] .still {
+  background-image: url("/maa-inti-bangaaram/v2/final.webp");
+  background-position: center top;
+}
+.scene[data-fallback="true"] .title,
+.scene[data-reduced="true"] .title {
+  display: none;
+}
+.scene[data-fallback="true"] .chapter,
+.scene[data-reduced="true"] .chapter {
+  min-height: auto;
+  padding-block: 100px;
+}
+.scene[data-fallback="true"] .titlePause,
+.scene[data-reduced="true"] .titlePause {
+  min-height: 60svh;
+  display: flex;
+  align-items: center;
+}
+.scene[data-fallback="true"] .staticTitle,
+.scene[data-reduced="true"] .staticTitle {
+  display: block;
+}
+.scene[data-fallback="true"] .closing,
+.scene[data-reduced="true"] .closing {
+  padding-bottom: 180px;
+}
+@media (max-width: 900px) {
+  .headerLabel {
+    display: none;
+  }
+  .chapter {
+    padding-inline: 6vw;
+    gap: 40px;
+  }
+  .heroCopy {
+    width: 51%;
+  }
+  .heroHeading {
+    font-size: 9vw;
+  }
+  .heading {
+    font-size: 7.4vw;
+  }
+  .personalChapter {
+    flex-direction: column;
+    align-items: stretch;
+    padding-block: 110px;
+  }
+  .personalChapter .chapterCopy {
+    max-width: 600px;
+  }
+  .cardGallery {
+    width: min(80%, 650px);
+    align-self: center;
+    margin-top: 40px;
+  }
+  .editsChapter {
+    gap: 45px;
+  }
+  .editIntro {
+    display: block;
+  }
+  .reel figcaption {
+    display: block;
+  }
+  .reel figcaption span {
+    display: block;
+    margin-top: 7px;
+  }
+  .caseFooter > span {
+    display: none;
+  }
+}
+@media (max-width: 600px) {
+  .header {
+    padding: max(20px, env(safe-area-inset-top)) 24px 20px;
+  }
+  .brandLink {
+    width: 94px;
+  }
+  .skip {
+    font-size: 10px;
+  }
+  .veil {
+    background: linear-gradient(
+      180deg,
+      #17030755,
+      transparent 18%,
+      #16030822 35%,
+      #160308bb 78%,
+      #16030899
+    );
+  }
+  .chapter {
+    min-height: auto;
+    padding: 100px 25px;
+    gap: 50px;
+  }
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    margin-bottom: 22px;
+  }
+  .hero {
+    min-height: 100svh;
+    align-items: flex-end;
+    padding-top: 39svh;
+    padding-bottom: 90px;
+  }
+  .heroCopy {
+    width: 100%;
+  }
+  .heroCopy .eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+  }
+  .heroHeading {
+    font-size: clamp(58px, 17vw, 92px);
+    line-height: 1.04;
+  }
+  .heroFootnote {
+    bottom: 25px;
+    left: 25px;
+    font-size: 8px;
+  }
+  .bodyCopy {
+    font-size: 21px;
+    line-height: 1.4;
+  }
+  .copyReveal {
+    margin-top: 25px !important;
+  }
+  .heroCopy .copyReveal {
+    max-width: 330px;
+  }
+  .heroCopy .textLink {
+    margin-top: 12px;
+  }
+  .heading,
+  .quizChapter .heading,
+  .personalChapter .heading,
+  .editIntro .heading {
+    font-size: clamp(44px, 12.8vw, 72px);
+    line-height: 1.1;
+  }
+  .quizChapter {
+    min-height: 125svh;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .rewardsChapter {
+    min-height: 95svh;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  .rewardsChapter .chapterCopy {
+    flex: 1;
+  }
+  .reachChapter {
+    min-height: 100svh;
+    padding-top: 19svh;
+  }
+  .metric .heading {
+    font-size: clamp(74px, 22vw, 130px);
+    white-space: nowrap;
+  }
+  .metricCaption .heading {
+    font-size: clamp(29px, 8.7vw, 50px);
+  }
+  .reachChapter .copyReveal {
+    max-width: 320px;
+  }
+  .titlePause {
+    min-height: 120svh;
+  }
+  .titleArtwork {
+    width: 90vw;
+  }
+  .titleByline {
+    margin-top: 24px;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+  }
+  .personalChapter {
+    gap: 45px;
+  }
+  .cardGallery {
+    width: 100%;
+    gap: 28px;
+    margin-top: 0;
+  }
+  .cardGallery figcaption {
+    font-size: 9px;
+    letter-spacing: 0.04em;
+  }
+  .cardBack {
+    transform: rotate(-10deg) translate(-5px, -8px);
+  }
+  .matchCards img {
+    border-radius: 6px;
+  }
+  .matchCards figcaption {
+    margin-top: 27px;
+  }
+  .editsChapter {
+    padding-inline: 25px;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 40px;
+  }
+  .reels {
+    width: min(100%, 310px);
+  }
+  .reel figcaption {
+    display: flex;
+  }
+  .reel figcaption span {
+    margin-top: 0;
+  }
+  .closing {
+    min-height: 100svh;
+    align-items: flex-start;
+    padding-bottom: 200px;
+  }
+  .closing .heading {
+    font-size: clamp(44px, 12.8vw, 72px);
+  }
+  .primaryLink {
+    padding: 18px 24px;
+    font-size: 12px;
+    gap: 45px;
+  }
+  .caseFooter {
+    left: 25px;
+    right: 25px;
+    gap: 12px;
+    padding-top: 25px;
+    bottom: 30px;
+  }
+  .footerMark {
+    width: 78px;
+  }
+  .caseFooter .textLink {
+    font-size: 8px;
+    gap: 14px;
+  }
+  .staticTitle {
+    width: 90vw;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .canvas,
+  .title {
+    display: none;
+  }
+  .still {
+    background-image: url("/maa-inti-bangaaram/v2/final.webp");
+    background-position: center top;
+  }
+  .chapter {
+    min-height: auto;
+    padding-block: 100px;
+  }
+  .titlePause {
+    min-height: 60svh;
+    display: flex;
+    align-items: center;
+  }
+  .staticTitle {
+    display: block;
+  }
+  .closing {
+    padding-bottom: 180px;
+  }
+}

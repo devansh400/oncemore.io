@@ -72,7 +72,7 @@ const ScrollReveal = ({
   progressController = /** @type {{current: ((progress: number) => void) | null} | undefined} */ (
     undefined
   ),
-  as: Tag = "h2",
+  as: Tag = /** @type {import("react").ElementType} */ ("h2"),
   enableBlur = true,
   baseOpacity = 0.1,
   baseRotation = 3,
