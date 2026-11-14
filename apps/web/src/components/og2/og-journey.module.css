@@ -1,0 +1,1134 @@
+.root {
+  --progress: 0;
+  --paper-edge: 100vw;
+  --og-paper: #eee4cd;
+  --og-glow: #f4ecd9;
+  --og-mount: #f7efdf;
+  --og-muted: #aaa18e;
+  color: #eee7d7;
+  background: #0b1014;
+  font-family: "Barlow Condensed", sans-serif;
+}
+.stage {
+  position: relative;
+  height: 100svh;
+  min-height: 480px;
+  overflow: hidden;
+  isolation: isolate;
+  background: #ded4bd;
+}
+.header,
+.footer {
+  position: absolute;
+  z-index: 30;
+  inset-inline: 3.6%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #323a34;
+}
+.header {
+  top: 0;
+  height: 92px;
+}
+.brand {
+  font:
+    800 26px var(--font-inter-tight),
+    sans-serif;
+  letter-spacing: -1.7px;
+  text-decoration: none;
+  color: inherit;
+}
+.brand > span {
+  font-size: 9px;
+  vertical-align: top;
+  margin-left: 3px;
+  letter-spacing: 0;
+}
+.edition,
+.eyebrow,
+.begin,
+.menuButton,
+.footer,
+.coverArt figcaption,
+.join,
+.replay,
+.contentsHeader button {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 9px;
+  letter-spacing: 0.13em;
+  line-height: 1.6;
+}
+.edition {
+  font-size: 8px;
+  opacity: 0.75;
+}
+.menuButton {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0 12px 12px;
+  background: none;
+  border: 0;
+  color: inherit;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.menuButton i {
+  display: block;
+  width: 19px;
+  height: 12px;
+  border-block: 1px solid currentColor;
+  position: relative;
+}
+.menuButton i::after {
+  content: "";
+  position: absolute;
+  inset: 5px 0 auto;
+  border-top: 1px solid;
+}
+.root button:focus-visible,
+.root a:focus-visible {
+  outline: 2px solid #e65a3f;
+  outline-offset: 6px;
+}
+.prologue {
+  position: absolute;
+  z-index: 6;
+  top: 35%;
+  left: 9%;
+  width: 35%;
+  color: #323a34;
+}
+.eyebrow {
+  display: block;
+  color: #c45943;
+  font-size: 9px;
+}
+.prologue .eyebrow {
+  color: #6f7161;
+  font-size: 8px;
+}
+.prologue h1 {
+  font:
+    400 clamp(28px, 3.6vw, 56px)/1.1 var(--font-instrument-serif),
+    Georgia,
+    serif;
+  letter-spacing: -0.035em;
+  margin: 22px 0 32px;
+}
+.prologue h1 em {
+  font-weight: 400;
+}
+.begin {
+  border: 0;
+  border-bottom: 1px solid #6c71644d;
+  color: inherit;
+  background: none;
+  padding: 10px 0;
+  cursor: pointer;
+  display: flex;
+  gap: 30px;
+  text-transform: uppercase;
+}
+.begin span {
+  font-size: 20px;
+  line-height: 1;
+}
+.prologueMark {
+  position: absolute;
+  right: 9%;
+  top: 40%;
+  display: flex;
+  gap: 12px;
+  color: #7d7d67;
+  writing-mode: vertical-rl;
+}
+.prologueMark > span {
+  font: 16px serif;
+  letter-spacing: 0.3em;
+}
+.prologueMark small {
+  font:
+    7px var(--font-geist-mono),
+    monospace;
+  letter-spacing: 0.14em;
+}
+.paper {
+  position: absolute;
+  z-index: 8;
+  left: 0;
+  top: calc((100% - var(--paper-height, 84%)) / 2);
+  height: var(--paper-height, 84%);
+  width: var(--paper-right, 65%);
+  clip-path: inset(0 0 0 var(--paper-edge));
+  background: #0b1014;
+  overflow: hidden;
+}
+.coverCopy {
+  position: absolute;
+  z-index: 2;
+  left: 9vw;
+  top: 27%;
+}
+.coverCopy h2 {
+  font:
+    400 clamp(56px, 7.5vw, 122px)/0.99 "Anton",
+    sans-serif;
+  letter-spacing: -0.025em;
+  margin: 24px 0;
+}
+.coverCopy h2 > span {
+  color: #c7513a;
+}
+.coverCopy p {
+  font-size: 19px;
+  letter-spacing: 0.01em;
+  color: #eee1c9;
+}
+.coverArt {
+  position: absolute;
+  height: 73%;
+  top: 12.5%;
+  right: 17%;
+  margin: 0;
+  aspect-ratio: 833/1466;
+}
+.coverArt img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  box-shadow: 0 15px 80px #000a;
+}
+.coverArt figcaption {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  padding-top: 12px;
+  font-size: 7px;
+  color: #dcd0b9;
+}
+.join {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 45px;
+  border: 1px solid #c6b29480;
+  padding: 15px 20px;
+  color: #eee7d7;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: #111516d9;
+  transition:
+    background 0.3s,
+    border-color 0.3s;
+}
+.join:hover {
+  border-color: #d55d42;
+  background: #55281e;
+}
+.join span {
+  font-size: 19px;
+}
+.replay {
+  color: #e4d2b9;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  font-size: 8px;
+  padding: 18px 0;
+}
+.roll {
+  position: absolute;
+  z-index: 12;
+  inset: 0;
+  pointer-events: none;
+}
+.model {
+  position: absolute;
+  inset: 0;
+  filter: drop-shadow(15px 12px 13px #302e224d);
+}
+.model * {
+  pointer-events: none !important;
+}
+.fallbackRoll {
+  position: absolute;
+  top: 3svh;
+  left: var(--roll-x, 50%);
+  height: 94svh;
+  width: 23svh;
+  transform: translateX(-50%) scaleX(var(--roll-scale, 1));
+  filter: drop-shadow(14px 12px 18px #0005);
+  overflow: hidden;
+}
+.fallbackRoll img {
+  position: absolute;
+  height: 100%;
+  width: auto;
+  max-width: none;
+  left: -10svh;
+}
+.root[data-model-ready="true"] .fallbackRoll {
+  visibility: hidden;
+}
+.footer {
+  bottom: 0;
+  height: 84px;
+  font-size: 7px;
+}
+.scrollHint {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  opacity: 0.9;
+}
+.scrollHint > span {
+  font-size: 20px;
+}
+.footer nav {
+  display: flex;
+  gap: 9px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.footer nav button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: 0;
+  color: inherit;
+  padding: 12px 6px;
+  cursor: pointer;
+  opacity: 0.45;
+  font-size: 8px;
+}
+.footer nav i {
+  display: block;
+  width: 15px;
+  height: 1px;
+  background: currentColor;
+  transition: width 0.4s;
+}
+.footer nav button[aria-current] {
+  color: #e27454;
+  opacity: 1;
+}
+.footer nav button[aria-current] i {
+  width: 35px;
+}
+.current {
+  max-width: 180px;
+  text-align: right;
+}
+.progress {
+  position: absolute;
+  z-index: 31;
+  bottom: 0;
+  inset-inline: 0;
+  height: 2px;
+  background: #d66547;
+  transform: scaleX(var(--progress));
+  transform-origin: left;
+}
+.contents {
+  position: fixed;
+  inset: 0;
+  width: min(720px, 92vw);
+  max-height: 90svh;
+  margin: auto;
+  padding: 35px 45px 45px;
+  border: 1px solid #7d695b66;
+  color: #eee7d7;
+  background: #111719;
+  box-shadow: 0 25px 150px #000b;
+}
+.contents::backdrop {
+  background: #03090de6;
+}
+.contentsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 50px;
+}
+.contentsHeader button {
+  color: inherit;
+  border: 0;
+  background: none;
+  padding: 10px;
+  cursor: pointer;
+}
+.contents > h2 {
+  font:
+    48px "Anton",
+    sans-serif;
+  margin: 15px 0 30px;
+}
+.contents nav {
+  display: grid;
+}
+.contents nav button {
+  display: grid;
+  grid-template-columns: 40px 1fr 20px;
+  align-items: center;
+  border: 0;
+  border-top: 1px solid #c6b89a24;
+  background: none;
+  color: #eee7d7;
+  padding: 16px 0;
+  text-align: left;
+  font-size: 26px;
+  cursor: pointer;
+}
+.contents nav button span {
+  font:
+    9px var(--font-geist-mono),
+    monospace;
+  color: #e89779;
+}
+.contents nav button:hover {
+  color: #e47c5b;
+}
+@media (max-width: 700px) {
+  .stage {
+    min-height: 500px;
+  }
+  .header {
+    height: 72px;
+    inset-inline: 6%;
+  }
+  .brand {
+    font-size: 22px;
+  }
+  .edition {
+    display: none;
+  }
+  .menuButton {
+    font-size: 8px;
+  }
+  .prologue {
+    left: 6%;
+    top: 32%;
+    width: 27%;
+  }
+  .prologue .eyebrow {
+    font-size: 5px;
+    line-height: 1.8;
+    letter-spacing: 0.07em;
+  }
+  .prologue h1 {
+    font-size: clamp(20px, 5.5vw, 25px);
+    margin: 15px 0 22px;
+  }
+  .begin {
+    font-size: 6px;
+    gap: 12px;
+    min-height: 44px;
+    letter-spacing: 0.05em;
+  }
+  .begin span {
+    font-size: 16px;
+  }
+  .prologueMark {
+    right: 7%;
+    top: 56%;
+  }
+  .prologueMark span {
+    font-size: 12px;
+  }
+  .coverCopy {
+    top: 14%;
+    left: 7vw;
+  }
+  .coverCopy h2 {
+    font-size: clamp(37px, 10vw, 66px);
+    margin: 12px 0;
+  }
+  .coverCopy h2 br {
+    display: none;
+  }
+  .coverCopy h2 span {
+    margin-left: 0.15em;
+  }
+  .coverCopy p {
+    font-size: 14px;
+    margin: 6px 0;
+  }
+  .coverCopy .eyebrow {
+    font-size: 6px;
+  }
+  .coverArt {
+    height: 56%;
+    width: calc(56svh * 0.568);
+    max-width: 78vw;
+    top: 35%;
+    right: 0;
+    left: 0;
+    margin-inline: auto;
+  }
+  .coverArt figcaption {
+    font-size: 6px;
+    padding-top: 7px;
+  }
+  .join {
+    font-size: 8px;
+    padding: 12px 16px;
+  }
+  .replay {
+    font-size: 7px;
+    padding: 14px 0 0;
+  }
+  .footer {
+    height: 73px;
+    inset-inline: 6%;
+  }
+  .scrollHint {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    font-size: 6px;
+    gap: 8px;
+  }
+  .scrollHint > span {
+    font-size: 13px;
+  }
+  .current {
+    position: absolute;
+    bottom: 13px;
+    right: 0;
+    font-size: 6px;
+  }
+  .footer nav {
+    bottom: 27px;
+    gap: 6px;
+  }
+  .footer nav button {
+    padding: 9px 5px;
+    font-size: 7px;
+    gap: 4px;
+  }
+  .footer nav i {
+    width: 9px;
+  }
+  .footer nav button[aria-current] i {
+    width: 23px;
+  }
+  .contents {
+    padding: 22px;
+  }
+  .contentsHeader {
+    margin-bottom: 25px;
+  }
+  .contents > h2 {
+    font-size: 36px;
+  }
+  .contents nav button {
+    font-size: 22px;
+    padding: 13px 0;
+  }
+}
+
+.paper {
+  background: #101617;
+}
+.paper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 70% 40%, #45433755, transparent 50%), url("/scroll/og-grime.svg");
+  opacity: 0.4;
+}
+.coverDragon {
+  position: absolute;
+  width: 80vw;
+  height: 100%;
+  left: -18vw;
+  top: 0;
+  object-fit: contain;
+  opacity: 0.27;
+}
+.coverSeal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 57px;
+  height: 64px;
+  border: 1px solid #b34733;
+  color: #c8543d;
+  font:
+    27px "Anton",
+    sans-serif;
+  margin-top: 30px;
+  transform: rotate(-5deg);
+}
+.coverSeal > span {
+  font:
+    6px var(--font-geist-mono),
+    monospace;
+  letter-spacing: 0.08em;
+  margin-top: 3px;
+}
+.paperNote {
+  position: absolute;
+  right: 5%;
+  top: 43%;
+  writing-mode: vertical-rl;
+  color: #847b69;
+  font:
+    7px var(--font-geist-mono),
+    monospace;
+  letter-spacing: 0.13em;
+}
+.world,
+.fans,
+.finale {
+  position: absolute;
+  inset: 0;
+  visibility: hidden;
+  perspective: 1000px;
+  perspective-origin: 50% 48%;
+}
+.world {
+  z-index: 9;
+}
+.background {
+  position: absolute;
+  inset: -3%;
+  transform-origin: 50% 48%;
+}
+.background img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.worldShade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, #0810158f 0, transparent 65%),
+    linear-gradient(0deg, #070d14bb, transparent 20%, transparent 75%, #080e1599);
+}
+.worldCopy {
+  position: absolute;
+  z-index: 8;
+  top: 29%;
+  left: 9%;
+  width: 48%;
+  text-shadow: 0 2px 20px #0008;
+}
+.worldCopy .eyebrow {
+  color: #ff9477;
+}
+.worldCopy h2 {
+  font:
+    400 clamp(70px, 10.6vw, 166px)/1.1 "Anton",
+    sans-serif;
+  letter-spacing: -0.025em;
+  margin: 19px 0 12px;
+}
+.worldCopy p {
+  font:
+    400 clamp(23px, 2.7vw, 42px)/1.1 var(--font-instrument-serif),
+    Georgia,
+    serif;
+  margin: 0;
+  color: #e3d6bc;
+  font-style: italic;
+}
+.gameNote {
+  display: block;
+  font:
+    7px var(--font-geist-mono),
+    monospace;
+  letter-spacing: 0.13em;
+  color: #adafa5;
+  margin-top: 45px;
+}
+.hero {
+  position: absolute;
+  z-index: 5;
+  height: 89%;
+  width: 64%;
+  right: -2%;
+  bottom: -6%;
+  transform-origin: 50% 85%;
+}
+.hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.foreground {
+  position: absolute;
+  z-index: 7;
+  inset: -6% -7% -4%;
+  pointer-events: none;
+  transform-origin: 50% 75%;
+}
+.foreground img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.accent {
+  position: absolute;
+  z-index: 3;
+  top: 8%;
+  right: 8%;
+  width: 35%;
+  height: 65%;
+  pointer-events: none;
+}
+.accent > span {
+  font: 400 clamp(200px, 33vw, 550px)/1 serif;
+  color: #b44c35;
+  opacity: 0.28;
+}
+.accent > img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0.7;
+}
+.marginNumber {
+  position: absolute;
+  top: 15%;
+  left: 3.8%;
+  font:
+    9px var(--font-geist-mono),
+    monospace;
+  color: #d0c6af66;
+  writing-mode: vertical-rl;
+  letter-spacing: 0.3em;
+}
+.archery .hero {
+  right: auto;
+  left: -8%;
+  height: 87%;
+  width: 66%;
+}
+.archery .worldCopy {
+  left: 57%;
+  width: 40%;
+  top: 30%;
+}
+.archery .worldCopy h2 {
+  font-size: clamp(64px, 8.3vw, 140px);
+}
+.archery .worldShade {
+  background:
+    linear-gradient(-90deg, #0810158f 0, transparent 65%),
+    linear-gradient(0deg, #070d14aa, transparent 25%, transparent 75%, #080e1588);
+}
+.archery .accent {
+  right: auto;
+  left: 4%;
+}
+.bushido .hero {
+  height: 94%;
+  right: -1%;
+  bottom: -12%;
+}
+.bushido .accent {
+  top: 51%;
+  right: auto;
+  left: 7%;
+  width: 42%;
+  height: 38%;
+}
+.bushido .accent > img {
+  opacity: 1;
+}
+.bushido .worldCopy {
+  top: 18%;
+}
+.bushido .gameNote {
+  display: none;
+}
+.bushido .worldCopy h2 {
+  font-size: clamp(68px, 9.7vw, 155px);
+}
+.fans {
+  z-index: 10;
+  background: radial-gradient(ellipse at 50% 45%, #45221d, #101416 65%);
+}
+.fanSun {
+  position: absolute;
+  border-radius: 50%;
+  width: 64vh;
+  height: 64vh;
+  left: calc(50% - 32vh);
+  top: 15%;
+  background: #903f2d;
+  opacity: 0.25;
+  box-shadow: 0 0 100px #b13b1e12;
+}
+.fanCopy {
+  position: absolute;
+  z-index: 5;
+  inset: 24% 12% auto;
+  text-align: center;
+}
+.fanCopy h2 {
+  font:
+    400 clamp(120px, 20vw, 310px)/1 "Anton",
+    sans-serif;
+  letter-spacing: -0.06em;
+  margin: 16px 0;
+}
+.fanCopy h2 span {
+  color: #d56144;
+  font-size: 0.55em;
+  vertical-align: top;
+  line-height: 1.6;
+}
+.fanCopy p {
+  font:
+    13px var(--font-geist-mono),
+    monospace;
+  letter-spacing: 0.15em;
+}
+.fanCopy p strong {
+  color: #e38662;
+  font-weight: 400;
+}
+.fanCopy .gameNote {
+  margin-top: 22px;
+}
+.fanCard {
+  position: absolute;
+  z-index: 6;
+  margin: 0;
+  width: 14%;
+  max-width: 230px;
+  filter: drop-shadow(0 20px 40px #0009);
+}
+.fanCard img {
+  width: 100%;
+  height: auto;
+}
+.cardSurface {
+  position: relative;
+  aspect-ratio: 339 / 589;
+  perspective: 650px;
+  container-type: inline-size;
+}
+.cardSurface > .cardBackground {
+  position: absolute;
+  left: 0;
+  top: 3.3%;
+  width: 94.4%;
+  height: 94.3%;
+  object-fit: fill;
+  border-radius: 5%;
+}
+.cardPortrait,
+.cardInk {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform-origin: 50% 70%;
+  pointer-events: none;
+}
+.cardPortrait {
+  z-index: 2;
+  mask-image: linear-gradient(#000 80%, transparent 95%);
+}
+.cardPortrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+.cardLogo {
+  z-index: 3;
+  transform-origin: 24% 12%;
+}
+.cardName {
+  z-index: 5;
+  transform-origin: 50% 86%;
+  filter: drop-shadow(1px 2px 0 #000b);
+}
+.cardNumber {
+  position: absolute;
+  z-index: 4;
+  left: 9.9%;
+  top: 16.5%;
+  color: #0b0d0d;
+  font:
+    800 3.3cqw/1 Arial,
+    sans-serif;
+  letter-spacing: -0.02em;
+}
+.card1 {
+  left: 10%;
+  top: 21%;
+  rotate: -12deg;
+}
+.card2 {
+  right: 11%;
+  top: 22%;
+  rotate: 11deg;
+}
+.card3 {
+  right: 24%;
+  top: 69%;
+  width: 10%;
+  rotate: -16deg;
+}
+.finale {
+  z-index: 11;
+  background: #101416;
+}
+.finalDragon {
+  position: absolute;
+  right: -13%;
+  top: -9%;
+  width: 100%;
+  height: 130%;
+  object-fit: contain;
+  opacity: 0.43;
+}
+.finalCopy {
+  position: absolute;
+  z-index: 3;
+  left: 10%;
+  top: 26%;
+}
+.finalCopy h2 {
+  font:
+    400 clamp(48px, 7.7vw, 125px)/1.07 "Anton",
+    sans-serif;
+  letter-spacing: -0.02em;
+  margin: 25px 0 36px;
+}
+.finalCopy h2 em {
+  color: #d55d42;
+  font-style: normal;
+}
+.join {
+  gap: 55px;
+  border-color: #a794794d;
+  padding: 19px 23px;
+  background: #1115169c;
+}
+.replay {
+  display: inline-flex;
+  vertical-align: middle;
+  margin-left: 24px;
+  color: #b3a38e;
+}
+.texture {
+  pointer-events: none;
+  position: absolute;
+  z-index: 20;
+  inset: 0;
+  opacity: 0.08;
+  background-image: url("/scroll/og-grime.svg");
+  mix-blend-mode: soft-light;
+}
+@media (min-width: 1700px) {
+  .coverArt {
+    right: 20%;
+  }
+}
+@media (max-width: 700px) {
+  .coverSeal,
+  .paperNote {
+    display: none;
+  }
+  .coverDragon {
+    width: 150vw;
+    height: 95%;
+    left: -40vw;
+    top: 10%;
+  }
+  .world {
+    perspective: 850px;
+  }
+  .background {
+    inset: -5% -40%;
+  }
+  .worldCopy,
+  .archery .worldCopy,
+  .bushido .worldCopy {
+    left: 7%;
+    top: 15%;
+    width: 88%;
+  }
+  .worldCopy h2,
+  .archery .worldCopy h2,
+  .bushido .worldCopy h2 {
+    font-size: clamp(56px, 17vw, 104px);
+    margin: 12px 0 5px;
+  }
+  .worldCopy p {
+    font-size: 25px;
+  }
+  .worldCopy .eyebrow {
+    font-size: 7px;
+  }
+  .worldCopy .gameNote {
+    margin-top: 16px;
+    font-size: 6px;
+  }
+  .hero,
+  .archery .hero,
+  .bushido .hero {
+    width: 123%;
+    height: 66%;
+    right: -24%;
+    left: auto;
+    bottom: -1%;
+  }
+  .archery .hero {
+    left: -25%;
+    right: auto;
+    height: 64%;
+    bottom: 0;
+  }
+  .bushido .hero {
+    bottom: -5%;
+    right: -19%;
+  }
+  .foreground {
+    inset: 12% -45% -3%;
+  }
+  .worldShade,
+  .archery .worldShade {
+    background: linear-gradient(180deg, #071018b3, transparent 55%, #07101888);
+  }
+  .accent,
+  .archery .accent {
+    width: 70%;
+    top: 30%;
+    right: -5%;
+    left: auto;
+  }
+  .accent > span {
+    font-size: 260px;
+  }
+  .bushido .accent {
+    width: 82%;
+    right: auto;
+    left: -6%;
+    top: 34%;
+    height: 38%;
+  }
+  .marginNumber {
+    display: none;
+  }
+  .fanCopy {
+    inset: 31% 6% auto;
+  }
+  .fanCopy h2 {
+    font-size: 35vw;
+    margin: 18px 0;
+  }
+  .fanCopy p {
+    font-size: 9px;
+  }
+  .fanCopy .eyebrow {
+    font-size: 7px;
+  }
+  .fanCopy .gameNote {
+    font-size: 6px;
+  }
+  .fanSun {
+    width: 90vw;
+    height: 90vw;
+    left: 5vw;
+    top: 27%;
+  }
+  .fanCard {
+    width: 22%;
+  }
+  .card1 {
+    top: 14%;
+    left: 11%;
+  }
+  .card2 {
+    top: 17%;
+    right: 12%;
+  }
+  .card3 {
+    top: 70%;
+    right: 18%;
+    width: 20%;
+  }
+  .finalCopy {
+    left: 7%;
+    top: 28%;
+    width: 90%;
+  }
+  .finalCopy .eyebrow {
+    font-size: 7px;
+  }
+  .finalCopy h2 {
+    font-size: 11.5vw;
+    margin: 20px 0 30px;
+  }
+  .finalDragon {
+    right: -75%;
+    top: 8%;
+    width: 200%;
+    height: 100%;
+    opacity: 0.3;
+  }
+  .join {
+    font-size: 8px;
+    padding: 16px 20px;
+  }
+  .replay {
+    display: block;
+    margin-left: 0;
+  }
+}
+.root:not([data-motion="full"]) .stage {
+  height: auto;
+  overflow: clip;
+}
+.root:not([data-motion="full"]) .header {
+  position: relative;
+  color: #eee7d7;
+  background: #111719;
+  padding-inline: 5%;
+  inset-inline: 0;
+}
+.root:not([data-motion="full"]) .prologue,
+.root:not([data-motion="full"]) .prologueMark,
+.root:not([data-motion="full"]) .roll,
+.root:not([data-motion="full"]) .footer,
+.root:not([data-motion="full"]) .progress,
+.root:not([data-motion="full"]) [data-cloud-intro] {
+  display: none;
+}
+.root:not([data-motion="full"]) .paper,
+.root:not([data-motion="full"]) .world,
+.root:not([data-motion="full"]) .fans,
+.root:not([data-motion="full"]) .finale {
+  position: relative;
+  inset: auto;
+  visibility: visible;
+  height: 100svh;
+  min-height: 600px;
+  width: 100%;
+  clip-path: none;
+}
+.root:not([data-motion="full"]) .worldCopy {
+  opacity: 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  .root *,
+  .root *::before,
+  .root *::after {
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+}
