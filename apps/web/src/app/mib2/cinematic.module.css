@@ -29,8 +29,7 @@
   opacity: 0;
 }
 .still {
-  background: url("/maa-inti-bangaaram/v2/opening.webp") var(--poster-x, 36.1%) top / cover
-    no-repeat;
+  background: url("/mib2/hair-clean-v1/opening.webp") var(--poster-x, 36.1%) top / cover no-repeat;
 }
 .scene[data-ready="true"] .canvas {
   opacity: 1;
@@ -553,7 +552,7 @@
 }
 .scene[data-fallback="true"] .still,
 .scene[data-reduced="true"] .still {
-  background-image: url("/maa-inti-bangaaram/v2/final.webp");
+  background-image: url("/mib2/hair-clean-v1/final.webp");
   background-position: center top;
 }
 .scene[data-fallback="true"] .title,
@@ -808,7 +807,7 @@
     display: none;
   }
   .still {
-    background-image: url("/maa-inti-bangaaram/v2/final.webp");
+    background-image: url("/mib2/hair-clean-v1/final.webp");
     background-position: center top;
   }
   .chapter {

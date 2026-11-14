@@ -1,0 +1,10 @@
+{
+  "originalFramesVerified": 330,
+  "repairedFramesVerified": 57,
+  "byteIdenticalLaterFrames": 273,
+  "outsideRepairPixelsUnchanged": true,
+  "openingMatchesFirstFrame": true,
+  "derivedSequenceBytes": 42027540,
+  "maximumChangedPixelsPerFrame": 3873,
+  "maximumChangedPercentage": 0.197
+}

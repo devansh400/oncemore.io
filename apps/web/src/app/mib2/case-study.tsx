@@ -288,7 +288,7 @@ export function CaseStudy() {
       >
         <div className={styles.staticTitle}>
           <svg viewBox="225 575 990 300" role="img" aria-label="Maa Inti Bangaaram">
-            <image href="/maa-inti-bangaaram/v2/title-card.jpg" width="1440" height="1440" />
+            <image href="/mib2/hair-clean-v1/title-card.jpg" width="1440" height="1440" />
           </svg>
           <p className={styles.eyebrow}>A OnceMore fan experience</p>
         </div>

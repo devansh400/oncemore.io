@@ -11,7 +11,7 @@ import styles from "./cinematic.module.css";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
-const MEDIA = "/maa-inti-bangaaram/v2";
+const MEDIA = "/mib2/hair-clean-v1";
 const SHOT_END = 11;
 const TITLE_START = 11.65;
 const TITLE_END = 13;

@@ -1,7 +1,7 @@
 const COUNT = 330;
 const WIDTH = 1920;
 const HEIGHT = 1024;
-const ROOT = "/maa-inti-bangaaram/v2/frames";
+const ROOT = "/mib2/hair-clean-v1/frames";
 
 // Focus points in the original shot. Portrait viewports follow the subject
 // instead of permanently cropping the woman, muzzle, or travelling bullet.

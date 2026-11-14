@@ -1,0 +1,25 @@
+Completed repair
+
+/mib2 now uses /mib2/hair-clean-v1/.
+57 frames repaired: 000-056 inclusive (1.9 seconds at 30 fps).
+All 330 originals match original-frame-sha256.json.
+273 unaffected derived frames remain byte-identical to their originals.
+Decoded pixels outside the tracked matte are unchanged in all repaired frames.
+Opening poster matches repaired 000.webp exactly.
+Original video and original route assets were not modified.
+
+Verified desktop and 390x844 phone forward/reverse playback at frames
+0,15,30,45,55,56,57,60,329,57,30,0. All requested frames drawn, no fallback,
+no page overflow, and no original frame URLs requested by /mib2.
+Reduced-motion cold navigation requests no frame sequence.
+Next.js compilation/runtime checks, TypeScript, targeted lint, formatting,
+and git diff --check passed.
+
+Lossless encoding increases sequence size from 14,499,950 to 42,027,540 bytes.
+Frame dimensions and decoded memory use remain the same.
+
+See repair-comparison.jpg, all-repaired-edges.jpg, mobile-cleaned.png,
+verification.json, repair-manifest.json, and build-clean-sequence.cjs.
+source-copies are the unchanged backup copies from the original investigation.
+000-cleanup-concept.png is the earlier concept, not a production frame;
+only its small clean-background texture was used by the localized repair.

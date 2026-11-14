@@ -9,6 +9,10 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
+        source: "/mib2/hair-clean-v1/:asset*",
+        headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
+      },
+      {
         source: "/maa-inti-bangaaram/:version(v1|v2)/:asset*",
         headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
       },

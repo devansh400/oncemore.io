@@ -13,14 +13,14 @@ export const metadata: Metadata = {
     title: "Maa Inti Bangaaram — You had to be there",
     description:
       "The MIB launch event has ended. See what fans unlocked and join OnceMore for what’s next.",
-    images: ["/maa-inti-bangaaram/v2/opening.webp"],
+    images: ["/mib2/hair-clean-v1/opening.webp"],
   },
   twitter: {
     card: "summary_large_image",
     title: "Maa Inti Bangaaram — You had to be there",
     description:
       "Missed the MIB launch experience? See what fans unlocked—and be there for the next one with OnceMore.",
-    images: ["/maa-inti-bangaaram/v2/opening.webp"],
+    images: ["/mib2/hair-clean-v1/opening.webp"],
   },
 };
 

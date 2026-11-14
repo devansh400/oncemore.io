@@ -21,7 +21,15 @@ integration remains the only smooth-scroll system.
 
 ## Rendering
 
-A single full-viewport canvas draws the original 330 frames at 30 fps. This
+A single full-viewport canvas draws 330 frames at 30 fps from the separate
+`/mib2/hair-clean-v1/` asset copy. Frames 000–056 have a tracked, feathered
+background repair removing the protruding hair loop. The edit is confined to
+the small area behind the upper back of the head; lossless WebP encoding
+preserves decoded source pixels outside the repair. Frames 057–329 are
+byte-identical copies, and the opening poster matches repaired frame 000.
+The original `/maa-inti-bangaaram/v2/` assets and source video are untouched.
+The offline repair script, comparison images and per-frame verification manifest
+are in `output/mib2-hair-review/`; there is no runtime retouching cost. This
 replaces native MP4 seeking after visible scrub stutter was reported. No video
 player, audio status, progress bar, or substitute red fill is shown.
 
@@ -117,9 +125,11 @@ Source: `b8983099-0356-4369-abeb-8e4c3db8cfdc-video.mp4` from Downloads,
 Its final frame still contains a small bullet. The desktop view may show it;
 the portrait composition allows it to leave the crop without editing footage.
 
-Versioned public assets: `/maa-inti-bangaaram/v2/`. All 330 WebPs together are
-14,499,950 bytes. Cache headers are immutable for a year, so replacements must
-use a new version. The earlier v1 video assets are no longer used by this route.
+Original public assets: `/maa-inti-bangaaram/v2/` (14,499,950 bytes of frames).
+This route uses the separate `/mib2/hair-clean-v1/` copy, including its repaired
+opening poster. Repairs use lossless WebP to preserve pixels outside the matte;
+the 273 unaffected frames retain their original encoding. Use a new asset
+version for subsequent repairs so cached copies cannot hide the change.
 
 Reproduce the frames using FFmpeg (substitute the source path):
 
