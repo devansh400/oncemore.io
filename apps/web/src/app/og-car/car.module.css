@@ -1,0 +1,1338 @@
+.scene {
+  --red: #ee323b;
+  --paper: #f0e9dd;
+  --muted: #b3afa6;
+  --gutter: clamp(24px, 6.3vw, 110px);
+  position: relative;
+  isolation: isolate;
+  color: var(--paper);
+  background: #090a09;
+  font-family: var(--font-inter-tight), Arial, sans-serif;
+}
+.scene :is(h1, h2, h3, p, figure) {
+  margin: 0;
+}
+.scene :is(a, button) {
+  -webkit-tap-highlight-color: transparent;
+}
+.scene a {
+  color: inherit;
+  text-decoration: none;
+}
+.scene a.primaryLink {
+  color: #090a09;
+}
+.scene :is(a, button):focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: 7px;
+}
+.header {
+  position: fixed;
+  z-index: 30;
+  inset: 0 0 auto;
+  height: 100px;
+  padding: 0 var(--gutter);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  background: linear-gradient(#060706b3, transparent);
+}
+.brand {
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -1.8px;
+}
+.brand span {
+  font-size: 10px;
+  display: inline-block;
+  vertical-align: top;
+  margin: 6px 0 0 3px;
+  letter-spacing: 0;
+}
+.headerChapter,
+.headerJoin,
+.eyebrow,
+.heroBottom,
+.filmProgress,
+.sectionTop,
+.comicFigure figcaption,
+.gameScreenTop,
+.archiveNote,
+.cardNote,
+.rainPoster figcaption,
+.footerTop,
+.footerBottom,
+.finalNote,
+.redStamp,
+.filmMetrics {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 10px;
+  line-height: 1.65;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+}
+.headerChapter {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.headerChapter span {
+  color: var(--red);
+}
+.headerJoin {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 10px 0;
+  text-transform: uppercase;
+  border-bottom: 1px solid #f0e9dd66;
+}
+.headerJoin > span {
+  font:
+    22px/1 Arial,
+    sans-serif;
+  transition: transform 0.3s;
+}
+.headerJoin:hover > span {
+  transform: translate(3px, -3px);
+}
+.viewport {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  background: url("/og-car/v3/opening.webp") center / cover no-repeat;
+}
+.canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+}
+.scene[data-ready="true"] .canvas {
+  opacity: 1;
+}
+.scene[data-fallback="true"] .canvas {
+  opacity: 0;
+}
+.filmShade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, #04060555, transparent 55%, #060706bb),
+    linear-gradient(90deg, #06070665, transparent 60%);
+}
+.filmOverlays {
+  position: absolute;
+  inset: 0;
+}
+.filmPanel {
+  position: absolute;
+  visibility: hidden;
+  opacity: 0;
+  z-index: 1;
+}
+.filmPanel .eyebrow {
+  color: #ded8cf;
+  text-shadow:
+    0 1px 7px #000,
+    0 0 3px #000;
+}
+.heroDescription,
+.filmCopy {
+  text-shadow:
+    0 2px 16px #000c,
+    0 1px 3px #000a;
+}
+.hero {
+  inset: 0;
+  visibility: visible;
+  opacity: 1;
+}
+.heroMain {
+  position: absolute;
+  left: var(--gutter);
+  top: 22%;
+  width: min(45vw, 640px);
+}
+.eyebrow {
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.hero h1 {
+  width: 100%;
+  margin-top: 23px;
+}
+.hero h1 img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.heroDescription {
+  margin-top: 24px !important;
+  font:
+    400 clamp(19px, 1.6vw, 25px)/1.35 "Barlow Condensed",
+    Arial,
+    sans-serif;
+  letter-spacing: 0.015em;
+}
+.heroAside {
+  position: absolute;
+  right: var(--gutter);
+  top: 35%;
+  font:
+    400 clamp(18px, 1.5vw, 23px)/1.5 "Barlow Condensed",
+    Arial,
+    sans-serif;
+  color: #d0cbc1;
+}
+.heroAside strong {
+  font-weight: 400;
+  color: var(--paper);
+}
+.heroBottom {
+  position: absolute;
+  inset: auto var(--gutter) 40px;
+  display: flex;
+  justify-content: space-between;
+  gap: 22px;
+  align-items: center;
+  font-size: 9px;
+}
+.heroBottom > span:first-child {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.heroBottom i,
+.unlocked i {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  background: var(--red);
+}
+.heroBottom a {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  padding: 12px 0;
+}
+.heroBottom a > span {
+  font-size: 22px;
+}
+.filmPanel h2 {
+  font:
+    400 clamp(55px, 6.3vw, 100px)/1.05 "Anton",
+    Impact,
+    sans-serif;
+  letter-spacing: -0.015em;
+  margin-top: 20px;
+}
+.lineMask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.075em;
+  margin-bottom: -0.075em;
+}
+.lineMask > span {
+  display: block;
+}
+.filmCopy {
+  font:
+    400 clamp(20px, 1.7vw, 27px)/1.4 "Barlow Condensed",
+    Arial,
+    sans-serif;
+  color: #e3ded4;
+  margin-top: 26px !important;
+  max-width: 440px;
+}
+.filmCopy strong {
+  color: var(--paper);
+  font-weight: 500;
+}
+.carPanel {
+  right: var(--gutter);
+  top: 20%;
+  max-width: 50vw;
+}
+.platformPanel {
+  left: var(--gutter);
+  top: 21%;
+}
+.platformPanel h2 .lineMask:last-child,
+.fansPanel h2 .lineMask:last-child {
+  color: var(--red);
+}
+.fansPanel {
+  left: var(--gutter);
+  top: 18%;
+}
+.filmMetrics {
+  display: flex;
+  gap: 30px;
+  margin-top: 26px;
+}
+.filmMetrics > span {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  font-size: 9px;
+  color: var(--muted);
+}
+.filmMetrics b {
+  color: var(--paper);
+  font-family: "Anton", Impact, sans-serif;
+  font-size: 34px;
+  line-height: 1;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.finalPanel {
+  top: 17%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(46vw, 660px);
+  text-align: center;
+}
+.finalPanel img {
+  width: 100%;
+  height: auto;
+  margin: 18px 0 16px;
+}
+.finalPanel .eyebrow {
+  font-size: 9px;
+}
+.finalNote {
+  font-size: 9px;
+}
+.filmProgress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: #ffffff12;
+}
+.filmProgress span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform: scaleX(0);
+  transform-origin: left;
+  background: var(--red);
+}
+.shotTrack {
+  position: relative;
+  height: 1100svh;
+  margin-top: -100vh;
+  margin-top: -100dvh;
+  pointer-events: none;
+}
+.finalHold {
+  height: 100svh;
+  pointer-events: none;
+}
+.afterStory {
+  position: relative;
+  z-index: 3;
+  background: linear-gradient(180deg, transparent, #090a09 750px);
+  scroll-margin-top: 70px;
+}
+.bridge {
+  min-height: 108svh;
+  padding: 160px var(--gutter) 130px;
+  background: linear-gradient(180deg, #090a0933, #090a09e0 65%, #090a09);
+}
+.bridgeHeading {
+  margin-top: 40px !important;
+  font:
+    400 clamp(60px, 9.2vw, 148px)/1.04 "Anton",
+    Impact,
+    sans-serif;
+  letter-spacing: -0.025em;
+}
+.bridgeHeading .lineMask:last-child {
+  color: var(--red);
+}
+.bridgeBottom {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+  gap: 70px;
+  margin-top: 65px;
+  padding-top: 28px;
+  border-top: 1px solid #e8e0d329;
+}
+.redStamp {
+  color: var(--red);
+}
+.bridgeBottom p {
+  max-width: 470px;
+  font:
+    400 24px/1.5 "Barlow Condensed",
+    Arial,
+    sans-serif;
+  color: var(--muted);
+}
+.bridgeBottom em,
+.comicCopy em,
+.filmCopy em {
+  font-style: normal;
+}
+.comicSection,
+.gamesSection,
+.cardsSection {
+  padding: 50px var(--gutter) 120px;
+  background: #090a09f5;
+}
+.sectionTop {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 22px 0;
+  margin-bottom: 65px;
+  border-top: 1px solid #e8e0d333;
+  color: var(--muted);
+}
+.sectionTop > span:first-child {
+  color: var(--paper);
+}
+.storyHeading {
+  font:
+    400 clamp(48px, 6.3vw, 100px)/1.08 "Anton",
+    Impact,
+    sans-serif;
+  letter-spacing: -0.018em;
+}
+.comicIntro {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  align-items: end;
+  gap: 80px;
+  margin-bottom: 65px;
+}
+.comicIntro .storyHeading .lineMask:last-child {
+  color: var(--red);
+}
+.comicCopy {
+  max-width: 430px;
+}
+.comicCopy p {
+  font:
+    400 22px/1.5 "Barlow Condensed",
+    Arial,
+    sans-serif;
+  color: var(--muted);
+}
+.comicCopy .lead {
+  font-size: 28px;
+  line-height: 1.3;
+  color: var(--paper);
+  margin-bottom: 23px;
+}
+.comicCopy strong {
+  font-weight: 500;
+  color: var(--red);
+}
+.comicFrame {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1154 / 682;
+  background: #141414;
+}
+.comicFrame > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.pixelGrid {
+  position: absolute;
+  inset: -1px;
+  display: grid;
+  grid-template-columns: repeat(16, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  pointer-events: none;
+}
+.pixelGrid span {
+  background: #151714;
+  box-shadow: inset 0 0 0 0.5px #252723;
+}
+.pixelGrid span:nth-child(5n) {
+  background: #1d201b;
+}
+.pixelGrid span:nth-child(7n) {
+  background: #292620;
+}
+.comicCorner {
+  position: absolute;
+  top: 22px;
+  left: 24px;
+  font:
+    10px/1.4 var(--font-geist-mono),
+    monospace;
+  letter-spacing: 0.1em;
+  color: #fff;
+  text-shadow: 0 1px 6px #000;
+}
+.comicFigure figcaption {
+  padding-top: 18px;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  color: var(--muted);
+  font-size: 9px;
+}
+.unlocked {
+  display: flex;
+  gap: 9px;
+  align-items: center;
+  color: var(--paper);
+}
+.milestones {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 50px;
+  align-items: end;
+  margin-top: 70px;
+  padding-bottom: 25px;
+}
+.milestones > div {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+.milestones strong {
+  font:
+    400 clamp(90px, 11vw, 180px)/0.9 "Anton",
+    Impact,
+    sans-serif;
+  letter-spacing: -0.035em;
+}
+.milestones strong > span {
+  color: var(--red);
+  font-size: 0.65em;
+  margin-left: 8px;
+}
+.milestones small {
+  display: block;
+  font:
+    10px/1.5 var(--font-geist-mono),
+    monospace;
+  letter-spacing: 0.15em;
+  margin-bottom: 15px;
+}
+.milestones > div > span {
+  font:
+    10px/1.5 var(--font-geist-mono),
+    monospace;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+.milestones > p {
+  font:
+    400 24px/1.4 "Barlow Condensed",
+    Arial,
+    sans-serif;
+  color: var(--muted);
+  padding-bottom: 32px;
+}
+.gamesSection {
+  padding-top: 40px;
+}
+.gamesIntro {
+  display: flex;
+  justify-content: space-between;
+  gap: 60px;
+  align-items: end;
+  margin-bottom: 55px;
+}
+.gamesIntro p {
+  max-width: 330px;
+  color: var(--muted);
+  font:
+    400 24px/1.4 "Barlow Condensed",
+    Arial,
+    sans-serif;
+}
+.gameShowcase {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 365px);
+  grid-template-rows: auto 1fr;
+  grid-template-areas: "choices preview" "caption preview";
+  column-gap: clamp(50px, 9vw, 150px);
+  max-width: 1120px;
+  margin-inline: auto;
+  align-items: start;
+}
+.gameTabs {
+  grid-area: choices;
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid #e8e0d333;
+}
+.gameTabs button {
+  position: relative;
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid #e8e0d333;
+  padding: 26px 24px;
+  color: var(--muted);
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    color 0.3s,
+    background 0.3s;
+}
+.gameTabs button > span:last-child {
+  margin-left: auto;
+  font-size: 26px;
+  transition: transform 0.3s;
+}
+.gameTabs button:hover {
+  color: var(--paper);
+  background: #ffffff04;
+}
+.gameTabs button:hover > span:last-child {
+  transform: translate(3px, -3px);
+}
+.gameTabs button[aria-pressed="true"] {
+  color: var(--paper);
+  background: linear-gradient(90deg, #ee323b13, transparent);
+}
+.gameTabs button[aria-pressed="true"]::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 2px;
+  background: var(--red);
+}
+.gameIndex {
+  color: var(--red);
+  font:
+    11px/1 var(--font-geist-mono),
+    monospace;
+}
+.gameChoice {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.gameChoice strong {
+  font:
+    400 clamp(28px, 3vw, 44px)/1 "Barlow Condensed",
+    Arial,
+    sans-serif;
+  text-transform: uppercase;
+}
+.gameChoice small {
+  color: var(--muted);
+  font:
+    400 18px/1.3 "Barlow Condensed",
+    Arial,
+    sans-serif;
+}
+.gameScreen {
+  grid-area: preview;
+  position: relative;
+  width: 100%;
+  max-width: 365px;
+  aspect-ratio: 9 / 16;
+  overflow: hidden;
+  background: #121411;
+  outline: 1px solid #e8e0d329;
+  box-shadow: 0 25px 70px #0008;
+}
+.gameScreen video {
+  display: block;
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+.gameScreenTop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 17px 15px;
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  font-size: 7px;
+  background: linear-gradient(#0009, transparent);
+  color: #fff;
+  pointer-events: none;
+}
+.videoControl {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  border: 1px solid #fff5;
+  background: #080a08b3;
+  color: #fff;
+  padding: 11px 15px;
+  cursor: pointer;
+  font-size: 20px;
+  backdrop-filter: blur(8px);
+}
+.videoControl span {
+  font:
+    9px/1 var(--font-geist-mono),
+    monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.gameCaption {
+  grid-area: caption;
+  display: flex;
+  flex-direction: column;
+  align-self: end;
+  gap: 20px;
+  padding: 45px 0 10px;
+}
+.gameCaption h3 {
+  font:
+    400 clamp(32px, 3.2vw, 48px)/1.15 "Anton",
+    Impact,
+    sans-serif;
+}
+.gameCaption p {
+  font:
+    400 24px/1.45 "Barlow Condensed",
+    Arial,
+    sans-serif;
+  color: var(--muted);
+  max-width: 400px;
+}
+.archiveNote {
+  font-size: 9px;
+  color: #b2ada4;
+  letter-spacing: 0.03em;
+  margin-top: 14px !important;
+}
+.cardsSection {
+  padding-top: 40px;
+  padding-bottom: 140px;
+}
+.cardsLayout {
+  display: grid;
+  grid-template-columns: 0.85fr 1.2fr;
+  gap: clamp(45px, 7vw, 120px);
+  align-items: center;
+}
+.rainPoster img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.rainPoster figcaption {
+  color: var(--muted);
+  font-size: 8px;
+  margin-top: 15px;
+  letter-spacing: 0.06em;
+}
+.cardsContent .storyHeading {
+  margin-top: 24px;
+}
+.cardsCopy {
+  font:
+    400 23px/1.45 "Barlow Condensed",
+    Arial,
+    sans-serif;
+  color: var(--muted);
+  max-width: 450px;
+  margin-top: 30px !important;
+}
+.fanCards {
+  display: flex;
+  justify-content: center;
+  margin: 65px -10px 40px;
+  padding: 0 30px;
+  perspective: 1100px;
+}
+.fanCards figure {
+  position: relative;
+  z-index: 1;
+  left: auto;
+  right: auto;
+  top: auto;
+  rotate: none;
+  max-width: none;
+  width: 36%;
+  flex-shrink: 0;
+  transition: translate 0.4s;
+}
+.fanCards figure + figure {
+  margin-left: -9%;
+}
+.fanCards figure:first-child {
+  transform: rotate(-9deg);
+}
+.fanCards figure:last-child {
+  transform: rotate(9deg);
+}
+.fanCards figure:nth-child(2) {
+  z-index: 2;
+}
+.fanCards figure:hover {
+  translate: 0 -12px;
+}
+.fanCards img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.cardNote {
+  text-align: center;
+  font-size: 8px;
+  color: var(--muted);
+}
+.closing {
+  position: relative;
+  min-height: 105svh;
+  display: flex;
+  align-items: center;
+  padding: 130px var(--gutter);
+  overflow: hidden;
+  background: #0b0906;
+}
+.closingArt {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 32% center;
+}
+.closingShade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, #080a08e8 5%, #080a08aa 45%, #080a0810),
+    linear-gradient(180deg, #090a09, transparent 25%, transparent 65%, #090a09);
+}
+.closingCopy {
+  position: relative;
+  z-index: 1;
+  max-width: 790px;
+}
+.closingCopy .storyHeading {
+  font-size: clamp(56px, 7.5vw, 120px);
+  margin-top: 35px;
+}
+.closingCopy > p:not(.eyebrow) {
+  max-width: 350px;
+  font:
+    400 24px/1.45 "Barlow Condensed",
+    Arial,
+    sans-serif;
+  color: #d3cec3;
+  margin-top: 35px;
+}
+.primaryLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 65px;
+  margin-top: 40px;
+  padding: 21px 25px;
+  background: var(--red);
+  color: #090a09;
+  font-size: 15px;
+  transition:
+    background 0.3s,
+    gap 0.3s;
+}
+.primaryLink > span {
+  font-size: 24px;
+  line-height: 1;
+}
+.primaryLink:hover {
+  background: #fa343c;
+  gap: 80px;
+}
+.footer {
+  padding: 65px var(--gutter) 32px;
+  background: #090a09;
+}
+.footerTop,
+.footerBottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+  color: var(--muted);
+  font-size: 9px;
+}
+.footerTop a {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  text-transform: uppercase;
+}
+.footerTop a > span {
+  color: var(--red);
+  font-size: 22px;
+}
+.footerBrand {
+  display: block;
+  width: max-content;
+  max-width: 100%;
+  font-size: clamp(70px, 17.8vw, 310px);
+  line-height: 1;
+  letter-spacing: -0.07em;
+  font-weight: 800;
+  margin: 40px 0 55px;
+}
+.footerBrand > span {
+  font-size: 0.1em;
+  vertical-align: top;
+  margin-top: 0.7em;
+  display: inline-block;
+  letter-spacing: 0;
+  margin-left: 0.1em;
+}
+.footerBottom {
+  border-top: 1px solid #e8e0d329;
+  padding-top: 25px;
+  font-size: 8px;
+}
+@media (min-width: 1800px) {
+  .heroMain {
+    top: 24%;
+  }
+  .bridge,
+  .comicSection,
+  .gamesSection,
+  .cardsSection {
+    padding-left: max(var(--gutter), calc((100vw - 1620px)/2));
+    padding-right: max(var(--gutter), calc((100vw - 1620px)/2));
+  }
+}
+@media (max-width: 900px) {
+  .heroAside {
+    display: none;
+  }
+  .heroMain {
+    width: 60vw;
+  }
+  .comicIntro {
+    gap: 35px;
+    grid-template-columns: 1.1fr 1fr;
+  }
+  .comicCopy p {
+    font-size: 20px;
+  }
+  .comicCopy .lead {
+    font-size: 24px;
+  }
+  .milestones {
+    gap: 25px;
+  }
+  .cardsLayout {
+    gap: 45px;
+  }
+  .cardsCopy {
+    font-size: 21px;
+  }
+  .storyHeading {
+    font-size: clamp(46px, 6.3vw, 100px);
+  }
+}
+@media (max-width: 700px) {
+  .scene {
+    --gutter: 24px;
+  }
+  .header {
+    height: 82px;
+    gap: 20px;
+  }
+  .brand {
+    font-size: 26px;
+  }
+  .headerChapter {
+    display: none;
+  }
+  .headerJoin {
+    font-size: 8px;
+    gap: 15px;
+  }
+  .headerJoin > span {
+    font-size: 18px;
+  }
+  .heroMain {
+    top: 21%;
+    left: var(--gutter);
+    width: calc(100% - 48px);
+  }
+  .heroMain .eyebrow {
+    font-size: 8px;
+    letter-spacing: 0.05em;
+  }
+  .hero h1 {
+    width: 100%;
+    max-width: 470px;
+    margin-top: 24px;
+  }
+  .heroDescription {
+    font-size: 21px;
+    margin-top: 20px !important;
+  }
+  .heroBottom {
+    bottom: max(30px, env(safe-area-inset-bottom));
+    gap: 18px;
+    align-items: start;
+    flex-direction: column;
+    font-size: 8px;
+  }
+  .heroBottom > span:last-child {
+    display: none;
+  }
+  .heroBottom a {
+    gap: 24px;
+  }
+  .filmPanel h2 {
+    font-size: clamp(44px, 12vw, 76px);
+  }
+  .filmPanel .eyebrow {
+    font-size: 8px;
+    letter-spacing: 0.07em;
+  }
+  .carPanel,
+  .platformPanel,
+  .fansPanel {
+    top: 17%;
+    left: var(--gutter);
+    right: var(--gutter);
+    max-width: none;
+  }
+  .filmPanel h2 {
+    margin-top: 18px;
+  }
+  .filmCopy {
+    font-size: 21px;
+    max-width: 320px;
+    margin-top: 20px !important;
+  }
+  .filmMetrics {
+    margin-top: 24px;
+    gap: 25px;
+  }
+  .filmMetrics b {
+    font-size: 30px;
+  }
+  .finalPanel {
+    top: 19%;
+    width: calc(100% - 48px);
+  }
+  .finalPanel .eyebrow {
+    font-size: 8px;
+  }
+  .finalNote {
+    font-size: 7px;
+    letter-spacing: 0.07em;
+  }
+  .filmShade {
+    background: linear-gradient(180deg, #05070588, transparent 70%, #060706c4);
+  }
+  .shotTrack {
+    height: 1050svh;
+  }
+  .finalHold {
+    height: 75svh;
+  }
+  .bridge {
+    min-height: auto;
+    padding-top: 130px;
+    padding-bottom: 85px;
+  }
+  .bridgeHeading {
+    font-size: clamp(40px, 10.5vw, 78px);
+    line-height: 1.12;
+    margin-top: 35px !important;
+  }
+  .bridgeBottom {
+    grid-template-columns: 1fr;
+    gap: 25px;
+    margin-top: 40px;
+    padding-top: 22px;
+  }
+  .bridgeBottom p {
+    font-size: 23px;
+  }
+  .comicSection,
+  .gamesSection,
+  .cardsSection {
+    padding-top: 25px;
+    padding-bottom: 75px;
+  }
+  .sectionTop {
+    font-size: 8px;
+    letter-spacing: 0.06em;
+    margin-bottom: 35px;
+  }
+  .sectionTop > span:last-child {
+    display: none;
+  }
+  .storyHeading {
+    font-size: clamp(40px, 10.5vw, 68px);
+    line-height: 1.12;
+  }
+  .comicIntro {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    margin-bottom: 35px;
+  }
+  .comicCopy .lead {
+    font-size: 26px;
+  }
+  .comicCopy p {
+    font-size: 22px;
+  }
+  .comicFigure {
+    margin-left: -24px !important;
+    margin-right: -24px !important;
+  }
+  .comicCorner {
+    top: 12px;
+    left: 14px;
+    font-size: 7px;
+  }
+  .comicFigure figcaption {
+    padding: 15px 24px 0;
+    font-size: 7px;
+    gap: 15px;
+    line-height: 1.7;
+    letter-spacing: 0.05em;
+  }
+  .unlocked {
+    align-items: start;
+    gap: 6px;
+  }
+  .unlocked i {
+    flex-shrink: 0;
+    margin-top: 4px;
+    width: 4px;
+    height: 4px;
+  }
+  .milestones {
+    grid-template-columns: 1fr 1fr;
+    gap: 38px 15px;
+    margin-top: 55px;
+  }
+  .milestones strong {
+    font-size: clamp(80px, 23vw, 125px);
+  }
+  .milestones > div {
+    gap: 18px;
+  }
+  .milestones > div > span,
+  .milestones small {
+    font-size: 8px;
+    letter-spacing: 0.08em;
+  }
+  .milestones > p {
+    grid-column: 1/-1;
+    font-size: 22px;
+    padding: 0;
+  }
+  .gamesIntro {
+    flex-direction: column;
+    align-items: start;
+    gap: 28px;
+    margin-bottom: 35px;
+  }
+  .gamesIntro p {
+    font-size: 22px;
+  }
+  .gameShowcase {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto auto;
+    grid-template-areas: "choices" "preview" "caption";
+    gap: 30px;
+  }
+  .gameTabs {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-bottom: 1px solid #e8e0d333;
+  }
+  .gameTabs button {
+    min-width: 0;
+    padding: 19px 5px;
+    gap: 6px;
+    justify-content: center;
+    border-bottom: 0;
+  }
+  .gameTabs button + button {
+    border-left: 1px solid #e8e0d329;
+  }
+  .gameTabs button > span:last-child,
+  .gameChoice small {
+    display: none;
+  }
+  .gameChoice strong {
+    font-size: clamp(20px, 5.8vw, 23px);
+  }
+  .gameTabs button[aria-pressed="true"]::after {
+    top: auto;
+    bottom: -1px;
+    width: auto;
+    right: 0;
+    height: 2px;
+  }
+  .gameIndex {
+    font-size: 8px;
+  }
+  .gameScreen {
+    margin-inline: auto;
+    width: min(100%, 330px);
+    max-width: 330px;
+    aspect-ratio: 9/16;
+  }
+  .gameScreenTop {
+    padding: 16px;
+    font-size: 7px;
+  }
+  .videoControl {
+    bottom: 14px;
+    right: 14px;
+    padding: 9px 13px;
+  }
+  .gameCaption {
+    gap: 16px;
+    padding: 0;
+  }
+  .gameCaption h3 {
+    font-size: 32px;
+  }
+  .gameCaption p {
+    font-size: 22px;
+  }
+  .archiveNote {
+    font-size: 8px;
+    line-height: 1.8;
+  }
+  .cardsLayout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .rainPoster {
+    width: 78%;
+    margin: 0 auto !important;
+  }
+  .rainPoster figcaption {
+    font-size: 7px;
+  }
+  .cardsContent .eyebrow {
+    font-size: 8px;
+  }
+  .cardsContent .storyHeading {
+    margin-top: 22px;
+  }
+  .cardsCopy {
+    font-size: 22px;
+    margin-top: 26px !important;
+  }
+  .fanCards {
+    margin-top: 45px;
+    margin-bottom: 40px;
+    padding-inline: 20px;
+  }
+  .fanCards figure {
+    width: 37%;
+  }
+  .cardNote {
+    font-size: 7px;
+  }
+  .closing {
+    min-height: 850px;
+    min-height: 100svh;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    align-items: center;
+  }
+  .closingArt {
+    object-position: 36% center;
+    opacity: 0.7;
+  }
+  .closingShade {
+    background:
+      linear-gradient(90deg, #080a08c7, #080a0855),
+      linear-gradient(180deg, #090a09, transparent 40%, #090a09);
+  }
+  .closingCopy .eyebrow {
+    max-width: 250px;
+    font-size: 8px;
+  }
+  .closingCopy .storyHeading {
+    font-size: clamp(46px, 12vw, 80px);
+    margin-top: 30px;
+  }
+  .closingCopy > p:not(.eyebrow) {
+    font-size: 23px;
+    max-width: 280px;
+  }
+  .primaryLink {
+    margin-top: 30px;
+    padding: 18px 22px;
+  }
+  .footer {
+    padding-top: 45px;
+    padding-bottom: 25px;
+  }
+  .footerTop {
+    align-items: start;
+    flex-direction: column;
+    gap: 22px;
+    font-size: 8px;
+  }
+  .footerBrand {
+    font-size: 17.5vw;
+    margin-block: 35px;
+    letter-spacing: -0.065em;
+  }
+  .footerBottom {
+    flex-direction: column;
+    align-items: start;
+    gap: 12px;
+    font-size: 7px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .viewport {
+    position: relative;
+  }
+  .shotTrack,
+  .finalHold,
+  .pixelGrid,
+  .filmProgress {
+    display: none;
+  }
+  .afterStory {
+    background: #090a09;
+  }
+  .hero,
+  .heroMain {
+    opacity: 1;
+    visibility: visible;
+  }
+  .fanCards figure,
+  .scene :is(a, button) {
+    transition: none;
+  }
+}
