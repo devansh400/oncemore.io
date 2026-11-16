@@ -2,7 +2,7 @@ const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 const ARC_SAMPLES = 256;
 
 /** One continuous, arc-length sampled zigzag route. No moving endpoint tweens. */
-export function createFlightCamera({Vector3, Quaternion, Matrix4, stopCount, buildPose}) {
+export function createFlightCamera({Vector3, Quaternion, Matrix4, stopCount, buildPose, pathMode='hermite'}) {
   const positions = Array.from({length:stopCount}, () => new Vector3());
   const looks = positions.map(() => new Vector3());
   const tangents = positions.map(() => new Vector3());
@@ -15,6 +15,10 @@ export function createFlightCamera({Vector3, Quaternion, Matrix4, stopCount, bui
   let initialized = false;
 
   function curve(segment, t, out) {
+    if(pathMode==='cloud-road'){
+      const eased=t*t*(3-2*t),a=positions[segment],b=positions[segment+1];
+      return out.set(a.x+(b.x-a.x)*eased,a.y+(b.y-a.y)*eased,a.z+(b.z-a.z)*t);
+    }
     const t2 = t*t, t3 = t2*t;
     return out.set(0,0,0)
       .addScaledVector(positions[segment], 2*t3-3*t2+1)
