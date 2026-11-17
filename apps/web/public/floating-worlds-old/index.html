@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<base href="/floating-worlds-old/">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Floating Worlds</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{ --ivory:#f1e4cc; --amber:#e9a24c; --ink:#080b12; }
+*{ box-sizing:border-box; margin:0; padding:0; }
+html,body{ height:100%; overflow:hidden; background:var(--ink); color:var(--ivory); font-family:'Manrope',system-ui,sans-serif; -webkit-font-smoothing:antialiased; overscroll-behavior:none; }
+#gl{ position:fixed; inset:0; width:100%; height:100%; display:block; touch-action:none; outline:none; }
+.fx{ position:fixed; inset:0; pointer-events:none; }
+#vig{ background:linear-gradient(to top, rgba(5,7,12,.34) 0%, rgba(5,7,12,0) 30%), linear-gradient(to bottom, rgba(5,7,12,.22) 0%, rgba(5,7,12,0) 14%); }
+#veil{ opacity:0; background:radial-gradient(70% 70% at 50% 50%, #ffd9a4 0%, #c8772e 26%, #1a1410 62%, #07090e 100%); }
+.lab{ font-size:11px; letter-spacing:.34em; text-transform:uppercase; font-weight:500; }
+header{ position:fixed; top:0; left:0; right:0; display:flex; justify-content:space-between; align-items:center; padding:26px clamp(20px,4vw,52px); pointer-events:none; transition:opacity .6s; }
+header .lab{ opacity:.72; }
+#counter{ font-variant-numeric:tabular-nums; }
+#block{ position:fixed; left:clamp(20px,4vw,52px); right:clamp(20px,4vw,52px); bottom:clamp(30px,7vh,72px); pointer-events:none; }
+#kicker{ color:var(--amber); display:flex; align-items:center; gap:14px; opacity:0; transform:translateY(8px); transition:opacity .5s, transform .5s; }
+#kicker::before{ content:''; width:34px; height:1px; background:currentColor; opacity:.8; }
+#title{ font-family:'Marcellus',Georgia,serif; font-weight:400; text-transform:uppercase; letter-spacing:.1em; line-height:1.02; font-size:clamp(34px,6.6vw,104px); margin:14px 0 20px -.04em; text-shadow:0 2px 40px rgba(0,0,0,.55); max-width:15ch; }
+#title.soon{ letter-spacing:.2em; font-size:clamp(28px,5vw,78px); }
+#title .w{ display:inline-block; overflow:hidden; vertical-align:top; padding-bottom:.06em; }
+#title .w>span{ display:inline-block; transform:translateY(108%); transition:transform .5s cubic-bezier(.6,0,.8,.3); }
+#enterBtn{ pointer-events:none; appearance:none; background:none; border:0; color:var(--ivory); cursor:pointer; display:inline-flex; align-items:center; gap:14px; padding:10px 0; opacity:0; transition:opacity .5s, color .3s; font-family:inherit; }
+#enterBtn i{ width:38px; height:38px; border:1px solid rgba(241,228,204,.45); border-radius:50%; display:grid; place-items:center; transition:border-color .3s, background .3s, transform .3s; }
+#enterBtn i::after{ content:''; width:7px; height:7px; border-top:1px solid currentColor; border-right:1px solid currentColor; transform:translateX(-2px) rotate(45deg); }
+#block.on #kicker{ opacity:1; transform:none; transition-delay:.1s; }
+@media (pointer:coarse){ .mouse{ display:none; } }
+@media (pointer:fine){ .touch{ display:none; } }
+#block.on #title .w>span{ transform:none; transition:transform .95s cubic-bezier(.16,1,.3,1); }
+#block.on #enterBtn{ opacity:.85; pointer-events:auto; transition-delay:.45s; }
+body.wide #enterBtn{ display:none; }
+body.wide #title{ display:none; }
+body.hovering #enterBtn, #enterBtn:hover, #enterBtn:focus-visible{ color:var(--amber); opacity:1; }
+body.hovering #enterBtn i, #enterBtn:hover i{ border-color:var(--amber); background:rgba(233,162,76,.12); transform:scale(1.08); }
+#dots{ position:fixed; right:clamp(16px,3vw,40px); top:50%; transform:translateY(-50%); display:flex; flex-direction:column; gap:6px; transition:opacity .6s; }
+#dots button{ appearance:none; background:none; border:0; width:28px; height:22px; cursor:pointer; position:relative; }
+#dots button::after{ content:''; position:absolute; right:6px; top:50%; height:1px; width:10px; background:var(--ivory); opacity:.4; transition:width .4s, opacity .4s, background .4s; }
+#dots button.on::after{ width:22px; opacity:1; background:var(--amber); }
+#dots button:hover::after{ opacity:.9; width:16px; }
+#scroll{ position:fixed; left:50%; bottom:26px; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:10px; opacity:.7; transition:opacity .8s; pointer-events:none; }
+#scroll b{ width:1px; height:34px; background:linear-gradient(var(--ivory),transparent); animation:drip 2.2s ease-in-out infinite; transform-origin:top; }
+@keyframes drip{ 0%{ transform:scaleY(0); } 45%{ transform:scaleY(1); } 100%{ transform:scaleY(1); opacity:0; } }
+body.moved #scroll{ opacity:0; }
+body.diving header, body.diving #dots, body.diving #scroll{ opacity:0; pointer-events:none; }
+#inside{ position:fixed; inset:0; display:grid; place-items:center; text-align:center; padding:24px; opacity:0; pointer-events:none; transition:opacity .9s; background:radial-gradient(80% 70% at 50% 40%, rgba(60,36,16,.55), rgba(7,9,14,.96) 70%), #07090e; }
+#inside.on{ opacity:1; pointer-events:auto; }
+#inside h2{ font-family:'Marcellus',Georgia,serif; font-weight:400; text-transform:uppercase; letter-spacing:.14em; font-size:clamp(30px,5.4vw,76px); margin:18px 0 18px; }
+#inside p{ opacity:.66; font-size:15px; line-height:1.6; max-width:38ch; margin:0 auto 34px; }
+#inKicker{ color:var(--amber); }
+#back{ appearance:none; background:none; color:var(--ivory); border:1px solid rgba(241,228,204,.4); padding:14px 26px; cursor:pointer; font-family:inherit; transition:border-color .3s, color .3s, background .3s; }
+#back:hover, #back:focus-visible{ border-color:var(--amber); color:var(--amber); background:rgba(233,162,76,.08); }
+#loader{ position:fixed; inset:0; background:var(--ink); display:grid; place-items:center; transition:opacity 1.4s ease .1s, visibility 0s 1.6s; z-index:10; }
+#loader.done{ opacity:0; visibility:hidden; }
+#loader div{ display:flex; flex-direction:column; align-items:center; gap:18px; }
+#loader span{ opacity:.7; }
+#track{ width:160px; height:1px; background:rgba(241,228,204,.18); overflow:hidden; }
+#bar{ width:100%; height:100%; background:var(--amber); transform:scaleX(0); transform-origin:left; transition:transform .4s; }
+button:focus-visible{ outline:1px solid var(--amber); outline-offset:4px; }
+@media (max-width:640px){ #dots{ display:none; } header{ padding:18px 20px; } #title{ max-width:none; font-size:clamp(30px,9.4vw,52px); } #title.soon{ font-size:clamp(26px,8vw,44px); } #block{ bottom:max(34px,env(safe-area-inset-bottom)); } body.wide #scroll{ display:flex; bottom:84px; } #scroll{ display:none; } }
+
+#lookBtn{ pointer-events:auto; appearance:none; background:rgba(8,11,18,.35); border:1px solid rgba(241,228,204,.28); color:var(--ivory); padding:9px 14px; cursor:pointer; font-family:inherit; margin-left:18px; backdrop-filter:blur(8px); transition:border-color .3s,color .3s; }
+#lookBtn:hover,#lookBtn[aria-expanded=true]{ border-color:var(--amber); color:var(--amber); }
+header .right{ display:flex; align-items:center; }
+#look{ position:fixed; top:74px; right:clamp(12px,3vw,40px); width:292px; max-height:calc(100vh - 110px); overflow:auto; background:rgba(9,12,19,.78); backdrop-filter:blur(18px); border:1px solid rgba(241,228,204,.14); padding:18px 18px 16px; opacity:0; transform:translateY(-8px); pointer-events:none; transition:opacity .35s, transform .35s; z-index:5; overscroll-behavior:contain; }
+#look.on{ opacity:1; transform:none; pointer-events:auto; }
+#look h3{ font-size:11px; letter-spacing:.3em; text-transform:uppercase; font-weight:600; color:var(--amber); margin-bottom:12px; }
+#lookPresets{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:14px; }
+#lookPresets button, #look .act button{ appearance:none; background:none; border:1px solid rgba(241,228,204,.22); color:var(--ivory); font-family:inherit; font-size:12px; padding:6px 10px; cursor:pointer; transition:all .25s; }
+#lookPresets button.on{ border-color:var(--amber); color:var(--ink); background:var(--amber); }
+#lookPresets button:hover, #look .act button:hover{ border-color:var(--amber); }
+#lookList label{ display:grid; grid-template-columns:1fr auto; align-items:baseline; gap:0 8px; font-size:12px; margin-bottom:5px; opacity:.92; }
+#lookList b{ font-weight:500; font-variant-numeric:tabular-nums; opacity:.6; }
+#lookList input{ grid-column:1/3; width:100%; accent-color:#e9a24c; height:16px; }
+#lookCode{ width:100%; height:56px; resize:none; background:rgba(0,0,0,.35); border:1px solid rgba(241,228,204,.14); color:var(--ivory); font:11px/1.45 ui-monospace,Menlo,monospace; padding:8px; margin:6px 0 10px; }
+#look .act{ display:flex; gap:8px; } #look .act button{ flex:1; padding:9px 8px; }
+#look p{ font-size:11.5px; line-height:1.5; opacity:.6; margin-bottom:4px; }
+body.looking #dots{ opacity:0; pointer-events:none; }
+body.diving #look, body.diving #lookBtn{ opacity:0; pointer-events:none; }
+@media (max-width:640px){ #look{ top:auto; bottom:0; left:0; right:0; width:auto; max-height:52vh; border-width:1px 0 0; } #lookBtn{ padding:7px 10px; margin-left:10px; } header .lab.hint{ display:none; } }
+</style>
+</head>
+<body>
+<canvas id="gl" tabindex="0" aria-label="A 3D sky of floating islands. Scroll to fly between them."></canvas>
+<div id="vig" class="fx"></div>
+<header>
+  <span class="lab" id="counter">00 / 05</span>
+  <span class="right"><span class="lab hint"><span class="mouse">Scroll</span><span class="touch">Swipe</span> to fly</span><button id="lookBtn" class="lab" aria-expanded="false" aria-controls="look">Look</button></span>
+</header>
+<nav id="dots" aria-label="Islands"></nav>
+<section id="block" aria-live="polite">
+  <div id="kicker" class="lab">Five floating worlds</div>
+  <h1 id="title"></h1>
+  <button id="enterBtn" class="lab"><i></i><span><span class="mouse">Click</span><span class="touch">Tap</span> the island to enter</span></button>
+</section>
+<div id="scroll"><span class="lab"><span class="mouse">Scroll</span><span class="touch">Swipe up</span></span><b></b></div>
+<aside id="look" aria-label="Look settings">
+  <h3>Look</h3>
+  <div id="lookPresets"></div>
+  <div id="lookList"></div>
+  <p>Send this line back to lock the look in:</p>
+  <textarea id="lookCode" readonly aria-label="Current look settings"></textarea>
+  <div class="act"><button id="lookCopy">Copy settings</button><button id="lookReset">Reset</button></div>
+</aside>
+<div id="veil" class="fx"></div>
+<section id="inside" aria-hidden="true">
+  <div>
+    <div id="inKicker" class="lab">Island I</div>
+    <h2 id="inTitle"></h2>
+    <p id="inNote"></p>
+    <button id="back" class="lab">Back to the sky</button>
+  </div>
+</section>
+<div id="loader"><div><span class="lab">Entering the sky</span><div id="track"><div id="bar"></div></div></div></div>
+<script type="module" src="app.js"></script>
+</body>
+</html>

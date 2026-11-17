@@ -12,6 +12,10 @@ const nextConfig: NextConfig = {
         source: "/floating-worlds",
         destination: "/floating-worlds/index.html",
       },
+      {
+        source: "/floating-worlds-old",
+        destination: "/floating-worlds-old/index.html",
+      },
     ];
   },
   async headers() {
