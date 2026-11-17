@@ -8,6 +8,13 @@ import { SiteFooter } from "./site-footer";
 import { SiteHeader } from "./site-header";
 
 const bare = new Set([
+  "/brand", // Standalone Oncemore identity and design system.
+  "/brand-dusk",
+  "/brand-storm",
+  "/brand-golden-hour",
+  "/brand-bright",
+  "/brand-blue-hour",
+  "/brand-artwork",
   "/maa-inti-bangaaram",
   "/mib2", // Short-copy variant with its own page chrome.
   "/og-car", // Full-screen, text-free scroll sequence.

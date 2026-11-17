@@ -1,0 +1,28 @@
+/* Oncemore / Storm. Load the named font families separately. */
+:root {
+  --oncemore-ink: #0D1119;
+  --oncemore-cloud: #DDE0DD;
+  --oncemore-accent: #D4A06B;
+  --oncemore-warm: #A76448;
+  --oncemore-atmosphere: #647180;
+  --oncemore-landscape: #797F78;
+  --oncemore-background: var(--oncemore-ink);
+  --oncemore-text: var(--oncemore-cloud);
+  --oncemore-action: var(--oncemore-accent);
+  --oncemore-action-text: var(--oncemore-ink);
+  --oncemore-focus: var(--oncemore-accent);
+  --oncemore-success: #A7BCA2;
+  --oncemore-error: #F0A48D;
+  --oncemore-font-display: 'Bricolage Grotesque', sans-serif;
+  --oncemore-font-body: 'DM Sans', sans-serif;
+  --oncemore-font-detail: 'Geist Mono', monospace;
+  --oncemore-space: 8px;
+  --oncemore-radius: 0px;
+  --oncemore-respond: 160ms;
+  --oncemore-reveal: 400ms;
+  --oncemore-enter: 700ms;
+  --oncemore-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+  :root { --oncemore-respond: 0ms; --oncemore-reveal: 0ms; --oncemore-enter: 0ms; }
+}

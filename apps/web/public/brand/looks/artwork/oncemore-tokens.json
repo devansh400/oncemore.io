@@ -1,0 +1,96 @@
+{
+  "name": "Oncemore",
+  "version": "1.0",
+  "colour": {
+    "ink": "#151C1B",
+    "cloud": "#F1E3CB",
+    "accent": "#D6AA72",
+    "warm": "#BA5F3E",
+    "atmosphere": "#677B7E",
+    "landscape": "#829573"
+  },
+  "semantic": {
+    "background": "{colour.ink}",
+    "text": "{colour.cloud}",
+    "action": "{colour.accent}",
+    "actionText": "{colour.ink}",
+    "focus": "{colour.accent}",
+    "success": "#A7BCA2",
+    "error": "#F0A48D"
+  },
+  "typography": {
+    "display": {
+      "family": "Bricolage Grotesque",
+      "weight": 500
+    },
+    "body": {
+      "family": "DM Sans",
+      "weight": 400
+    },
+    "detail": {
+      "family": "Geist Mono",
+      "weight": 400
+    },
+    "scale": {
+      "display": "clamp(4.5rem, 9vw, 9rem)",
+      "heading": "clamp(2.5rem, 4vw, 4rem)",
+      "title": "2rem",
+      "body": "1rem",
+      "label": ".6875rem"
+    }
+  },
+  "spacing": {
+    "unit": "8px",
+    "section": "clamp(60px, 7vw, 100px)",
+    "gutter": "clamp(24px, 4vw, 64px)"
+  },
+  "shape": {
+    "radius": "0px",
+    "border": "1px"
+  },
+  "motion": {
+    "respond": "160ms",
+    "reveal": "400ms",
+    "enter": "700ms",
+    "ease": "cubic-bezier(0.22, 1, 0.36, 1)",
+    "reducedMotion": "Disable travel and ambient loops; preserve immediate state feedback."
+  },
+  "accessibility": {
+    "minimumTarget": "44px",
+    "bodyContrast": "4.5:1",
+    "largeTextContrast": "3:1"
+  },
+  "look": "Artwork",
+  "description": "Less relighting and less haze allow the original island art to speak. Red leaves, aged gold, green canopies, and textured stone become the identity’s richest notes.",
+  "colourNames": {
+    "ink": "Obsidian",
+    "cloud": "Canvas",
+    "accent": "Aged gold",
+    "warm": "Vermilion",
+    "atmosphere": "Mineral blue",
+    "landscape": "Canopy"
+  },
+  "sourceLook": {
+    "scene": "/floating-worlds",
+    "note": "Exact scene look values. HEX colours are an interface interpretation of the rendered look.",
+    "values": {
+      "exposure": 1.12,
+      "fill": 1.35,
+      "relight": 0.25,
+      "sun": 1,
+      "rim": 0.6,
+      "sky": 1.3,
+      "warmth": 1,
+      "haze": 0.7,
+      "clouds": 0.9,
+      "glow": 1,
+      "contrast": 1,
+      "saturation": 1.05,
+      "vignette": 0.6
+    }
+  },
+  "contrast": {
+    "text": 13.67,
+    "action": 8.12
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "name": "Oncemore",
+  "version": "1.0",
+  "colour": {
+    "midnight": "#0B0F17",
+    "cloud": "#EDE6D6",
+    "afterglow": "#E5A15B",
+    "ember": "#C8663D",
+    "atmosphere": "#758592",
+    "earth": "#829182"
+  },
+  "semantic": {
+    "background": "{colour.midnight}",
+    "text": "{colour.cloud}",
+    "action": "{colour.afterglow}",
+    "actionText": "{colour.midnight}",
+    "focus": "{colour.afterglow}",
+    "success": "#A7BCA2",
+    "error": "#F0A48D"
+  },
+  "typography": {
+    "display": {
+      "family": "Bricolage Grotesque",
+      "weight": 500
+    },
+    "body": {
+      "family": "DM Sans",
+      "weight": 400
+    },
+    "detail": {
+      "family": "Geist Mono",
+      "weight": 400
+    },
+    "scale": {
+      "display": "clamp(4.5rem, 9vw, 9rem)",
+      "heading": "clamp(2.5rem, 4vw, 4rem)",
+      "title": "2rem",
+      "body": "1rem",
+      "label": ".6875rem"
+    }
+  },
+  "spacing": {
+    "unit": "8px",
+    "section": "clamp(60px, 7vw, 100px)",
+    "gutter": "clamp(24px, 4vw, 64px)"
+  },
+  "shape": {
+    "radius": "0px",
+    "border": "1px"
+  },
+  "motion": {
+    "respond": "160ms",
+    "reveal": "400ms",
+    "enter": "700ms",
+    "ease": "cubic-bezier(0.22, 1, 0.36, 1)",
+    "reducedMotion": "Disable travel and ambient loops; preserve immediate state feedback."
+  },
+  "accessibility": {
+    "minimumTarget": "44px",
+    "bodyContrast": "4.5:1",
+    "largeTextContrast": "3:1"
+  }
+}
