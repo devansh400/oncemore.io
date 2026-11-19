@@ -87,7 +87,12 @@ export function createCloudRoad({scene,islands,atlas,noise,shared,common,mobile,
   billows.frustumCulled=false;billows.renderOrder=6;scene.add(billows);
   let frame=0;
   const lastSort=new Vector3(Infinity,Infinity,Infinity);
+  function setVisible(visible){
+    billows.visible=bed.visible=visible;
+    if(visible)frame=0;
+  }
   function update(camera){
+    if(!billows.visible)return;
     right.setFromMatrixColumn(camera.matrixWorld,0);up.setFromMatrixColumn(camera.matrixWorld,1);
     if(frame++%8!==0&&camera.position.distanceToSquared(lastSort)<100)return;
     lastSort.copy(camera.position);
@@ -96,5 +101,5 @@ export function createCloudRoad({scene,islands,atlas,noise,shared,common,mobile,
     clouds.forEach((c,i)=>{centers.setXYZ(i,c.x,c.y,c.z);sizes.setXYZW(i,c.sx,c.sy,c.tile,c.alpha);tones.setX(i,c.tone);seeds.setX(i,c.phase/6.283);});
     centers.needsUpdate=true;sizes.needsUpdate=true;tones.needsUpdate=true;seeds.needsUpdate=true;
   }
-  return {route,update,billows,bed};
+  return {route,update,setVisible,billows,bed};
 }

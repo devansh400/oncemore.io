@@ -1,0 +1,56 @@
+#veil,
+.island-arrival-veil {
+  background: radial-gradient(
+    70% 70% at 50% 50%,
+    #ffd9a4 0%,
+    #c8772e 26%,
+    #1a1410 62%,
+    #07090e 100%
+  );
+}
+
+.island-arrival-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 201;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html[data-island-arrival] .island-arrival-veil {
+    animation: island-veil 1.5s linear reverse backwards;
+  }
+
+  html[data-island-arrival] [data-island-arrival-media] {
+    /* Sample the sky camera's quintic easing and reverse the dive. */
+    animation: island-zoom 1.5s
+      linear(0, 0.016 12.5%, 0.104 25%, 0.275 37.5%, 0.5, 0.725 62.5%, 0.896 75%, 0.984 87.5%, 1)
+      reverse backwards;
+  }
+}
+
+@keyframes island-veil {
+  0%,
+  55% {
+    visibility: visible;
+    opacity: 0;
+    /* Match smoothstep(0.55, 1, progress) in the sky. */
+    animation-timing-function: cubic-bezier(0.333, 0, 0.667, 1);
+  }
+
+  100% {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+@keyframes island-zoom {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(1.24);
+  }
+}

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { IslandArrival } from "@/components/island-arrival";
 import "@fontsource/anton/latin-400.css";
 import "@fontsource/barlow-condensed/latin-400.css";
 import "@fontsource/barlow-condensed/latin-500.css";
@@ -24,5 +25,10 @@ export const metadata: Metadata = {
 };
 
 export default function OGCarPage() {
-  return <CarExperience />;
+  return (
+    <>
+      <IslandArrival />
+      <CarExperience />
+    </>
+  );
 }

@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<base href="/floating-worlds/">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Floating Worlds</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/floating-worlds/island-transition.css">
 <style>
 :root{ --ivory:#f1e4cc; --amber:#e9a24c; --ink:#080b12; }
 *{ box-sizing:border-box; margin:0; padding:0; }
@@ -15,7 +15,7 @@ html,body{ height:100%; overflow:hidden; background:var(--ink); color:var(--ivor
 .fx{ position:fixed; inset:0; pointer-events:none; }
 #vig{ background:linear-gradient(to top, rgba(5,7,12,.34) 0%, rgba(5,7,12,0) 30%), linear-gradient(to bottom, rgba(5,7,12,.22) 0%, rgba(5,7,12,0) 14%); }
 body:not(.wide) #vig{ background:linear-gradient(90deg,rgba(5,7,12,.48),transparent 64%),linear-gradient(to top,rgba(5,7,12,.48),transparent 45%); }
-#veil{ opacity:0; background:radial-gradient(70% 70% at 50% 50%, #ffd9a4 0%, #c8772e 26%, #1a1410 62%, #07090e 100%); }
+#veil{ opacity:0; }
 .lab{ font-size:11px; letter-spacing:.34em; text-transform:uppercase; font-weight:500; }
 header{ position:fixed; top:0; left:0; right:0; display:flex; justify-content:space-between; align-items:center; padding:26px clamp(20px,4vw,52px); pointer-events:none; transition:opacity .6s; }
 header .lab{ opacity:.72; }
@@ -37,8 +37,8 @@ header .lab{ opacity:.72; }
 #block.on #enterBtn{ opacity:.85; pointer-events:auto; transition-delay:.45s; }
 body.wide #enterBtn{ display:none; }
 body.wide #title{ display:none; }
-body.hovering #enterBtn, #enterBtn:hover, #enterBtn:focus-visible{ color:var(--amber); opacity:1; }
-body.hovering #enterBtn i, #enterBtn:hover i{ border-color:var(--amber); background:rgba(233,162,76,.12); transform:scale(1.08); }
+body:has(#gl[data-hovering]) #enterBtn, #enterBtn:hover, #enterBtn:focus-visible{ color:var(--amber); opacity:1; }
+body:has(#gl[data-hovering]) #enterBtn i, #enterBtn:hover i{ border-color:var(--amber); background:rgba(233,162,76,.12); transform:scale(1.08); }
 #dots{ position:fixed; right:clamp(16px,3vw,40px); top:50%; transform:translateY(-50%); display:flex; flex-direction:column; gap:6px; transition:opacity .6s; }
 #dots button{ appearance:none; background:none; border:0; width:28px; height:22px; cursor:pointer; position:relative; }
 #dots button::after{ content:''; position:absolute; right:6px; top:50%; height:1px; width:10px; background:var(--ivory); opacity:.4; transition:width .4s, opacity .4s, background .4s; }
@@ -75,9 +75,15 @@ header .right{ display:flex; align-items:center; }
 #lookPresets button, #look .act button{ appearance:none; background:none; border:1px solid rgba(241,228,204,.22); color:var(--ivory); font-family:inherit; font-size:12px; padding:6px 10px; cursor:pointer; transition:all .25s; }
 #lookPresets button.on{ border-color:var(--amber); color:var(--ink); background:var(--amber); }
 #lookPresets button:hover, #look .act button:hover{ border-color:var(--amber); }
+.look-toggle{ display:flex; align-items:center; gap:12px; min-height:52px; padding:10px 0; margin:8px 0 14px; border-top:1px solid rgba(241,228,204,.14); border-bottom:1px solid rgba(241,228,204,.14); cursor:pointer; font-size:12px; }
+.look-toggle input{ width:17px; height:17px; margin:0; accent-color:var(--amber); flex-shrink:0; }
+.look-toggle input:focus-visible{ outline:1px solid var(--amber); outline-offset:4px; }
+.look-toggle small{ display:block; margin-top:3px; font-size:10.5px; opacity:.6; }
+.look-toggle + .look-toggle{ border-top:0; margin-top:-14px; }
 #lookList label{ display:grid; grid-template-columns:1fr auto; align-items:baseline; gap:0 8px; font-size:12px; margin-bottom:5px; opacity:.92; }
 #lookList b{ font-weight:500; font-variant-numeric:tabular-nums; opacity:.6; }
 #lookList input{ grid-column:1/3; width:100%; accent-color:#e9a24c; height:16px; }
+#lookList label:has(input:disabled){ opacity:.4; }
 #lookCode{ width:100%; height:56px; resize:none; background:rgba(0,0,0,.35); border:1px solid rgba(241,228,204,.14); color:var(--ivory); font:11px/1.45 ui-monospace,Menlo,monospace; padding:8px; margin:6px 0 10px; }
 #look .act{ display:flex; gap:8px; } #look .act button{ flex:1; padding:9px 8px; }
 #look p{ font-size:11.5px; line-height:1.5; opacity:.6; margin-bottom:4px; }
@@ -103,6 +109,8 @@ body.diving #look, body.diving #lookBtn{ opacity:0; pointer-events:none; }
 <aside id="look" aria-label="Look settings">
   <h3>Look</h3>
   <div id="lookPresets"></div>
+  <label class="look-toggle" for="hideCloudPath"><input id="hideCloudPath" type="checkbox" checked><span>Hide dense cloud path<small>Compare against the open sky.</small></span></label>
+  <label class="look-toggle" for="enableEdgeVignette"><input id="enableEdgeVignette" type="checkbox" checked><span>Enable edge vignette<small>Darken the edges to frame the islands.</small></span></label>
   <div id="lookList"></div>
   <p>Send this line back to lock the look in:</p>
   <textarea id="lookCode" readonly aria-label="Current look settings"></textarea>
@@ -118,6 +126,6 @@ body.diving #look, body.diving #lookBtn{ opacity:0; pointer-events:none; }
   </div>
 </section>
 <div id="loader"><div><span class="lab">Entering the sky</span><div id="track"><div id="bar"></div></div></div></div>
-<script type="module" src="app.js"></script>
+<script type="module" src="/floating-worlds/archive.js"></script>
 </body>
 </html>

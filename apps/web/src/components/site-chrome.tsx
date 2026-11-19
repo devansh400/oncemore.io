@@ -8,6 +8,7 @@ import { SiteFooter } from "./site-footer";
 import { SiteHeader } from "./site-header";
 
 const bare = new Set([
+  "/",
   "/design/brand", // Standalone Oncemore identity and design system.
   "/design/brand-dusk",
   "/design/brand-storm",
@@ -42,7 +43,7 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
   return (
     <>
       {!minimal && <SiteHeader />}
-      <main id="main">{children}</main>
+      <main id="main" tabIndex={-1}>{children}</main>
       {!minimal && <SiteFooter />}
       {!minimal && (
         <>

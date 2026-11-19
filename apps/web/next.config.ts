@@ -9,10 +9,6 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return [
       {
-        source: "/",
-        destination: "/floating-worlds/index.html",
-      },
-      {
         source: "/archive/floating-worlds",
         destination: "/floating-worlds/index.html",
       },
