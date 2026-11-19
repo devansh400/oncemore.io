@@ -1,0 +1,96 @@
+.theme {
+  --background: var(--color-neutral-950);
+  --foreground: var(--color-white);
+  --card: color-mix(in oklab, var(--color-neutral-950) 30%, transparent);
+  --card-foreground: var(--foreground);
+  --popover: color-mix(in oklab, var(--color-neutral-950) 75%, transparent);
+  --popover-foreground: var(--foreground);
+  --primary: var(--color-white);
+  --primary-foreground: var(--color-neutral-950);
+  --secondary: color-mix(in oklab, var(--color-white) 12%, transparent);
+  --secondary-foreground: var(--foreground);
+  --muted: color-mix(in oklab, var(--color-neutral-950) 30%, transparent);
+  --muted-foreground: var(--color-neutral-200);
+  --accent: color-mix(in oklab, var(--color-white) 18%, transparent);
+  --accent-foreground: var(--foreground);
+  --border: color-mix(in oklab, var(--color-white) 12%, transparent);
+  --input: color-mix(in oklab, var(--color-white) 20%, transparent);
+  --ring: var(--color-white);
+  color: var(--foreground);
+}
+
+.theme[data-density="dense"] {
+  --card: color-mix(in oklab, var(--color-neutral-950) 60%, transparent);
+}
+
+.theme [data-slot="card"],
+.popup {
+  border: 1px solid color-mix(in oklab, var(--color-white) 5%, transparent);
+  border-radius: var(--radius-2xl);
+  box-shadow: none;
+  backdrop-filter: blur(var(--blur-lg)) saturate(1.5);
+}
+
+.popup[data-slot="sheet-content"] {
+  border-radius: var(--radius-2xl) 0 0 var(--radius-2xl);
+}
+
+.popup[data-slot="tooltip-content"] {
+  background: var(--popover);
+  color: var(--popover-foreground);
+}
+
+.popup[data-slot="tooltip-content"] > svg {
+  display: none;
+}
+
+.theme
+  :is(
+    [data-slot="button"],
+    [data-slot="badge"],
+    [data-slot="dialog-trigger"],
+    [data-slot="dialog-close"],
+    [data-slot="dropdown-menu-trigger"],
+    [data-slot="popover-trigger"],
+    [data-slot="sheet-trigger"],
+    [data-slot="sheet-close"],
+    [data-slot="switch"],
+    [data-slot="switch-thumb"],
+    [data-slot="toggle-group-item"],
+    [data-slot="tooltip-trigger"],
+    [data-slot="slider-thumb"]
+  ) {
+  border-radius: calc(infinity * 1px);
+}
+
+.theme
+  :is(
+    [data-slot="alert"],
+    [data-slot="input"],
+    [data-slot="select-trigger"],
+    [data-slot="textarea"],
+    [data-slot="tabs-list"],
+    [data-slot="tabs-trigger"]
+  ),
+.popup :is([data-slot="select-item"], [data-slot="dropdown-menu-item"]) {
+  border-radius: var(--radius-lg);
+}
+
+.theme [data-slot="card-title"] {
+  font-family: var(--brand-display);
+  font-size: var(--text-2xl);
+  line-height: var(--leading-tight);
+}
+
+.theme [data-slot="card-description"] {
+  font-size: var(--text-sm);
+}
+
+.theme [data-slot="avatar-fallback"] {
+  background-color: var(--background);
+}
+
+.theme [data-slot="toggle-group-item"][aria-pressed="true"] {
+  background: var(--primary);
+  color: var(--primary-foreground);
+}

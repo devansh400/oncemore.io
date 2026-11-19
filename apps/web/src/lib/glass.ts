@@ -8,4 +8,5 @@ export const glassAction =
   "inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-4 text-sm";
 export const glassPrimary = `${glassAction} ${glassFocus} bg-white font-medium text-neutral-950 hover:bg-neutral-200`;
 export const glassSecondary = `${glassAction} ${glassFocus} ${glassPill} text-white hover:bg-white/10`;
+export const glassInsetAction = `${glassAction} ${glassFocus} border border-white/10 bg-white/5 text-white hover:bg-white/10`;
 export const glassField = `${glassFocus} min-h-11 w-full rounded-xl border border-white/20 bg-neutral-950/40 px-3 text-sm text-white placeholder:text-neutral-400`;
