@@ -30,6 +30,28 @@ export type SceneController = {
   setVignetteEnabled: (enabled: boolean) => void;
   resetLook: () => void;
   dispose: () => void;
+  /** Live scene internals. Read-only from React; used to project island anchors. */
+  debug?: {
+    camera: SceneCamera;
+    ISLANDS: SceneIsland[];
+    /** The current flight between stops; `t` runs 0–1. */
+    F: { active: boolean; from: number; to: number; t: number };
+  };
+};
+
+/** The parts of the bundle's three.js camera that anchor projection reads. */
+export type SceneCamera = {
+  matrixWorldInverse: { elements: ArrayLike<number> };
+  projectionMatrix: { elements: ArrayLike<number> };
+};
+
+export type SceneIsland = {
+  id: string;
+  /** Painted width in world units. */
+  W?: number;
+  /** Painted height in world units. */
+  H?: number;
+  group: { matrixWorld: { elements: ArrayLike<number> } };
 };
 
 export type SceneModule = {
@@ -41,6 +63,8 @@ export type SceneModule = {
       onProgress: (progress: number) => void;
       onVeil: (opacity: number) => void;
       onError: (error: unknown) => void;
+      /** Stepping forward from the last island. Return true to stop the wrap to the overview. */
+      onEnd?: () => boolean;
       ignoreInput?: (event: Event) => boolean;
       lookStorageKey?: string | null;
     },
