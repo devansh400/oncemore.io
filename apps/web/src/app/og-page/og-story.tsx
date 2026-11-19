@@ -323,7 +323,7 @@ export function OGStory() {
           <p data-reveal>
             The OG event is complete. Join OnceMore for the next world worth stepping into.
           </p>
-          <a className={styles.primaryLink} href="/signup" data-reveal>
+          <a className={styles.primaryLink} href="/archive/signup" data-reveal>
             Join OnceMore <Arrow />
           </a>
         </div>

@@ -8,31 +8,31 @@ import { SiteFooter } from "./site-footer";
 import { SiteHeader } from "./site-header";
 
 const bare = new Set([
-  "/brand", // Standalone Oncemore identity and design system.
-  "/brand-dusk",
-  "/brand-storm",
-  "/brand-golden-hour",
-  "/brand-bright",
-  "/brand-blue-hour",
-  "/brand-artwork",
-  "/maa-inti-bangaaram",
-  "/mib2", // Short-copy variant with its own page chrome.
-  "/og-car", // Full-screen, text-free scroll sequence.
-  "/mib",
-  "/squish",
-  "/squish2",
-  "/oncemore2",
-  "/transition",
-  "/katana",
-  "/scroll",
-  "/scroll2", // Short-copy OG scroll with its own page chrome.
-  "/og2", // Illustrated OG journey with its own page chrome.
-  "/og-compare",
-  "/mib-compare",
-  "/signup",
-  "/signup-3d",
-  "/profile",
-  "/profile2",
+  "/design/brand", // Standalone Oncemore identity and design system.
+  "/design/brand-dusk",
+  "/design/brand-storm",
+  "/design/brand-golden-hour",
+  "/design/brand-bright",
+  "/design/brand-blue-hour",
+  "/design/brand-artwork",
+  "/archive/maa-inti-bangaaram",
+  "/mib-page", // Short-copy variant with its own page chrome.
+  "/og-page", // Full-screen, text-free scroll sequence.
+  "/archive/mib",
+  "/archive/squish",
+  "/archive/squish2",
+  "/archive/oncemore2",
+  "/archive/transition",
+  "/archive/katana",
+  "/archive/scroll",
+  "/archive/scroll2", // Short-copy OG scroll with its own page chrome.
+  "/archive/og2", // Illustrated OG journey with its own page chrome.
+  "/archive/og-compare",
+  "/archive/mib-compare",
+  "/archive/signup",
+  "/archive/signup-3d",
+  "/archive/profile",
+  "/archive/profile2",
 ]);
 
 export function SiteChrome({ children }: { children: React.ReactNode }) {

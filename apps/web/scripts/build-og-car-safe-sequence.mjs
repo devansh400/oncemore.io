@@ -35,7 +35,7 @@ for (const [index, entry] of entries.entries()) {
 }
 await copyFile(path.join(destination, "000.webp"), path.join(destination, "../opening.webp"));
 await writeFile(
-  path.join(web, "src/app/og-car/frame-timing.json"),
+  path.join(web, "src/app/og-page/frame-timing.json"),
   JSON.stringify({
     ticksPerSecond: 120,
     originalRanges,

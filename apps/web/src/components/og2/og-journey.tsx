@@ -476,7 +476,7 @@ export function OGJourney() {
               <br />
               COULD BE <em>YOURS.</em>
             </h2>
-            <Link href={{ pathname: "/signup" }} className={styles.join}>
+            <Link href={{ pathname: "/archive/signup" }} className={styles.join}>
               Join OnceMore <span aria-hidden="true">↗</span>
             </Link>
             <button

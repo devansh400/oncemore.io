@@ -361,7 +361,7 @@ export function MobileScrollExperience() {
                   </figcaption>
                 </figure>
                 <div className={styles.join}>
-                  <a href="/signup">
+                  <a href="/archive/signup">
                     Join OnceMore <span aria-hidden="true">↗</span>
                   </a>
                   <button onClick={() => navigate(-1)}>

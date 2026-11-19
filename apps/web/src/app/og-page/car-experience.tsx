@@ -284,7 +284,7 @@ export function CarExperience() {
         <a className={styles.headerChapter} href="#og-story">
           THE OG CHAPTER <span> / 01</span>
         </a>
-        <a href="/signup" className={styles.headerJoin}>
+        <a href="/archive/signup" className={styles.headerJoin}>
           Join the next one <Arrow />
         </a>
       </header>

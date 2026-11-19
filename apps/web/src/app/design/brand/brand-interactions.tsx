@@ -100,7 +100,7 @@ export function ComponentPreview() {
       <div>
         <span className="brand-mono">01 / CALLS TO ADVENTURE</span>
         <div className="brand-button-row">
-          <Button nativeButton={false} size="lg" render={<a href="/floating-worlds" />}>
+          <Button nativeButton={false} size="lg" render={<a href="/archive/floating-worlds" />}>
             Explore the worlds <span aria-hidden="true">↗</span>
           </Button>
           <Button

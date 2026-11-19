@@ -323,7 +323,7 @@ export function ScrollExperience() {
                     </div>
                     {index === 6 && (
                       <>
-                        <a className={styles.experienceLink} href="/signup">
+                        <a className={styles.experienceLink} href="/archive/signup">
                           Join OnceMore <span>↗</span>
                         </a>
                         <button

@@ -106,7 +106,7 @@ export function BrandBook({ theme = originalTheme }: { theme?: BrandTheme }) {
               <br />
               {theme.caption[1]}
             </span>
-            <a href="/floating-worlds" aria-label="Enter Floating Worlds">
+            <a href="/archive/floating-worlds" aria-label="Enter Floating Worlds">
               ↗
             </a>
           </div>
@@ -127,7 +127,7 @@ export function BrandBook({ theme = originalTheme }: { theme?: BrandTheme }) {
           {lookSlugs.map((slug) => (
             <a
               key={slug}
-              href={`/brand-${slug}`}
+              href={`/design/brand-${slug}`}
               aria-current={theme.slug === slug ? "page" : undefined}
             >
               <i style={{ background: brandThemes[slug].colours[2].hex }} />
@@ -491,7 +491,7 @@ export function BrandBook({ theme = originalTheme }: { theme?: BrandTheme }) {
                   <br />
                   One scroll closer.
                 </h3>
-                <a href="/floating-worlds">Enter Floating Worlds ↗</a>
+                <a href="/archive/floating-worlds">Enter Floating Worlds ↗</a>
               </div>
             </figure>
             <figure className="brand-stationery">
@@ -541,7 +541,7 @@ export function BrandBook({ theme = originalTheme }: { theme?: BrandTheme }) {
             <span>04 / Design tokens</span>
             <span>JSON ↓</span>
           </a>
-          <a href="/floating-worlds">
+          <a href="/archive/floating-worlds">
             <span>05 / The inspiration</span>
             <span>EXPLORE ↗</span>
           </a>

@@ -1,6 +1,6 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
-import { brandThemes, lookSlugs, colourText, contrast } from "../src/app/brand/brand-themes";
+import { brandThemes, lookSlugs, colourText, contrast } from "../src/app/design/brand/brand-themes";
 
 // Run with: bun apps/web/scripts/generate-brand-look-assets.ts
 // Scene captures live beside these generated assets and are rendered from the matching preset.
