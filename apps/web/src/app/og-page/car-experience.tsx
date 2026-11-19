@@ -45,10 +45,8 @@ export function CarExperience() {
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
         let sequence: FrameSequence | undefined;
-        let requested = 0;
-        let playhead = 0;
+        let frame = 0;
         let visible = !document.hidden;
-        let failed = false;
         let disposed = false;
         delete scene.dataset.fallback;
         delete scene.dataset.ready;
@@ -97,7 +95,6 @@ export function CarExperience() {
         });
         const setProgress = gsap.quickSetter(scene.querySelector("[data-film-progress]"), "scaleX");
         const onError = () => {
-          failed = true;
           scene.dataset.fallback = "true";
           sequence?.dispose();
           sequence = undefined;
@@ -115,19 +112,13 @@ export function CarExperience() {
         } catch {
           onError();
         }
-        const tick = (_time: number, delta: number) => {
-          if (!visible) return;
-          const difference = requested - playhead;
-          const settled = Math.abs(difference) < 0.000001;
-          playhead = settled
-            ? requested
-            : playhead + difference * (1 - Math.exp(-Math.min(delta, 64) / 110));
-          if (!failed && sequence) {
-            const frame = frameAtProgress(shotProgress(playhead));
-            sequence.setFrame(settled ? Math.round(frame) : frame);
-          }
-          film.progress(playhead);
-          setProgress(playhead);
+        const syncProgress = (progress: number) => {
+          frame = frameAtProgress(shotProgress(progress));
+          film.progress(progress);
+          setProgress(progress);
+        };
+        const tick = () => {
+          if (visible) sequence?.setFrame(frame);
         };
         const trigger = ScrollTrigger.create({
           trigger: scene,
@@ -135,17 +126,10 @@ export function CarExperience() {
           endTrigger: scene.querySelector("[data-shot-end]"),
           end: "top top",
           invalidateOnRefresh: true,
-          onUpdate: (self) => {
-            requested = self.progress;
-          },
-          onRefresh: (self) => {
-            requested = self.progress;
-          },
+          onUpdate: (self) => syncProgress(self.progress),
+          onRefresh: (self) => syncProgress(self.progress),
         });
-        requested = trigger.progress;
-        playhead = requested;
-        sequence?.setFrame(frameAtProgress(shotProgress(playhead)));
-        film.progress(playhead);
+        syncProgress(trigger.progress);
         gsap.ticker.add(tick);
         gsap.to(overlays, {
           autoAlpha: 0,
@@ -165,7 +149,7 @@ export function CarExperience() {
               yPercent: 0,
               stagger: 0.1,
               ease: "power3.out",
-              scrollTrigger: { trigger: heading, start: "top 92%", end: "top 48%", scrub: 0.7 },
+              scrollTrigger: { trigger: heading, start: "top 92%", end: "top 48%", scrub: true },
             },
           );
         });
@@ -190,7 +174,7 @@ export function CarExperience() {
               trigger: scene.querySelector("[data-comic-reveal]"),
               start: "top 85%",
               end: "bottom 62%",
-              scrub: 0.5,
+              scrub: true,
             },
           },
         );
@@ -199,7 +183,7 @@ export function CarExperience() {
         const fanCards = scene.querySelector("[data-fan-cards]")!;
         const fanTimeline = gsap.timeline({
           defaults: { ease: "power2.out" },
-          scrollTrigger: { trigger: fanCards, start: "top 92%", end: "bottom 55%", scrub: 0.8 },
+          scrollTrigger: { trigger: fanCards, start: "top 92%", end: "bottom 55%", scrub: true },
         });
         fanTimeline
           .fromTo(
@@ -289,7 +273,9 @@ export function CarExperience() {
         </a>
       </header>
       <div className={styles.viewport}>
-        <canvas ref={canvasRef} className={styles.canvas} aria-hidden="true" />
+        <div className={styles.media} data-island-arrival-media aria-hidden="true">
+          <canvas ref={canvasRef} className={styles.canvas} />
+        </div>
         <div className={styles.filmShade} aria-hidden="true" />
         <div className={styles.filmOverlays} data-film-overlays>
           <div className={`${styles.filmPanel} ${styles.hero}`} data-panel="hero">

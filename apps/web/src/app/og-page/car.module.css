@@ -103,6 +103,10 @@
   height: 100vh;
   height: 100dvh;
   overflow: hidden;
+}
+.media {
+  position: absolute;
+  inset: 0;
   background: url("/og-car/v3/opening.webp") center / cover no-repeat;
 }
 .canvas {

@@ -2,19 +2,22 @@
 
 import Lenis from "lenis";
 import "lenis/dist/lenis.css";
+import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 
 export function SmoothScroll({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
+  const lerp = pathname === "/mib-page" || pathname === "/og-page" ? 0.12 : 0.09;
   const reduced = useReducedMotion();
 
   useEffect(() => {
     if (reduced) return;
 
     const lenis = new Lenis({
-      lerp: 0.09,
+      lerp,
       smoothWheel: true,
       wheelMultiplier: 0.9,
       anchors: true,
@@ -34,7 +37,7 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
       gsap.ticker.remove(raf);
       lenis.destroy();
     };
-  }, [reduced]);
+  }, [lerp, reduced]);
 
   return <>{children}</>;
 }

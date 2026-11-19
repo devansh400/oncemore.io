@@ -88,14 +88,14 @@ export class FrameSequence {
   }
 
   private resize() {
-    const rect = this.canvas.getBoundingClientRect();
+    const { clientWidth, clientHeight } = this.canvas;
     const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
-    const scale = Math.min(dpr, 1920 / Math.max(rect.width, rect.height));
-    this.width = Math.max(1, Math.round(rect.width * scale));
-    this.height = Math.max(1, Math.round(rect.height * scale));
+    const scale = Math.min(dpr, 1920 / Math.max(clientWidth, clientHeight));
+    this.width = Math.max(1, Math.round(clientWidth * scale));
+    this.height = Math.max(1, Math.round(clientHeight * scale));
     this.canvas.width = this.width;
     this.canvas.height = this.height;
-    this.cacheLimit = rect.width < 600 ? 8 : 12;
+    this.cacheLimit = clientWidth < 600 ? 8 : 12;
     const sw = Math.min(WIDTH, (this.width / this.height) * HEIGHT);
     const sx = Math.max(0, Math.min(WIDTH - sw, focalPoint(0) * WIDTH - sw / 2));
     const posterPosition = sw < WIDTH ? (sx / (WIDTH - sw)) * 100 : 50;

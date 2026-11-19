@@ -16,8 +16,7 @@ These treatments do not affect the original
 `/maa-inti-bangaaram` page or modify any source media.
 
 Self-contained UI built from the supplied brief
-and film assets. Other pages' UI is not used. The existing root Lenis/GSAP
-integration remains the only smooth-scroll system.
+and film assets. Other pages' UI is not used. Lenis smooths wheel input with a 0.12 lerp and preserves native touch scrolling.
 
 ## Rendering
 
@@ -42,8 +41,8 @@ player, audio status, progress bar, or substitute red fill is shown.
   eviction or unmount. Fetches are aborted on unmount.
 - The backing canvas caps DPR at 1.5 and its longest dimension at 1920 pixels.
   It redraws only when the selected source frame or viewport size changes.
-- GSAP's existing ticker supplies an 80 ms exponential settle between scroll
-  updates, independent of refresh rate. There is no additional RAF loop or
+- ScrollTrigger maps the scroll position directly to the target frame.
+  GSAP's ticker presents the available frame without a separate RAF loop or
   per-frame React state. Hidden-tab work pauses.
 - Cover geometry fills every viewport. The source's baked-in black borders
   are removed (1920x1024 crop at y=28). The remaining photographed scene is not

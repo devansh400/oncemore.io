@@ -15,9 +15,6 @@ export function frameAtProgress(progress: number) {
     else high = middle - 1;
   }
   if (low === FRAME_COUNT - 1) return low;
-  const position = low + (tick - timestamps[low]) / (timestamps[low + 1] - timestamps[low]);
-  // Never morph or double-expose the headlights. These moments display a
-  // single authentic source image; the scroll playhead still eases normally.
-  const original = timing.originalRanges.some(([start, end]) => tick >= start && tick <= end);
-  return original ? Math.round(position) : position;
+  // Display the closest whole frame so moving edges keep a single exposure.
+  return tick - timestamps[low] < timestamps[low + 1] - tick ? low : low + 1;
 }

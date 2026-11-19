@@ -54,8 +54,8 @@ to v2. The final source frame is retained.
 `frame-timing.json` stores timestamps in 120Hz ticks, representing both 24fps
 and 60fps exactly. `frameAtProgress()` maps scroll progress to source time using
 binary search; changing frame density does not speed up or slow down the shot.
-The renderer displays whole source frames in protected intervals and supports
-fractional blending elsewhere. A new asset version bypasses cached bad frames.
+The renderer displays the nearest whole frame at every position. A new asset
+version bypasses cached bad frames.
 
 To reproduce, first generate the v2 interpolation outside the protected intervals:
 
@@ -82,13 +82,11 @@ and 2 DPR. Preloading prioritizes the direction of travel, then establishes
 sparse coverage across the shot, then fills gaps. Encoded frames remain cached
 for reverse scrolling. Decoded bitmaps are explicitly closed on eviction.
 
-One sticky viewport spans the cinematic track and continuing story. The existing root Lenis/GSAP clock
-drives a reversible fractional playhead with a 110ms exponential settle.
-Outside protected intervals, adjacent 60fps frames blend for continuous movement
-at slow scroll speeds and on high-refresh screens, settling onto a single sharp
-frame when scrolling stops. Painting happens only on the shared ticker, never
-in asynchronous decode callbacks; an unavailable frame holds until a closer
-frame is ready instead of flashing backwards. Unchanged images are not redrawn.
+One sticky viewport spans the cinematic track and continuing story. Lenis
+smooths wheel input with a 0.12 lerp and preserves native touch scrolling.
+ScrollTrigger maps the scroll position directly to the reversible playhead.
+GSAP's ticker presents the available frame; an unavailable frame holds until a
+closer frame is ready. Unchanged images are not redrawn.
 The final frame holds at the bottom. No per-frame React state or native video
 seeking is used. Hidden tabs pause work; unmount aborts fetches and frees bitmaps.
 Reduced motion and no-JavaScript show the opening still in a single viewport;

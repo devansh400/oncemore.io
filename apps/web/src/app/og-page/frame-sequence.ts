@@ -18,10 +18,8 @@ export class FrameSequence {
   private fetchCount = 0;
   private decodeCount = 0;
   private desired = 0;
-  private position = 0;
   private direction = 1;
   private drawn = -1;
-  private drawnBlend = -1;
   private width = 0;
   private height = 0;
   private cacheLimit = 12;
@@ -42,9 +40,8 @@ export class FrameSequence {
     this.pumpFetch();
   }
 
-  setFrame(frame: number) {
-    this.position = Math.max(0, Math.min(COUNT - 1, frame));
-    const index = Math.floor(this.position);
+  setFrame(index: number) {
+    if (index === this.desired && index === this.drawn) return;
     if (index !== this.desired) this.direction = index > this.desired ? 1 : -1;
     this.desired = index;
     this.pumpFetch();
@@ -62,15 +59,15 @@ export class FrameSequence {
   }
 
   private resize() {
-    const rect = this.canvas.getBoundingClientRect();
+    const { clientWidth, clientHeight } = this.canvas;
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const scale = Math.min(dpr, 3840 / Math.max(rect.width, rect.height));
-    this.width = Math.max(1, Math.round(rect.width * scale));
-    this.height = Math.max(1, Math.round(rect.height * scale));
+    const scale = Math.min(dpr, 3840 / Math.max(clientWidth, clientHeight));
+    this.width = Math.max(1, Math.round(clientWidth * scale));
+    this.height = Math.max(1, Math.round(clientHeight * scale));
     if (this.canvas.width === this.width && this.canvas.height === this.height) return;
     this.canvas.width = this.width;
     this.canvas.height = this.height;
-    this.cacheLimit = rect.width < 600 ? 10 : 18;
+    this.cacheLimit = clientWidth < 600 ? 10 : 18;
     this.drawn = -1;
     this.context.imageSmoothingQuality = "high";
     this.paint();
@@ -181,18 +178,16 @@ export class FrameSequence {
     if (!this.bitmaps.has(index)) {
       let distance = Infinity;
       for (const candidate of this.bitmaps.keys()) {
-        if (Math.abs(candidate - this.position) < distance) {
+        if (Math.abs(candidate - this.desired) < distance) {
           index = candidate;
-          distance = Math.abs(candidate - this.position);
+          distance = Math.abs(candidate - this.desired);
         }
       }
       // Keep the last image until a closer one is ready; don't flash backwards
       // as old network/decode requests finish after a quick scroll.
-      if (this.drawn >= 0 && Math.abs(this.drawn - this.position) <= distance) return;
+      if (this.drawn >= 0 && Math.abs(this.drawn - this.desired) <= distance) return;
     }
-    const next = index === this.desired ? this.bitmaps.get(index + 1) : undefined;
-    const blend = next ? Math.round((this.position - index) * 120) / 120 : 0;
-    if (index === this.drawn && blend === this.drawnBlend) return;
+    if (index === this.drawn) return;
     const bitmap = this.bitmaps.get(index)!;
     const scale = Math.max(this.width / WIDTH, this.height / HEIGHT);
     const sw = this.width / scale;
@@ -200,15 +195,8 @@ export class FrameSequence {
     const sx = Math.max(0, Math.min(WIDTH - sw, 0.5 * WIDTH - sw / 2));
     const sy = (HEIGHT - sh) / 2;
     this.context.drawImage(bitmap, sx, sy, sw, sh, 0, 0, this.width, this.height);
-    if (next && blend > 0) {
-      this.context.globalAlpha = blend;
-      this.context.drawImage(next, sx, sy, sw, sh, 0, 0, this.width, this.height);
-      this.context.globalAlpha = 1;
-    }
-    const changed = this.drawn !== index;
     this.drawn = index;
-    this.drawnBlend = blend;
-    if (changed) this.onDraw(index);
+    this.onDraw(index);
   }
 
   dispose() {

@@ -31,7 +31,6 @@ export function CinematicExperience() {
       const title = scene.querySelector<HTMLElement>("[data-title]")!;
       const status = scene.querySelector<HTMLElement>("[data-status]")!;
       let sequence: FrameSequence | undefined;
-      let requested = 0;
       let clock = 0;
       let presented = -1;
       let failed = false;
@@ -72,15 +71,13 @@ export function CinematicExperience() {
         ScrollTrigger.refresh();
       };
 
-      // Share the existing GSAP/Lenis clock. A short, frame-rate-independent
-      // settle removes wheel/touch steps; no video seeks or competing RAF loop.
-      const tick = (_time: number, delta: number) => {
-        if (!visible || failed || reduced || !sequence) return;
-        const difference = requested - clock;
-        if (Math.abs(difference) < 0.0005) clock = requested;
-        else clock += difference * (1 - Math.exp(-Math.min(delta, 64) / 80));
-        sequence.setFrame(Math.min(clock / SHOT_END, 1) * LAST_FRAME);
+      const syncProgress = (progress: number) => {
+        clock = progress * TOTAL;
         paintOverlays();
+      };
+      const tick = () => {
+        if (!visible) return;
+        sequence?.setFrame(Math.min(clock / SHOT_END, 1) * LAST_FRAME);
       };
       gsap.ticker.add(tick);
 
@@ -133,17 +130,10 @@ export function CinematicExperience() {
             endTrigger: scene.querySelector("[data-shot-end]"),
             end: "top top",
             invalidateOnRefresh: true,
-            onUpdate: (self) => {
-              requested = self.progress * TOTAL;
-            },
-            onRefresh: (self) => {
-              requested = self.progress * TOTAL;
-            },
+            onUpdate: (self) => syncProgress(self.progress),
+            onRefresh: (self) => syncProgress(self.progress),
           });
-          requested = trigger.progress * TOTAL;
-          clock = requested;
-          sequence?.setFrame(Math.min(clock / SHOT_END, 1) * LAST_FRAME);
-          paintOverlays();
+          syncProgress(trigger.progress);
           return () => {
             trigger.kill();
             sequence?.dispose();
@@ -181,7 +171,7 @@ export function CinematicExperience() {
         <span className={styles.headerLabel}>Maa Inti Bangaaram / Launch event</span>
       </header>
       <div className={styles.viewport}>
-        <div className={styles.media} aria-hidden="true">
+        <div className={styles.media} data-island-arrival-media aria-hidden="true">
           <div className={styles.still} />
           <canvas ref={canvasRef} className={styles.canvas} />
         </div>
