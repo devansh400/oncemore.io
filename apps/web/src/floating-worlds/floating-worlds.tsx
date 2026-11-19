@@ -8,7 +8,7 @@ import { FetchQuest } from "@/fetch-quest/fetch-quest";
 
 import { IslandCard } from "./island-card";
 import { loadFloatingWorlds } from "./load-scene";
-import { allEdges, edgeBlurOverUi, edgeBlurUnderUi, SceneEdgeBlur } from "./scene-edge-blur";
+import { allEdges, SceneEdgeBlur } from "./scene-edge-blur";
 import { SkyPreloader } from "./sky-preloader";
 import type { LookState, SceneController, SceneState } from "./scene-types";
 
@@ -127,7 +127,7 @@ function LookPanel({
         <span>
           Enable edge blur
           <small className="mt-0.5 block text-xs opacity-70">
-            Soften every edge, interface included, with a gradual blur.
+            Soften every edge of the scene with a gradual blur.
           </small>
         </span>
       </label>
@@ -286,9 +286,8 @@ export function FloatingWorlds({
       {failed && (
         <Image src="/brand/floating-worlds.webp" alt="" fill unoptimized className="object-cover" />
       )}
-      {/* The scene's share of the edge blur; the layer over the UI adds the rest. */}
-      {edgeBlur &&
-        allEdges.map((edge) => <SceneEdgeBlur key={edge} edge={edge} strength={edgeBlurUnderUi} />)}
+      {/* The full edge blur, over the scene only: every UI element paints above it and stays sharp. */}
+      {edgeBlur && allEdges.map((edge) => <SceneEdgeBlur key={edge} edge={edge} />)}
       <header
         data-world-controls
         data-diving={scene.diving}
@@ -447,11 +446,6 @@ export function FloatingWorlds({
         ready={!loading}
       />
       <div hidden={scene.diving || showLook || questOpen}>{children}</div>
-      {/* Above the island title and hints, below the Look panel so it stays usable. */}
-      {edgeBlur &&
-        allEdges.map((edge) => (
-          <SceneEdgeBlur key={edge} edge={edge} className="absolute z-10" strength={edgeBlurOverUi} />
-        ))}
     </div>
   );
 }
