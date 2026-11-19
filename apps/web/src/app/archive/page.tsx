@@ -24,7 +24,7 @@ const routes = [
   "/archive/squish",
   "/archive/squish2",
   "/archive/transition",
-];
+] as const;
 
 export default function ArchiveIndexPage() {
   return (
