@@ -16,6 +16,7 @@ const bare = new Set([
   "/design/brand-bright",
   "/design/brand-blue-hour",
   "/design/brand-artwork",
+  "/design/glass",
   "/archive/maa-inti-bangaaram",
   "/mib-page", // Short-copy variant with its own page chrome.
   "/og-page", // Full-screen, text-free scroll sequence.
