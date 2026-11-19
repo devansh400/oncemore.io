@@ -17,6 +17,7 @@ const bare = new Set([
   "/design/brand-blue-hour",
   "/design/brand-artwork",
   "/design/glass",
+  "/design/fetch", // Fetch quest art and vault review.
   "/archive/maa-inti-bangaaram",
   "/mib-page", // Short-copy variant with its own page chrome.
   "/og-page", // Full-screen, text-free scroll sequence.
