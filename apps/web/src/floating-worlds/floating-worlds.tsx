@@ -7,6 +7,7 @@ import { type ReactNode, type RefObject, useEffect, useRef, useState } from "rea
 
 import { loadFloatingWorlds } from "./load-scene";
 import { SceneEdgeBlur } from "./scene-edge-blur";
+import { SkyPreloader } from "./sky-preloader";
 import type { LookState, SceneController, SceneState } from "./scene-types";
 
 const initialScene: SceneState = {
@@ -370,21 +371,11 @@ export function FloatingWorlds({
           </button>
         </div>
       </section>
-      <div
-        className="absolute inset-0 z-30 grid place-items-center bg-neutral-950 motion-safe:transition-opacity motion-safe:duration-700 data-[done=true]:pointer-events-none data-[done=true]:opacity-0"
-        data-done={!loading}
-        inert={!loading}
-      >
-        <div className="flex flex-col items-center gap-4">
-          <span className={`${technicalLabel} opacity-80`}>Entering the sky</span>
-          <progress
-            className="h-2 w-40 accent-white scheme-dark"
-            aria-label="Loading the sky"
-            max={1}
-            value={loadingProgress}
-          />
-        </div>
-      </div>
+      <SkyPreloader
+        displayClassName={displayClassName}
+        progress={loadingProgress}
+        ready={!loading}
+      />
       <div hidden={scene.diving || showLook}>{children}</div>
     </div>
   );
