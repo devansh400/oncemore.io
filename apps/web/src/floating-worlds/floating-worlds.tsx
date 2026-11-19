@@ -5,9 +5,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { type ReactNode, type RefObject, useEffect, useRef, useState } from "react";
 
-import type { LookState, SceneController, SceneModule, SceneState } from "./scene-types";
+import { loadFloatingWorlds } from "./load-scene";
+import { SceneEdgeBlur } from "./scene-edge-blur";
+import type { LookState, SceneController, SceneState } from "./scene-types";
 
-const scenePath = "/floating-worlds/app.js";
 const initialScene: SceneState = {
   stop: 0,
   worlds: [],
@@ -19,6 +20,7 @@ const initialScene: SceneState = {
 };
 const numerals = ["I", "II", "III", "IV", "V"];
 const label = "text-xs font-medium tracking-widest uppercase";
+const technicalLabel = `font-mono ${label}`;
 const lookAction =
   "cursor-pointer rounded-md border border-white/20 px-3 py-2 text-xs hover:bg-white/10 aria-pressed:bg-white aria-pressed:text-neutral-950";
 const lookToggle =
@@ -36,9 +38,11 @@ function InputHint({ mouse, touch }: { mouse: string; touch: string }) {
 function LookPanel({
   look,
   controller,
+  displayClassName,
 }: {
   look: LookState;
   controller: RefObject<SceneController | null>;
+  displayClassName: string;
 }) {
   const [copied, setCopied] = useState(false);
   const output = useRef<HTMLTextAreaElement>(null);
@@ -60,7 +64,7 @@ function LookPanel({
 
   return (
     <>
-      <h2 className={`${label} mb-3`}>Look</h2>
+      <h2 className={`${displayClassName} ${label} mb-3`}>Look</h2>
       <div className="mb-3.5 flex flex-wrap gap-1.5">
         {look.presets.map((name) => (
           <button
@@ -147,7 +151,15 @@ function LookPanel({
   );
 }
 
-export function FloatingWorlds({ children }: { children: ReactNode }) {
+export function FloatingWorlds({
+  bodyClassName,
+  children,
+  displayClassName,
+}: {
+  bodyClassName: string;
+  children: ReactNode;
+  displayClassName: string;
+}) {
   const canvas = useRef<HTMLCanvasElement>(null);
   const veil = useRef<HTMLDivElement>(null);
   const controller = useRef<SceneController | null>(null);
@@ -164,9 +176,7 @@ export function FloatingWorlds({ children }: { children: ReactNode }) {
 
     async function mountScene(element: HTMLCanvasElement) {
       try {
-        const { mountFloatingWorlds } = (await import(
-          /* webpackIgnore: true */ /* turbopackIgnore: true */ scenePath
-        )) as SceneModule;
+        const { mountFloatingWorlds } = await loadFloatingWorlds();
         if (!active) return;
         controller.current = mountFloatingWorlds(element, {
           onScene: setScene,
@@ -199,7 +209,9 @@ export function FloatingWorlds({ children }: { children: ReactNode }) {
   const showLook = lookOpen && !scene.diving && !failed;
 
   return (
-    <div className="fixed inset-0 overflow-hidden overscroll-none bg-neutral-950 font-sans text-white **:focus-visible:outline-2 **:focus-visible:outline-white **:focus-visible:-outline-offset-2">
+    <div
+      className={`${bodyClassName} fixed inset-0 overflow-hidden overscroll-none bg-neutral-950 text-white **:focus-visible:outline-2 **:focus-visible:outline-white **:focus-visible:-outline-offset-2`}
+    >
       <canvas
         ref={canvas}
         id="gl"
@@ -217,12 +229,13 @@ export function FloatingWorlds({ children }: { children: ReactNode }) {
       {failed && (
         <Image src="/brand/floating-worlds.webp" alt="" fill unoptimized className="object-cover" />
       )}
+      <SceneEdgeBlur />
       <header
         data-world-controls
         data-diving={scene.diving}
         className="pointer-events-none absolute inset-x-0 top-0 flex items-center justify-between px-4 py-3 data-[diving=true]:invisible sm:px-6"
       >
-        <span className={`${label} tabular-nums opacity-80`}>
+        <span className={`${technicalLabel} tabular-nums opacity-80`}>
           {String(scene.stop).padStart(2, "0")} /{" "}
           {String(scene.worlds.length || 5).padStart(2, "0")}
         </span>
@@ -269,11 +282,11 @@ export function FloatingWorlds({ children }: { children: ReactNode }) {
         className="pointer-events-none absolute inset-x-4 bottom-8 opacity-0 motion-safe:transition-opacity data-[visible=true]:opacity-100 md:right-auto md:left-6 md:max-w-sm lg:max-w-md"
         data-visible={titleVisible || failed}
       >
-        <p className={`${label} text-white/80`}>{islandLabel}</p>
+        <p className={`${technicalLabel} text-white/80`}>{islandLabel}</p>
         <h1
           className={
             island
-              ? "mt-2 text-3xl font-semibold tracking-tight sm:text-4xl lg:text-6xl"
+              ? `${displayClassName} mt-2 text-3xl font-medium tracking-tight sm:text-4xl lg:text-6xl`
               : "sr-only"
           }
         >
@@ -324,7 +337,9 @@ export function FloatingWorlds({ children }: { children: ReactNode }) {
         hidden={!showLook}
         className="absolute inset-x-4 bottom-4 z-20 max-h-1/2 overflow-auto overscroll-contain rounded-xl bg-neutral-950/90 p-4 backdrop-blur-md sm:top-16 sm:right-6 sm:bottom-auto sm:left-auto sm:max-h-4/5 sm:w-80"
       >
-        {look && <LookPanel look={look} controller={controller} />}
+        {look && (
+          <LookPanel look={look} controller={controller} displayClassName={displayClassName} />
+        )}
       </aside>
       <div
         ref={veil}
@@ -338,8 +353,10 @@ export function FloatingWorlds({ children }: { children: ReactNode }) {
         inert={!scene.inside}
       >
         <div>
-          <p className={`${label} text-white/80`}>{islandLabel}</p>
-          <h2 className="my-4 text-3xl font-semibold tracking-tight sm:text-5xl">
+          <p className={`${technicalLabel} text-white/80`}>{islandLabel}</p>
+          <h2
+            className={`${displayClassName} my-4 text-3xl font-medium tracking-tight sm:text-5xl`}
+          >
             {island?.title}
           </h2>
           <p className="mb-8 text-sm text-white/80">This world is still being built.</p>
@@ -359,7 +376,7 @@ export function FloatingWorlds({ children }: { children: ReactNode }) {
         inert={!loading}
       >
         <div className="flex flex-col items-center gap-4">
-          <span className={`${label} opacity-80`}>Entering the sky</span>
+          <span className={`${technicalLabel} opacity-80`}>Entering the sky</span>
           <progress
             className="h-2 w-40 accent-white scheme-dark"
             aria-label="Loading the sky"

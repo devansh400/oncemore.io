@@ -41,6 +41,8 @@ export type SceneModule = {
       onProgress: (progress: number) => void;
       onVeil: (opacity: number) => void;
       onError: (error: unknown) => void;
+      ignoreInput?: (event: Event) => boolean;
+      lookStorageKey?: string | null;
     },
   ) => SceneController;
 };

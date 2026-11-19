@@ -7,13 +7,10 @@ import {
   contrast,
   type BrandTheme,
 } from "./brand-themes";
-import { Bricolage_Grotesque, DM_Sans } from "next/font/google";
+import { brandBody, brandDisplay } from "../brand-fonts";
 import { BrandMark } from "./brand-mark";
 import { ComponentPreview, LogoPlayground, MotionPreview, Palette } from "./brand-interactions";
 import "./brand.css";
-
-const display = Bricolage_Grotesque({ subsets: ["latin"], variable: "--brand-display" });
-const body = DM_Sans({ subsets: ["latin"], variable: "--brand-body" });
 
 function SectionHeading({
   number,
@@ -43,7 +40,7 @@ export function BrandBook({ theme = originalTheme }: { theme?: BrandTheme }) {
   const isOriginal = theme.slug === "original";
   return (
     <div
-      className={`brand ${display.variable} ${body.variable}`}
+      className={`brand ${brandDisplay.variable} ${brandBody.variable}`}
       data-look={theme.slug}
       data-scheme={theme.light ? "light" : "dark"}
       style={themeStyle(theme)}
