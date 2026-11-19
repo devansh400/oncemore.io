@@ -1,7 +1,8 @@
 /*
  * Cloud break, matched to the Floating Worlds dusk: the scene's own cloud
  * sprites part from the centre as --p rises (0 to 1) while the eclipse corona
- * traces the loading progress. On exit the camera pushes through the deck.
+ * traces the loading progress. On exit the eclipse's dark disc opens onto the
+ * live scene and the camera flies through the lit ring.
  *
  * Sky colours follow fogCol/sunGlow in public/floating-worlds/app.js.
  */
@@ -11,17 +12,32 @@
   inset: 0;
   z-index: 30;
   overflow: hidden;
+}
+
+.root:not([data-phase="load"]) {
+  pointer-events: none;
+}
+
+/* .sky is clipped round the disc; .front carries the eclipse and wordmark. */
+.sky,
+.front {
+  position: absolute;
+  inset: 0;
+  transform-origin: var(--ox, 50%) var(--oy, 50%);
+}
+
+.sky {
   background:
     radial-gradient(circle at 84% 18%, rgb(255 226 180 / 0.9) 0, rgb(255 190 120 / 0.55) 1.2vmin, transparent 4vmin),
     radial-gradient(60% 45% at 84% 22%, rgb(219 120 51 / 0.55), transparent 70%),
     radial-gradient(90% 60% at 80% 60%, rgb(128 56 18 / 0.35), transparent 70%),
     linear-gradient(to bottom, #070a14 0%, #121a2b 38%, #262f42 62%, #3a3036 80%, #1d1a1e 100%);
-  transition: opacity 1100ms cubic-bezier(0.4, 0, 0.2, 1) 200ms;
 }
 
-.root[data-exit="true"] {
-  opacity: 0;
-  pointer-events: none;
+.root[data-phase="zoom"] .sky,
+.root[data-phase="zoom"] .front {
+  scale: var(--zoom);
+  transition: scale 1400ms cubic-bezier(0.7, 0, 0.3, 1);
 }
 
 /* Low fog that fills the gaps between sprites until the deck parts. */
@@ -37,11 +53,6 @@
     #000 calc(var(--p) * 70% + 18%)
   );
   opacity: calc(1 - var(--p) * 0.6);
-}
-
-.root[data-exit="true"] .fog {
-  opacity: 0;
-  transition: opacity 900ms ease;
 }
 
 .clouds {
@@ -71,14 +82,6 @@
   animation: drift var(--t) ease-in-out infinite alternate;
 }
 
-.root[data-exit="true"] .cloud {
-  scale: 3.2;
-  opacity: 0;
-  transition:
-    scale 1300ms cubic-bezier(0.55, 0, 0.25, 1),
-    opacity 900ms ease 250ms;
-}
-
 @keyframes drift {
   from {
     translate: calc(var(--drift) * -1) 0;
@@ -92,16 +95,13 @@
 .light {
   position: absolute;
   inset: 0;
-  pointer-events: none;
-  background:
-    radial-gradient(70% 55% at 86% 16%, rgb(255 150 70 / 0.38), transparent 70%);
+  background: radial-gradient(70% 55% at 86% 16%, rgb(255 150 70 / 0.38), transparent 70%);
   mix-blend-mode: soft-light;
 }
 
 .shade {
   position: absolute;
   inset: 0;
-  pointer-events: none;
   background: linear-gradient(to top, rgb(0 0 0 / 0.45), transparent 40%);
 }
 
@@ -113,14 +113,6 @@
   aspect-ratio: 1;
   translate: -50% -50%;
   overflow: visible;
-  transition:
-    opacity 700ms ease,
-    scale 1100ms cubic-bezier(0.55, 0, 0.25, 1);
-}
-
-.root[data-exit="true"] .eclipse {
-  opacity: 0;
-  scale: 1.6;
 }
 
 .corona {
@@ -132,11 +124,21 @@
   stroke-dashoffset: calc(100 - var(--p) * 100);
 }
 
+/*
+ * The dark disc dissolves into the live sky while the camera dives, so the
+ * blue of the scene floods in through the ring rather than appearing first.
+ */
+.root[data-phase="zoom"] .disc {
+  opacity: 0;
+  transition: opacity 1100ms cubic-bezier(0.45, 0, 0.55, 1);
+}
+
 .wordmark {
   position: absolute;
   left: 50%;
   top: calc(40% + clamp(64px, 10vmin, 100px));
   translate: -50% 0;
+  margin: 0;
   font-size: clamp(1.25rem, 3vw, 1.75rem);
   font-weight: 500;
   letter-spacing: -0.01em;
@@ -145,35 +147,27 @@
   opacity: clamp(0, calc((var(--p) - 0.05) / 0.25), 0.9);
 }
 
-.root[data-exit="true"] .wordmark {
+.root:not([data-phase="load"]) .wordmark {
   opacity: 0;
-  transition: opacity 500ms ease;
+  transition: opacity 400ms ease;
+}
+
+/* Reduced motion: no fly-through, just a quiet fade. */
+.root[data-phase="fade"] {
+  opacity: 0;
+  transition: opacity 500ms linear;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .root {
-    transition: opacity 500ms linear;
-  }
-
   .cloud {
     animation: none;
     transform: translate(-50%, -50%) scale(var(--s)) scaleX(var(--flip));
     opacity: 1;
   }
 
-  .root[data-exit="true"] .cloud {
-    scale: none;
-    transition: opacity 400ms linear;
-  }
-
   .fog {
     mask-image: none;
     opacity: 0.6;
-  }
-
-  .eclipse,
-  .root[data-exit="true"] .eclipse {
-    scale: none;
   }
 
   .wordmark {
