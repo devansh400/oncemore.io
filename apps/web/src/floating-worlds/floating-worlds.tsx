@@ -1,12 +1,14 @@
 "use client";
 
-import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { type ReactNode, type RefObject, useEffect, useRef, useState } from "react";
 
+import { FetchQuest } from "@/fetch-quest/fetch-quest";
+
+import { IslandCard } from "./island-card";
 import { loadFloatingWorlds } from "./load-scene";
-import { SceneEdgeBlur } from "./scene-edge-blur";
+import { edgeBlurOverUi, edgeBlurUnderUi, SceneEdgeBlur } from "./scene-edge-blur";
 import { SkyPreloader } from "./sky-preloader";
 import type { LookState, SceneController, SceneState } from "./scene-types";
 
@@ -20,6 +22,12 @@ const initialScene: SceneState = {
   inside: false,
 };
 const numerals = ["I", "II", "III", "IV", "V"];
+/*
+ * Versioned so looks saved before the vignette became opt-in fall back to the
+ * new defaults instead of keeping it switched on.
+ */
+const lookStorageKey = "oncemore:look-v2";
+const edgeBlurKey = "oncemore:edge-blur";
 const label = "text-xs font-medium tracking-widest uppercase";
 const technicalLabel = `font-mono ${label}`;
 const lookAction =
@@ -40,10 +48,14 @@ function LookPanel({
   look,
   controller,
   displayClassName,
+  edgeBlur,
+  onEdgeBlurChange,
 }: {
   look: LookState;
   controller: RefObject<SceneController | null>;
   displayClassName: string;
+  edgeBlur: boolean;
+  onEdgeBlurChange: (enabled: boolean) => void;
 }) {
   const [copied, setCopied] = useState(false);
   const output = useRef<HTMLTextAreaElement>(null);
@@ -91,7 +103,7 @@ function LookPanel({
           <small className="mt-0.5 block text-xs opacity-70">Compare against the open sky.</small>
         </span>
       </label>
-      <label className={`${lookToggle} mb-3 border-b`}>
+      <label className={lookToggle}>
         <input
           type="checkbox"
           className="size-4 shrink-0 accent-white"
@@ -102,6 +114,20 @@ function LookPanel({
           Enable edge vignette
           <small className="mt-0.5 block text-xs opacity-70">
             Darken the edges to frame the islands.
+          </small>
+        </span>
+      </label>
+      <label className={`${lookToggle} mb-3 border-b`}>
+        <input
+          type="checkbox"
+          className="size-4 shrink-0 accent-white"
+          checked={edgeBlur}
+          onChange={(event) => onEdgeBlurChange(event.currentTarget.checked)}
+        />
+        <span>
+          Enable edge blur
+          <small className="mt-0.5 block text-xs opacity-70">
+            Soften the bottom edge, interface included, with a gradual blur.
           </small>
         </span>
       </label>
@@ -143,7 +169,10 @@ function LookPanel({
         <button
           className={`${lookAction} flex-1`}
           type="button"
-          onClick={() => controller.current?.resetLook()}
+          onClick={() => {
+            controller.current?.resetLook();
+            onEdgeBlurChange(true);
+          }}
         >
           Reset
         </button>
@@ -169,6 +198,23 @@ export function FloatingWorlds({
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [lookOpen, setLookOpen] = useState(false);
   const [failed, setFailed] = useState(false);
+  const [edgeBlur, setEdgeBlur] = useState(true);
+  const [questOpen, setQuestOpen] = useState(false);
+  /* The fetch quest takes over when the fan scrolls past the last island. */
+  const questEnd = useRef<(() => boolean) | null>(null);
+
+  useEffect(() => {
+    try {
+      if (window.localStorage.getItem(edgeBlurKey) === "off") setEdgeBlur(false);
+    } catch {}
+  }, []);
+
+  function changeEdgeBlur(enabled: boolean) {
+    setEdgeBlur(enabled);
+    try {
+      window.localStorage.setItem(edgeBlurKey, enabled ? "on" : "off");
+    } catch {}
+  }
 
   useEffect(() => {
     let active = true;
@@ -189,6 +235,8 @@ export function FloatingWorlds({
           onError: () => {
             if (active) setFailed(true);
           },
+          onEnd: () => questEnd.current?.() ?? false,
+          lookStorageKey,
         });
       } catch {
         if (active) setFailed(true);
@@ -208,6 +256,14 @@ export function FloatingWorlds({
   const titleVisible = scene.ready && !scene.moving && !scene.diving;
   const loading = !scene.ready && !failed;
   const showLook = lookOpen && !scene.diving && !failed;
+  /*
+   * The card keeps showing the last island it settled on, so it fades out with
+   * the right content when the camera leaves instead of swapping mid-flight.
+   */
+  const [cardIndex, setCardIndex] = useState(-1);
+  if (titleVisible && island && cardIndex !== scene.stop - 1) setCardIndex(scene.stop - 1);
+  const cardWorld = scene.worlds[cardIndex];
+  const cardVisible = titleVisible && Boolean(island);
 
   return (
     <div
@@ -221,7 +277,7 @@ export function FloatingWorlds({
         className="absolute inset-0 size-full touch-none"
         hidden={failed}
       />
-      {!failed && look?.edgeVignetteEnabled !== false && (
+      {!failed && look?.edgeVignetteEnabled && (
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/50 to-transparent"
@@ -230,7 +286,8 @@ export function FloatingWorlds({
       {failed && (
         <Image src="/brand/floating-worlds.webp" alt="" fill unoptimized className="object-cover" />
       )}
-      <SceneEdgeBlur />
+      {/* The scene's share of the edge blur; the layer over the UI adds the rest. */}
+      {edgeBlur && <SceneEdgeBlur strength={edgeBlurUnderUi} />}
       <header
         data-world-controls
         data-diving={scene.diving}
@@ -258,7 +315,7 @@ export function FloatingWorlds({
           </div>
         )}
       </header>
-      {scene.ready && !failed && !scene.diving && !showLook && (
+      {scene.ready && !failed && !scene.diving && !showLook && !questOpen && (
         <nav
           className="absolute top-1/2 right-6 hidden -translate-y-1/2 flex-col gap-1 sm:flex"
           aria-label="Islands"
@@ -278,21 +335,30 @@ export function FloatingWorlds({
           ))}
         </nav>
       )}
+      {cardWorld && !failed && !showLook && !questOpen && (
+        /* Above the edge blur so the card stays sharp; scrolling over it still flies. */
+        <section
+          aria-live="polite"
+          className="pointer-events-none absolute inset-x-4 bottom-6 z-20 translate-y-3 opacity-0 motion-safe:transition-[opacity,translate] motion-safe:duration-500 motion-safe:ease-out data-[visible=true]:pointer-events-auto data-[visible=true]:translate-y-0 data-[visible=true]:opacity-100 sm:bottom-8 md:right-auto md:left-6 md:w-md"
+          data-visible={cardVisible}
+          inert={!cardVisible}
+        >
+          <IslandCard
+            index={cardIndex}
+            total={scene.worlds.length}
+            world={cardWorld}
+            displayClassName={displayClassName}
+            onEnter={() => controller.current?.enter()}
+          />
+        </section>
+      )}
       <section
         aria-live="polite"
         className="pointer-events-none absolute inset-x-4 bottom-8 opacity-0 motion-safe:transition-opacity data-[visible=true]:opacity-100 md:right-auto md:left-6 md:max-w-sm lg:max-w-md"
-        data-visible={titleVisible || failed}
+        data-visible={(titleVisible && !island) || failed}
       >
-        <p className={`${technicalLabel} text-white/80`}>{islandLabel}</p>
-        <h1
-          className={
-            island
-              ? `${displayClassName} mt-2 text-3xl font-medium tracking-tight sm:text-4xl lg:text-6xl`
-              : "sr-only"
-          }
-        >
-          {island?.title ?? "OnceMore Floating Worlds"}
-        </h1>
+        <p className={`${technicalLabel} text-white/80`}>Five floating worlds</p>
+        {!island && <h1 className="sr-only">OnceMore Floating Worlds</h1>}
         {failed && (
           <div className="mt-3 text-sm">
             <p>The 3D sky is unavailable.</p>
@@ -306,30 +372,27 @@ export function FloatingWorlds({
             </div>
           </div>
         )}
-        {island && titleVisible && (
-          <button
-            type="button"
-            className={`${label} pointer-events-auto mt-3 inline-flex cursor-pointer items-center gap-2 rounded-lg bg-neutral-950/60 px-3 py-2 backdrop-blur-md hover:bg-neutral-950/75`}
-            data-world-controls
-            onClick={() => controller.current?.enter()}
-          >
-            <ChevronRight aria-hidden="true" className="size-4" />
-            <span>
-              <InputHint mouse="Click" touch="Tap" /> the island to enter
-            </span>
-          </button>
-        )}
       </section>
       {!scene.moved && !scene.diving && !failed && (
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute bottom-6 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 opacity-70"
+          className="pointer-events-none absolute bottom-6 left-1/2 z-20 flex -translate-x-1/2 flex-col items-center gap-2 opacity-70"
         >
           <span className={label}>
             <InputHint mouse="Scroll" touch="Swipe up" />
           </span>
           <span className="h-8 w-px bg-linear-to-b from-white to-transparent motion-safe:animate-pulse" />
         </div>
+      )}
+      {!failed && (
+        <FetchQuest
+          scene={scene}
+          controller={controller}
+          endHandler={questEnd}
+          hidden={showLook}
+          displayClassName={displayClassName}
+          onOpenChange={setQuestOpen}
+        />
       )}
       <aside
         id="look"
@@ -339,7 +402,13 @@ export function FloatingWorlds({
         className="absolute inset-x-4 bottom-4 z-20 max-h-1/2 overflow-auto overscroll-contain rounded-xl bg-neutral-950/90 p-4 backdrop-blur-md sm:top-16 sm:right-6 sm:bottom-auto sm:left-auto sm:max-h-4/5 sm:w-80"
       >
         {look && (
-          <LookPanel look={look} controller={controller} displayClassName={displayClassName} />
+          <LookPanel
+            look={look}
+            controller={controller}
+            displayClassName={displayClassName}
+            edgeBlur={edgeBlur}
+            onEdgeBlurChange={changeEdgeBlur}
+          />
         )}
       </aside>
       <div
@@ -376,7 +445,9 @@ export function FloatingWorlds({
         progress={loadingProgress}
         ready={!loading}
       />
-      <div hidden={scene.diving || showLook}>{children}</div>
+      <div hidden={scene.diving || showLook || questOpen}>{children}</div>
+      {/* Above the island title and hints, below the Look panel so it stays usable. */}
+      {edgeBlur && <SceneEdgeBlur className="absolute z-10" strength={edgeBlurOverUi} />}
     </div>
   );
 }
