@@ -141,15 +141,20 @@ function Specimen({
   className?: string;
   children: ReactNode;
 }) {
+  const [number, ...parts] = label.split(" / ");
   return (
     <Card
       className={cn(
-        "min-w-0 [--card-spacing:--spacing(5)] sm:[--card-spacing:--spacing(6)]",
+        "glass-pane relative min-w-0 gap-6 ring-0 [--card-spacing:--spacing(6)] sm:[--card-spacing:--spacing(7)]",
         className,
       )}
     >
-      <CardHeader>
-        <p className="font-mono text-xs tracking-widest text-muted-foreground uppercase">{label}</p>
+      <CardHeader className="gap-2">
+        <p className="flex items-center gap-2 font-mono text-[0.6875rem] tracking-[0.18em] text-muted-foreground uppercase">
+          <span className="text-[#8fcbff]">{number}</span>
+          <span aria-hidden="true" className="h-px w-4 bg-current opacity-40" />
+          {parts.join(" / ")}
+        </p>
         <CardTitle>
           <h3>{title}</h3>
         </CardTitle>
@@ -173,11 +178,14 @@ export function ComponentGallery({
   const filteredScenes = scenes.filter((scene) =>
     scene.name.toLowerCase().includes(query.trim().toLowerCase()),
   );
-  const portal = cn(styles.theme, styles.popup, bodyClassName, displayVariable);
+  const portal = cn("glass-slab", styles.theme, styles.popup, bodyClassName, displayVariable);
 
   function notify(message: string) {
     toast.custom(() => (
-      <div className={cn(portal, "w-full bg-popover px-4 py-3 text-sm text-popover-foreground")}>
+      <div
+        className={cn(portal, "flex w-full items-center gap-3 rounded-full px-5 py-3 text-sm")}
+      >
+        <span aria-hidden="true" className="glass-dot" />
         {message}
       </div>
     ));
@@ -345,8 +353,8 @@ export function ComponentGallery({
               </ToggleGroup>
               <FieldDescription>
                 {density === "light"
-                  ? "30% tint for a clearer view of the scene."
-                  : "60% tint for more contrast."}
+                  ? "Pane: 34% Midnight tint, so the world reads through."
+                  : "Slab: 58% Midnight tint, for long reading and bright looks."}
               </FieldDescription>
             </Field>
             <Separator />

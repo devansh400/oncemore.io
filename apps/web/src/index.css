@@ -67,11 +67,255 @@
   background-size: 220px 220px;
 }
 
+/* ---------- Glass over worlds ----------
+ * Three densities of brand-tinted glass for UI over the Floating Worlds scene.
+ * Midnight tints the glass and Cloud carries the light. The rim is brightest on
+ * the sun's side (upper right), as the scene's own clouds are lit. Moonlight is
+ * the one accent: focus, the current choice and live status.
+ * The rim and grain are pseudo-elements, so a glass element must be
+ * positioned; the base layer makes it relative unless a utility says otherwise.
+ */
+:root {
+  --glass-ink: 11 15 23;
+  --glass-well: 5 8 14;
+  --glass-cloud: 237 230 214;
+  --glass-light: 255 246 232;
+  --glass-glow: 143 203 255;
+  --glass-deep: 74 155 232;
+  --glass-noise: url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@layer base {
+  .glass-veil,
+  .glass-pane,
+  .glass-slab {
+    position: relative;
+    isolation: isolate;
+  }
+}
+
+.glass-veil {
+  --glass-alpha: 0.13;
+  --glass-blur: 14px;
+  --glass-sheen: 0.07;
+  --glass-rim: 0.55;
+  --glass-drop: 0.2;
+}
+
+.glass-pane {
+  --glass-alpha: 0.34;
+  --glass-blur: 22px;
+  --glass-sheen: 0.06;
+  --glass-rim: 0.65;
+  --glass-drop: 0.42;
+}
+
+.glass-slab {
+  --glass-alpha: 0.64;
+  --glass-blur: 30px;
+  --glass-sheen: 0.05;
+  --glass-rim: 0.75;
+  --glass-drop: 0.58;
+}
+
+.glass-veil,
+.glass-pane,
+.glass-slab {
+  color: rgb(var(--glass-cloud));
+  background-color: rgb(var(--glass-ink) / var(--glass-alpha));
+  background-image: linear-gradient(
+    to bottom,
+    rgb(var(--glass-cloud) / var(--glass-sheen)),
+    transparent 42%
+  );
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.7) brightness(0.94);
+  backdrop-filter: blur(var(--glass-blur)) saturate(1.7) brightness(0.94);
+  box-shadow:
+    inset 0 1px 0 rgb(255 244 228 / calc(var(--glass-rim) * 0.16)),
+    0 1px 2px rgb(3 5 12 / calc(var(--glass-drop) * 0.6)),
+    0 22px 44px -18px rgb(3 5 12 / var(--glass-drop));
+}
+
+/* Glass that is itself a control darkens a step on hover. */
+:is(a, button).glass-veil {
+  transition: background-color 200ms ease;
+}
+
+:is(a, button).glass-veil:hover {
+  --glass-alpha: 0.26;
+}
+
+/* Rim: brightest where the low sun would catch it. */
+.glass-veil::before,
+.glass-pane::before,
+.glass-slab::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  padding: 1px;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(
+    200deg,
+    rgb(var(--glass-light) / calc(var(--glass-rim) * 0.42)) 0%,
+    rgb(var(--glass-cloud) / calc(var(--glass-rim) * 0.12)) 26%,
+    rgb(var(--glass-cloud) / calc(var(--glass-rim) * 0.035)) 58%,
+    rgb(var(--glass-cloud) / calc(var(--glass-rim) * 0.07)) 100%
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box exclude,
+    linear-gradient(#000 0 0);
+}
+
+/* Grain keeps large blurred areas from banding and makes the glass feel made. */
+.glass-veil::after,
+.glass-pane::after,
+.glass-slab::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  background-image: var(--glass-noise);
+  background-size: 160px;
+  opacity: 0.07;
+  mix-blend-mode: overlay;
+}
+
+/* Soft local shade for type set directly on the scene. */
+@layer base {
+  .glass-scrim {
+    position: relative;
+    isolation: isolate;
+  }
+}
+
+.glass-scrim::before {
+  content: "";
+  position: absolute;
+  inset: -3rem -4rem;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(closest-side, rgb(5 8 14 / 0.55), rgb(5 8 14 / 0.25) 60%, transparent);
+  filter: blur(8px);
+}
+
+.glass-type {
+  color: rgb(var(--glass-cloud));
+  text-shadow:
+    0 1px 2px rgb(5 8 14 / 0.35),
+    0 8px 40px rgb(5 8 14 / 0.45);
+}
+
+/* Interactive surfaces. */
+.glass-primary {
+  color: rgb(var(--glass-ink));
+  background: linear-gradient(to bottom, #f8f2e7, #e3d7c1);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.85),
+    inset 0 -1px 0 rgb(40 48 80 / 0.2),
+    0 10px 28px -10px rgb(var(--glass-glow) / 0.7);
+  transition:
+    box-shadow 250ms ease,
+    filter 250ms ease,
+    translate 150ms ease;
+}
+
+.glass-primary:hover {
+  filter: brightness(1.04);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.9),
+    inset 0 -1px 0 rgb(40 48 80 / 0.2),
+    0 14px 36px -10px rgb(var(--glass-glow) / 0.9);
+}
+
+.glass-primary:active {
+  translate: 0 1px;
+}
+
+.glass-control {
+  color: rgb(var(--glass-cloud));
+  background-color: rgb(var(--glass-cloud) / 0.07);
+  box-shadow:
+    inset 0 0 0 1px rgb(var(--glass-cloud) / 0.07),
+    inset 0 1px 0 rgb(var(--glass-cloud) / 0.06);
+  transition:
+    background-color 200ms ease,
+    box-shadow 200ms ease,
+    color 200ms ease;
+}
+
+.glass-control:hover:not(:disabled) {
+  background-color: rgb(var(--glass-cloud) / 0.13);
+}
+
+.glass-control[aria-pressed="true"],
+.glass-control[aria-current="true"] {
+  color: rgb(var(--glass-ink));
+  background-color: rgb(var(--glass-cloud));
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.8),
+    0 6px 20px -8px rgb(var(--glass-glow) / 0.7);
+}
+
+.glass-well {
+  color: rgb(var(--glass-cloud));
+  background-color: rgb(var(--glass-well) / 0.4);
+  box-shadow:
+    inset 0 0 0 1px rgb(var(--glass-cloud) / 0.06),
+    inset 0 1px 3px rgb(0 0 0 / 0.35);
+}
+
+.glass-focus:focus-visible {
+  outline: 2px solid rgb(var(--glass-glow));
+  outline-offset: 2px;
+}
+
+.glass-dot {
+  display: inline-block;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 999px;
+  background: rgb(var(--glass-glow));
+  box-shadow: 0 0 10px rgb(var(--glass-glow) / 0.9);
+}
+
+.glass-dot[data-live="true"] {
+  animation: glass-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes glass-pulse {
+  50% {
+    opacity: 0.45;
+    box-shadow: 0 0 4px rgb(var(--glass-glow) / 0.5);
+  }
+}
+
+/* Overlays dim the world slightly instead of blacking it out. */
+[data-slot="dialog-overlay"],
+[data-slot="sheet-overlay"] {
+  background-color: rgb(5 8 14 / 0.42);
+  -webkit-backdrop-filter: blur(6px) saturate(1.2);
+  backdrop-filter: blur(6px) saturate(1.2);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .marquee__track {
     animation: none;
   }
   .link-rule::after {
     transition: none;
+  }
+  .glass-dot[data-live="true"] {
+    animation: none;
+  }
+  .glass-primary:active {
+    translate: none;
   }
 }
