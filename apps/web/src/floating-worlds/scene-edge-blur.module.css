@@ -19,6 +19,25 @@
   bottom: auto;
 }
 
+.left,
+.right {
+  inset-inline: auto;
+  top: 0;
+  bottom: 0;
+  width: clamp(64px, 9vw, 140px);
+  height: auto;
+}
+
+.left {
+  --toward: to left;
+  left: 0;
+}
+
+.right {
+  --toward: to right;
+  right: 0;
+}
+
 .layer {
   position: absolute;
   inset: 0;
