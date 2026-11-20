@@ -256,8 +256,9 @@ export function FloatingWorlds({
    * campaign page opens on cached frames after the dive.
    */
   useEffect(() => {
-    if (islandHref === "/og-page") warmSequence(OG_SEQUENCE, OG_POSTER);
-    else if (islandHref === "/mib-page") warmSequence(MIB_SEQUENCE, MIB_POSTER);
+    // Suffix match: deploys under a basePath rewrite hrefs to `/<base>/og-page`.
+    if (islandHref?.endsWith("/og-page")) warmSequence(OG_SEQUENCE, OG_POSTER);
+    else if (islandHref?.endsWith("/mib-page")) warmSequence(MIB_SEQUENCE, MIB_POSTER);
   }, [islandHref]);
   const islandLabel = island ? `Island ${numerals[scene.stop - 1]}` : "Five floating worlds";
   const titleVisible = scene.ready && !scene.moving && !scene.diving;
