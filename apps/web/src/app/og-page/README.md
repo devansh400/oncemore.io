@@ -156,3 +156,17 @@ Verified all three layered cards, image loading, independent layer transforms,
 reverse assembly, desktop and 390/320px layouts, and reduced-motion visibility.
 No horizontal overflow. TypeScript, targeted lint and Next.js runtime/compilation
 checks pass. React inspection confirms three instances of the shared component.
+
+## Delivery v4 (tiered frames)
+
+Frames are served from `/og-car/v4/frames/` in three WebP tiers re-encoded from
+v3: `preview/` (480px q50, 3.8 MB total), `md/` (1280px q75, 17.7 MB) and `hd/`
+(1920px q80, 36.9 MB). `preview.pack` holds the whole preview tier in one
+coverage-ordered file (every 16th frame, then every 4th, then the rest), built
+by `scripts/build-preview-pack.mjs`; the loader streams it and publishes frames
+as their bytes arrive, so a cold first visit covers the shot from one request.
+The page preloads the poster and the pack in `<head>`, and the home page warms
+both while the OG island is framed. Phones and small windows stream `md`;
+larger screens stream `hd`. The canvas never exceeds the detail tier's
+resolution. Streaming stops once the visitor scrolls past the shot. The shared
+loader lives in `src/lib/frame-sequence.ts`.

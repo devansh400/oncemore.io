@@ -4,7 +4,10 @@ import "@fontsource/anton/latin-400.css";
 import "@fontsource/barlow-condensed/latin-400.css";
 import "@fontsource/barlow-condensed/latin-500.css";
 
+import { preloadSequence } from "@/lib/preload-sequence";
+
 import { CinematicExperience } from "./cinematic-experience";
+import { MIB_POSTER, MIB_SEQUENCE } from "./frame-sequence";
 
 export const metadata: Metadata = {
   title: "Maa Inti Bangaaram — You had to be there | OnceMore",
@@ -26,6 +29,7 @@ export const metadata: Metadata = {
 };
 
 export default function MaaIntiBangaaramPage() {
+  preloadSequence(MIB_SEQUENCE, MIB_POSTER);
   return (
     <>
       <IslandArrival />

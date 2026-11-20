@@ -4,7 +4,10 @@ import "@fontsource/anton/latin-400.css";
 import "@fontsource/barlow-condensed/latin-400.css";
 import "@fontsource/barlow-condensed/latin-500.css";
 
+import { preloadSequence } from "@/lib/preload-sequence";
+
 import { CarExperience } from "./car-experience";
+import { OG_POSTER, OG_SEQUENCE } from "./frame-sequence";
 
 export const metadata: Metadata = {
   title: "They Call Him OG — Unlocked by the Fans | OnceMore",
@@ -25,6 +28,7 @@ export const metadata: Metadata = {
 };
 
 export default function OGCarPage() {
+  preloadSequence(OG_SEQUENCE, OG_POSTER);
   return (
     <>
       <IslandArrival />

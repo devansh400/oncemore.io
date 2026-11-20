@@ -5,7 +5,8 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 import { useRef } from "react";
-import { FrameSequence } from "./frame-sequence";
+import { FrameSequence } from "@/lib/frame-sequence";
+import { OG_OPTIONS } from "./frame-sequence";
 import { frameAtProgress } from "./frame-timing";
 import { Arrow, OGStory, STORY_MEDIA } from "./og-story";
 import styles from "./car.module.css";
@@ -102,8 +103,10 @@ export function CarExperience() {
         try {
           sequence = new FrameSequence(
             canvas,
-            (frame) => {
+            OG_OPTIONS,
+            (frame, tier) => {
               scene.dataset.frame = String(frame);
+              scene.dataset.tier = tier;
               scene.dataset.ready = "true";
             },
             onError,
@@ -114,6 +117,8 @@ export function CarExperience() {
         }
         const syncProgress = (progress: number) => {
           frame = frameAtProgress(shotProgress(progress));
+          // Past the shot, stop streaming frames so story media gets the bandwidth.
+          sequence?.setIdle(progress >= 1);
           film.progress(progress);
           setProgress(progress);
         };
@@ -248,6 +253,7 @@ export function CarExperience() {
           window.removeEventListener("pageshow", syncVisibility);
           delete scene.dataset.ready;
           delete scene.dataset.frame;
+          delete scene.dataset.tier;
         };
       });
       return () => mm.revert();

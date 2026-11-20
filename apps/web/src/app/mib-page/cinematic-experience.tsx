@@ -5,7 +5,8 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef } from "react";
 
-import { FrameSequence } from "./frame-sequence";
+import { FrameSequence } from "@/lib/frame-sequence";
+import { mibOptions } from "./frame-sequence";
 import { CaseStudy, OnceMoreMark } from "./case-study";
 import styles from "./cinematic.module.css";
 
@@ -73,6 +74,8 @@ export function CinematicExperience() {
 
       const syncProgress = (progress: number) => {
         clock = progress * TOTAL;
+        // Past the shot, stop streaming frames so the case study gets the bandwidth.
+        sequence?.setIdle(clock >= SHOT_END);
         paintOverlays();
       };
       const tick = () => {
@@ -109,10 +112,12 @@ export function CinematicExperience() {
           try {
             sequence = new FrameSequence(
               canvas,
-              (frame) => {
+              mibOptions(canvas),
+              (frame, tier) => {
                 if (disposed) return;
                 presented = frame;
                 scene.dataset.frame = String(frame);
+                scene.dataset.tier = tier;
                 scene.dataset.ready = "true";
                 scene.dataset.loading = "false";
                 status.textContent = "";

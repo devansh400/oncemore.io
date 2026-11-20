@@ -27,7 +27,9 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
     lenis.on("scroll", onScroll);
 
     const raf = (time: number) => lenis.raf(time * 1000);
-    gsap.ticker.add(raf);
+    // Run first on each tick so scroll-driven work (e.g. frame sequences)
+    // presents this frame's position, not the previous one.
+    gsap.ticker.add(raf, false, true);
     gsap.ticker.lagSmoothing(0);
 
     const refresh = () => ScrollTrigger.refresh();

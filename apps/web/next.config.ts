@@ -57,11 +57,11 @@ const nextConfig: NextConfig = {
         headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
       },
       {
-        source: "/og-car/:version(v1|v2|v3)/:asset*",
+        source: "/og-car/:version(v1|v2|v3|v4)/:asset*",
         headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
       },
       {
-        source: "/mib2/hair-clean-v1/:asset*",
+        source: "/mib2/:version(hair-clean-v1|hair-clean-v2)/:asset*",
         headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
       },
       {

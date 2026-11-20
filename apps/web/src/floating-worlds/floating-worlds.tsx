@@ -4,6 +4,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { type ReactNode, type RefObject, useEffect, useRef, useState } from "react";
 
+import { MIB_POSTER, MIB_SEQUENCE } from "@/app/mib-page/frame-sequence";
+import { OG_POSTER, OG_SEQUENCE } from "@/app/og-page/frame-sequence";
+import { warmSequence } from "@/lib/frame-sequence";
+
 import { IslandCard } from "./island-card";
 import { loadFloatingWorlds } from "./load-scene";
 import { allEdges, SceneEdgeBlur } from "./scene-edge-blur";
@@ -246,6 +250,15 @@ export function FloatingWorlds({
   }, []);
 
   const island = scene.worlds[scene.stop - 1];
+  const islandHref = island?.href;
+  /*
+   * While an island is framed, warm the HTTP cache for its scroll film so the
+   * campaign page opens on cached frames after the dive.
+   */
+  useEffect(() => {
+    if (islandHref === "/og-page") warmSequence(OG_SEQUENCE, OG_POSTER);
+    else if (islandHref === "/mib-page") warmSequence(MIB_SEQUENCE, MIB_POSTER);
+  }, [islandHref]);
   const islandLabel = island ? `Island ${numerals[scene.stop - 1]}` : "Five floating worlds";
   const titleVisible = scene.ready && !scene.moving && !scene.diving;
   const loading = !scene.ready && !failed;

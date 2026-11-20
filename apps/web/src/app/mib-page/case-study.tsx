@@ -25,7 +25,8 @@ function Headline({
       mode={hero ? "enter" : "scrub"}
       baseRotation={0}
       baseOpacity={0.08}
-      blurStrength={3}
+      // Per-word filter: blur() repaints every word on every scroll frame.
+      enableBlur={false}
       stagger={0.06}
       wordAnimationEnd="top 40%"
     >
@@ -65,7 +66,7 @@ function Copy({ children, hero = false }: { children: string; hero?: boolean }) 
       mode={hero ? "enter" : "scrub"}
       baseRotation={0}
       baseOpacity={0.15}
-      blurStrength={2}
+      enableBlur={false}
       stagger={0.025}
       wordAnimationEnd="bottom 60%"
     >
