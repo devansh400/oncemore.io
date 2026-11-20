@@ -4,8 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { type ReactNode, type RefObject, useEffect, useRef, useState } from "react";
 
-import { FetchQuest } from "@/fetch-quest/fetch-quest";
-
 import { IslandCard } from "./island-card";
 import { loadFloatingWorlds } from "./load-scene";
 import { allEdges, SceneEdgeBlur } from "./scene-edge-blur";
@@ -199,9 +197,6 @@ export function FloatingWorlds({
   const [lookOpen, setLookOpen] = useState(false);
   const [failed, setFailed] = useState(false);
   const [edgeBlur, setEdgeBlur] = useState(true);
-  const [questOpen, setQuestOpen] = useState(false);
-  /* The fetch quest takes over when the fan scrolls past the last island. */
-  const questEnd = useRef<(() => boolean) | null>(null);
 
   useEffect(() => {
     try {
@@ -235,7 +230,6 @@ export function FloatingWorlds({
           onError: () => {
             if (active) setFailed(true);
           },
-          onEnd: () => questEnd.current?.() ?? false,
           lookStorageKey,
         });
       } catch {
@@ -315,7 +309,7 @@ export function FloatingWorlds({
           </div>
         )}
       </header>
-      {scene.ready && !failed && !scene.diving && !showLook && !questOpen && (
+      {scene.ready && !failed && !scene.diving && !showLook && (
         <nav
           className="absolute top-1/2 right-6 hidden -translate-y-1/2 flex-col gap-1 sm:flex"
           aria-label="Islands"
@@ -335,7 +329,7 @@ export function FloatingWorlds({
           ))}
         </nav>
       )}
-      {cardWorld && !failed && !showLook && !questOpen && (
+      {cardWorld && !failed && !showLook && (
         /* Above the edge blur so the card stays sharp; scrolling over it still flies. */
         <section
           aria-live="polite"
@@ -383,16 +377,6 @@ export function FloatingWorlds({
           </span>
           <span className="h-8 w-px bg-linear-to-b from-white to-transparent motion-safe:animate-pulse" />
         </div>
-      )}
-      {!failed && (
-        <FetchQuest
-          scene={scene}
-          controller={controller}
-          endHandler={questEnd}
-          hidden={showLook}
-          displayClassName={displayClassName}
-          onOpenChange={setQuestOpen}
-        />
       )}
       <aside
         id="look"
@@ -445,7 +429,7 @@ export function FloatingWorlds({
         progress={loadingProgress}
         ready={!loading}
       />
-      <div hidden={scene.diving || showLook || questOpen}>{children}</div>
+      <div hidden={scene.diving || showLook}>{children}</div>
     </div>
   );
 }
