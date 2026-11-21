@@ -53,8 +53,14 @@ export function detailTier(source: SequenceSource, cssWidth: number, cssHeight: 
   return cover * dpr <= (MD_WIDTH / source.width) * 1.1 ? "md" : "hd";
 }
 
-const saveData = () =>
-  Boolean((navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData);
+const FIRST_FRAME_MARK = "sequence:first-frame";
+
+type Connection = { saveData?: boolean; effectiveType?: string };
+const connection = () => (navigator as Navigator & { connection?: Connection }).connection;
+const saveData = () => Boolean(connection()?.saveData);
+/** True unless the browser reports Data Saver or a 3G-or-slower link. */
+export const roomyConnection = () =>
+  !saveData() && !/(^|-)(2g|3g)$/.test(connection()?.effectiveType ?? "");
 
 type Layer = {
   blobs: Map<number, Blob>;
@@ -423,6 +429,8 @@ export class FrameSequence {
     this.context.drawImage(bitmap, sx * f, sy * f, sw * f, sh * f, 0, 0, this.width, this.height);
     this.drawn = index;
     this.drawnTier = tier;
+    // Lets the transition benchmark time the first scrub frame after a dive.
+    if (!performance.getEntriesByName(FIRST_FRAME_MARK).length) performance.mark(FIRST_FRAME_MARK);
     this.onDraw(index, tier);
   }
 
@@ -439,27 +447,40 @@ export class FrameSequence {
 }
 
 /*
+ * One low-priority download queue for warming the HTTP cache ahead of a
+ * visit. Each URL is fetched once per page; `urgent` URLs jump the queue (the
+ * island the visitor is looking at beats background warming of the others).
+ */
+const warmedUrls = new Set<string>();
+const warmQueue: string[] = [];
+let warmWorkers = 0;
+export function warmUrls(urls: string[], { urgent = false } = {}) {
+  const fresh = urls.filter((url) => !warmedUrls.has(url));
+  fresh.forEach((url) => warmedUrls.add(url));
+  if (urgent) warmQueue.unshift(...fresh);
+  else warmQueue.push(...fresh);
+  while (warmWorkers < 3 && warmQueue.length) {
+    warmWorkers++;
+    void (async () => {
+      for (let url = warmQueue.shift(); url; url = warmQueue.shift()) {
+        try {
+          await (await fetch(url, { priority: "low" })).blob();
+        } catch {}
+      }
+      warmWorkers--;
+    })();
+  }
+}
+
+/*
  * Fill the HTTP cache for a sequence before the visitor gets there — e.g.
  * while an island is framed on the home page. Frames are served immutable,
  * so the destination page reads them straight from disk.
  */
-const warmed = new Set<string>();
 export function warmSequence(source: SequenceSource, poster: string) {
-  if (warmed.has(source.root) || saveData()) return;
-  warmed.add(source.root);
+  if (saveData()) return;
   const tier = detailTier(source, window.innerWidth, window.innerHeight);
   const urls = [poster, packUrl(source)];
   for (let index = 0; index < 24; index++) urls.push(frameUrl(source, tier, index));
-  let next = 0;
-  const worker = async () => {
-    while (next < urls.length) {
-      const url = urls[next++];
-      try {
-        await (await fetch(url, { priority: "low" })).blob();
-      } catch {
-        return;
-      }
-    }
-  };
-  for (let i = 0; i < 3; i++) void worker();
+  warmUrls(urls, { urgent: true });
 }

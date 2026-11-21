@@ -18,6 +18,16 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
+  /* Prerendered while an island was framed: hold the veil's opening state. */
+  html[data-island-arrival-pending] .island-arrival-veil {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  html[data-island-arrival-pending] [data-island-arrival-media] {
+    transform: scale(1.24);
+  }
+
   html[data-island-arrival] .island-arrival-veil {
     animation: island-veil 1.5s linear reverse backwards;
   }

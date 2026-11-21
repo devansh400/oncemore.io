@@ -67,6 +67,10 @@ export function LayeredFanCard({ index }: { index: number }) {
           alt=""
           width={678}
           height={1178}
+          // Lazy, so React doesn't preload ~1 MB of card art in <head> ahead
+          // of the scroll film that /og-page shows first.
+          loading="lazy"
+          decoding="async"
         />
         <div className={styles.cardPortrait} data-fan-portrait>
           <img
@@ -74,6 +78,8 @@ export function LayeredFanCard({ index }: { index: number }) {
             alt=""
             width={678}
             height={1178}
+            loading="lazy"
+            decoding="async"
           />
         </div>
         <CardInk index={index} part="logo" />

@@ -170,3 +170,23 @@ both while the OG island is framed. Phones and small windows stream `md`;
 larger screens stream `hd`. The canvas never exceeds the detail tier's
 resolution. Streaming stops once the visitor scrolls past the shot. The shared
 loader lives in `src/lib/frame-sequence.ts`.
+
+## Entering from the sky
+
+The dive leaves the sky with a full page load, so the home page gets this page
+ready ahead of time (`src/floating-worlds/campaign-warmup.ts`):
+
+1. Once the sky has loaded and the browser is idle, it fetches this page's HTML
+   and warms the JS, CSS, fonts and poster it names, for every campaign island.
+   Desktop-class devices on a good link also warm the preview pack.
+2. While the OG island is framed, it warms the first 24 sharp frames and adds a
+   Speculation Rules prerender of `/og-page` (desktop-class devices on a good
+   link; phones get a document prefetch). The dive then swaps to a page that has
+   already rendered. Moving off the island cancels the prerender.
+
+A prerendered page runs its arrival script before the dive has recorded its
+arrival, so `IslandArrival` holds the veil fully covered while
+`document.prerendering` is true and starts the fade on `prerenderingchange`.
+In automated tests Chrome refused the prerender while any DevTools protocol
+client was attached to the tab (`PrerenderingDisabledByDevTools`), so a
+benchmark has to detach before the island is framed to see it.

@@ -8,6 +8,7 @@ import { MIB_POSTER, MIB_SEQUENCE } from "@/app/mib-page/frame-sequence";
 import { OG_POSTER, OG_SEQUENCE } from "@/app/og-page/frame-sequence";
 import { warmSequence } from "@/lib/frame-sequence";
 
+import { speculateCampaign, warmCampaignShells } from "./campaign-warmup";
 import { IslandCard } from "./island-card";
 import { loadFloatingWorlds } from "./load-scene";
 import { allEdges, SceneEdgeBlur } from "./scene-edge-blur";
@@ -259,7 +260,25 @@ export function FloatingWorlds({
     // Suffix match: deploys under a basePath rewrite hrefs to `/<base>/og-page`.
     if (islandHref?.endsWith("/og-page")) warmSequence(OG_SEQUENCE, OG_POSTER);
     else if (islandHref?.endsWith("/mib-page")) warmSequence(MIB_SEQUENCE, MIB_POSTER);
+    speculateCampaign(islandHref);
   }, [islandHref]);
+  useEffect(() => () => speculateCampaign(undefined), []);
+
+  /*
+   * Once the sky has loaded, warm every campaign page's shell in idle time so
+   * whichever island the visitor dives into can paint straight away.
+   */
+  const campaignHrefs = scene.worlds.flatMap((world) => (world.href ? [world.href] : [])).join(" ");
+  useEffect(() => {
+    if (!scene.ready || !campaignHrefs) return;
+    const start = () => warmCampaignShells(campaignHrefs.split(" "));
+    // Give the sky's own textures a head start before sharing the link.
+    const timeout = window.setTimeout(() => {
+      if ("requestIdleCallback" in window) window.requestIdleCallback(start, { timeout: 3000 });
+      else start();
+    }, 1500);
+    return () => window.clearTimeout(timeout);
+  }, [scene.ready, campaignHrefs]);
   const islandLabel = island ? `Island ${numerals[scene.stop - 1]}` : "Five floating worlds";
   const titleVisible = scene.ready && !scene.moving && !scene.diving;
   const loading = !scene.ready && !failed;
